@@ -1,0 +1,9 @@
+2021-04-19 16:44:54,893 INFO o.s.b.StartupInfoLogger [main] Started PatientControllerTest in 1.955 seconds (JVM running for 3.57)
+2021-04-19 16:44:55,085 DEBUG c.m.p.s.PatientServiceImpl [main] Entering addPatient
+2021-04-19 16:44:55,086 DEBUG c.m.p.s.PatientServiceImpl [main] patient saved, returning true.
+2021-04-19 16:44:55,090 DEBUG c.m.p.s.PatientServiceImpl [main] Entering updatePatient
+2021-04-19 16:44:55,090 DEBUG c.m.p.s.PatientServiceImpl [main] patient dont exist. Returning false
+2021-04-19 16:44:55,095 DEBUG c.m.p.s.PatientServiceImpl [main] Entering addPatient
+2021-04-19 16:44:55,095 DEBUG c.m.p.s.PatientServiceImpl [main] patient already exist. Returning false
+2021-04-19 16:44:55,097 DEBUG c.m.p.s.PatientServiceImpl [main] Entering updatePatient
+2021-04-19 16:44:55,098 DEBUG c.m.p.s.PatientServiceImpl [main] patient updated, returning true.
