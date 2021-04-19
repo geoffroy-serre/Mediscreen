@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface PatientRepository extends JpaRepository<Patient, Long> {
   boolean existsPatientByFamilyNameAndGivenNameAndDateOfBirth(String family, String given,
                                                               LocalDate dob);
-  Optional<Patient> findPatientByFamilyNameAndGivenName(String family, String given);
-  boolean existsPatient(Patient patient);
+  Patient findPatientByFamilyNameAndGivenName(String family, String given);
+  boolean existsPatientById(Long id);
 }

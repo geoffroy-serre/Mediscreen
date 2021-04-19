@@ -4,6 +4,7 @@ package com.mediscreen.patient.entity;
 import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,12 +16,12 @@ public class Patient {
   @Column(name = "id")
   private Long id;
 
-  @NotNull
+  @NotBlank
   @Column(name = "familly_name")
   @Size(min = 2, max = 255)
   String familyName;
 
-  @NotNull
+  @NotBlank
   @Column(name = "given_name")
   @Size(min = 2, max = 255)
   String givenName;
@@ -32,15 +33,14 @@ public class Patient {
 
   @NotNull
   @Column(name = "gender")
-  @Size(min = 1, max = 1)
   Character gender;
 
-  @NotNull
+  @NotBlank
   @Column(name = "address")
   @Size(min = 2, max = 255)
   String address;
 
-  @NotNull
+  @NotBlank
   @Column(name = "phone_number")
   @Size(min = 2, max = 15)
   String phoneNumber;

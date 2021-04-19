@@ -25,7 +25,7 @@ public interface PatientService {
    * @param given String
    * @return Optional<Patient>
    */
-  Optional<Patient> findPatientByFamilyNameAndGivenName(String family, String given);
+  Patient findPatientByFamilyNameAndGivenName(String family, String given);
 
   /**
    * Return True if patient already exist and have been updated.

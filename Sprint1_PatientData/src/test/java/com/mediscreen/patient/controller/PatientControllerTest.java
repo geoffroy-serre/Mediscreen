@@ -1,59 +1,44 @@
 package com.mediscreen.patient.controller;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mediscreen.patient.PatientApplication;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.mediscreen.patient.entity.Patient;
 import com.mediscreen.patient.repository.PatientRepository;
 import com.mediscreen.patient.service.PatientService;
+import com.mediscreen.patient.service.PatientServiceImpl;
 import java.time.LocalDate;
-import java.util.Optional;
-import org.aspectj.lang.annotation.Before;
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.context.WebApplicationContext;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@ExtendWith(SpringExtension.class)
 @WebMvcTest(PatientController.class)
 public class PatientControllerTest {
 
   @MockBean
   private PatientService patientService;
-  @MockBean
-  private PatientRepository patientRepository;
+
 
   @Autowired
   MockMvc mockMvc;
 
-  public static Patient patient;
+  Patient patient;
 
   @BeforeEach()
-  void  setupPatient(){
+  void setupPatient() {
     String family = "testFamily";
     String given = "testGiven";
     LocalDate dob = LocalDate.of(1982, 4, 14);
@@ -63,23 +48,111 @@ public class PatientControllerTest {
     patient = new Patient(family, given, dob, sex, address, phone);
   }
 
-
   @Test
   public void updatePatient() throws Exception {
+    patient.setId(123L);
     when(patientService.updatePatient(patient)).thenReturn(true);
     mockMvc.perform(put("/patient/update")
-    .contentType(MediaType.APPLICATION_JSON)
-    .flashAttr("patient",patient))
+            .contentType(MediaType.APPLICATION_JSON)
+            .flashAttr("patient", patient))
             .andExpect(status().isOk());
   }
+
   @Test
   public void updatePatientUnknown() throws Exception {
-    patient.setAddress("a");
+    patient.setId(123L);
     when(patientService.updatePatient(patient)).thenReturn(false);
     mockMvc.perform(put("/patient/update")
             .contentType(MediaType.APPLICATION_JSON)
-            .flashAttr("patient",patient))
+            .flashAttr("patient", patient))
             .andExpect(status().isConflict());
   }
+
+  @Test
+  public void updatePatientNotValid() throws Exception {
+    patient.setAddress("");
+    mockMvc.perform(put("/patient/update")
+            .contentType(MediaType.APPLICATION_JSON)
+            .flashAttr("patient", patient))
+            .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  public void addPatientNotValid() throws Exception {
+    patient.setAddress("m");
+    when(patientService.addPatient(patient.getFamilyName(),patient.getGivenName(),
+            patient.getDateOfBirth(),patient.getGender(),patient.getAddress(),
+            patient.getPhoneNumber())).thenReturn(true);
+    mockMvc.perform(post("/patient/add")
+            .param("family", patient.getFamilyName())
+            .param("given", patient.getGivenName())
+            .param("dob", patient.getDateOfBirth().toString())
+            .param("sex", patient.getGender().toString())
+            .param("address", patient.getAddress())
+            .param("phone", patient.getPhoneNumber()))
+            .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  public void addPatientMissingParam() throws Exception {
+    mockMvc.perform(post("/patient/add")
+            .param("given", patient.getGivenName())
+            .param("dob", patient.getDateOfBirth().toString())
+            .param("sex", patient.getGender().toString())
+            .param("address", patient.getAddress())
+            .param("phone", patient.getPhoneNumber()))
+            .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  public void addPatient() throws Exception {
+    when(patientService.addPatient(patient.getFamilyName(),patient.getGivenName(),
+            patient.getDateOfBirth(),patient.getGender(),patient.getAddress(),
+            patient.getPhoneNumber())).thenReturn(true);
+    mockMvc.perform(post("/patient/add")
+            .param("family", patient.getFamilyName())
+            .param("given", patient.getGivenName())
+            .param("dob", patient.getDateOfBirth().toString())
+            .param("sex", patient.getGender().toString())
+            .param("address", patient.getAddress())
+            .param("phone", patient.getPhoneNumber()))
+            .andExpect(status().isOk());
+  }
+
+  @Test
+  public void getPatient() throws Exception {
+    when(patientService.findPatientByFamilyNameAndGivenName(patient.getFamilyName() ,
+            patient.getGivenName())).thenReturn(patient);
+    mockMvc.perform(get("/patient")
+            .param("familyName", patient.getFamilyName())
+            .param("givenName", patient.getGivenName()))
+            .andExpect(status().isOk());
+  }
+  @Test
+  public void getPatientNoResult() throws Exception {
+    when(patientService.findPatientByFamilyNameAndGivenName(patient.getFamilyName() ,
+            patient.getGivenName())).thenReturn(null);
+    mockMvc.perform(get("/patient")
+            .param("familyName", patient.getFamilyName())
+            .param("givenName", patient.getGivenName()))
+            .andExpect(status().isOk());
+  }
+
+  @Test
+  public void getPatientNotValid() throws Exception {
+    patient.setFamilyName("r");
+    mockMvc.perform(get("/patient")
+            .param("familyName", patient.getFamilyName())
+            .param("givenName", patient.getGivenName()))
+            .andExpect(status().isBadRequest());
+  }
+  @Test
+  public void getPatientMissingParam() throws Exception {
+    mockMvc.perform(get("/patient")
+            .param("givenName", patient.getGivenName()))
+            .andExpect(status().isBadRequest());
+  }
+
+
 }
 

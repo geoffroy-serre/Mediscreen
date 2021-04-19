@@ -61,7 +61,7 @@ public class PatientServiceImpl implements PatientService {
    * @inheritDoc
    */
   @Override
-  public Optional<Patient> findPatientByFamilyNameAndGivenName(String family, String given) {
+  public Patient findPatientByFamilyNameAndGivenName(String family, String given) {
     return patientRepository.findPatientByFamilyNameAndGivenName(family, given);
   }
 
@@ -70,7 +70,7 @@ public class PatientServiceImpl implements PatientService {
    */
   @Override
   public boolean existsPatient(Patient patient) {
-    return patientRepository.existsPatient(patient);
+    return patientRepository.existsPatientById(patient.getId());
   }
 
   /**
