@@ -49,7 +49,6 @@ public class PatientController {
     }
   }
 
-
   @PutMapping("patient/update")
   public void updatePatient(@RequestBody @Valid Patient patient, HttpServletResponse response) {
     logger.info("Entering updatePatient for patient id "+patient.getId());
@@ -85,5 +84,8 @@ if(patient ==null){
     return patient;
   }
 
-
+ /*TODO Create Delete Controller by id.
+ * TODO Create Get patient list (all).
+ *  TODO write tests for those.
+  */
 }
