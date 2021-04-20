@@ -62,6 +62,7 @@ public class PatientServiceImpl implements PatientService {
    */
   @Override
   public Patient findPatientByFamilyNameAndGivenName(String family, String given) {
+    logger.debug("Entering findPatientByFamilyNameAndGivenName :"+family+" "+given);
     return patientRepository.findPatientByFamilyNameAndGivenName(family, given);
   }
 
@@ -70,6 +71,7 @@ public class PatientServiceImpl implements PatientService {
    */
   @Override
   public boolean existsPatient(Patient patient) {
+    logger.debug("Entering existsPatient for id: "+patient.getId());
     return patientRepository.existsPatientById(patient.getId());
   }
 
@@ -78,6 +80,7 @@ public class PatientServiceImpl implements PatientService {
    */
   @Override
   public boolean existsPatientByFamilyAndGivenAndDob(String family, String given, LocalDate dob) {
+    logger.debug("Entering existsPatientByFamilyAndGivenAndDob :"+family+" "+given+" "+ dob);
     return patientRepository.existsPatientByFamilyNameAndGivenNameAndDateOfBirth(family, given,
             dob);
   }

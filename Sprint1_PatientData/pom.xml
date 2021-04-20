@@ -109,6 +109,14 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>**/entity/*</exclude>
+                        <exclude>**/utils/*</exclude>
+                        <exclude>**/exceptions/*</exclude>
+                        <exclude>**/PatientApplication.class</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

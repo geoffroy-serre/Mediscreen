@@ -1,5 +1,6 @@
 package com.mediscreen.patient.controller;
 
+import com.mediscreen.patient.customValidator.Gender;
 import com.mediscreen.patient.entity.Patient;
 import com.mediscreen.patient.service.PatientService;
 import java.time.LocalDate;
@@ -7,15 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @RestController
+@Validated
 public class PatientController {
 
   @Autowired
@@ -24,37 +24,53 @@ public class PatientController {
   Logger logger = LoggerFactory.getLogger(PatientController.class);
 
   @PostMapping("patient/add")
-  public void addPatient(@RequestParam @Size(min = 2, max = 255) String family,
-                         @RequestParam @Size(min = 2, max = 255) String given,
+  public void addPatient(@RequestParam @Size(min = 2, max = 255,message="family must be between {min} and {max} characters long") String family,
+                         @RequestParam @Valid @Size(min = 2, max = 255,
+                                 message="given must be between {min} and {max} characters long")  String given,
                          @RequestParam @NotNull @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dob,
-                         @RequestParam @NotNull @Min(1) @Max(1) Character sex,
-                         @RequestParam @Size(min = 2, max = 255) String address,
-                         @RequestParam @Size(min = 2, max = 255) String phone,
+                         @RequestParam @Gender  Character sex,
+                         @RequestParam @Size(min = 2, max = 255, message="address must be between" +
+                                 " {min} and {max} characters long") String address,
+                         @RequestParam @Size(min = 2, max = 255,message="phone must be between " +
+                                 "{min} and {max} characters long") String phone,
                          HttpServletResponse response) {
     logger.info("Enter addPatient in patient microservice");
     if (patientService.addPatient(family, given, dob, sex, address, phone)) {
+      logger.debug("Patient added: status 200");
       response.setStatus(200);
     } else {
+      logger.debug("Patient not added: status 409");
       response.setStatus(409);
     }
   }
 
 
   @PutMapping("patient/update")
-  public void updatePatient(@Valid Patient patient, HttpServletResponse response) {
+  public void updatePatient(@RequestBody @Valid Patient patient, HttpServletResponse response) {
+    logger.info("Entering updatePatient for patient id "+patient.getId());
     if (patientService.updatePatient(patient)) {
+      logger.debug("Patient updated: status 200");
       response.setStatus(200);
     } else {
+      logger.debug("Patient not updated: status 409");
       response.setStatus(409);
     }
   }
 
   @GetMapping("patient")
   public Patient getPatientByFamilyAndGivenName(
-          @RequestParam @Min(1) @Max(255) String familyName,
-          @RequestParam @Min(1) @Max(255) String givenName) {
-
-    return patientService.findPatientByFamilyNameAndGivenName(familyName, givenName);
+          @RequestParam @Size(min=2, max=255, message="familyName must be between {min} and {max} characters long") String familyName,
+          @RequestParam  @Size(min=2, max=255, message="givenName must be between {min} and {max}" +
+                  " characters long") String givenName,
+          HttpServletResponse response) {
+Patient patient = patientService.findPatientByFamilyNameAndGivenName(familyName, givenName);
+if(patient ==null){
+  logger.debug("No patient found for "+familyName+" "+givenName);
+  response.setStatus(404);
+  return null;
+}
+    logger.debug("Patient found for "+familyName+" "+givenName+" returning patient");
+    return patient;
   }
 
 

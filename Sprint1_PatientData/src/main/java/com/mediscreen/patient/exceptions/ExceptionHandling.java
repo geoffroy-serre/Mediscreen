@@ -1,6 +1,8 @@
 package com.mediscreen.patient.exceptions;
 
-import java.util.Date;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
 @ControllerAdvice
@@ -21,10 +24,20 @@ public class ExceptionHandling {
                                                        HttpServletRequest request,
                                                        HttpServletResponse responseCode) {
     responseCode.setStatus(400);
+    List<String> messages = constraintViolationException.getConstraintViolations().stream()
+            .map(ConstraintViolation::getMessage).collect(Collectors.toList());
+    String errorMessage = "";
+    for (int i = 0; i<messages.size(); i++){
+      if (i<messages.size()-1){
+        errorMessage += messages.get(i)+" and also ";
+      }
+      else{
+        errorMessage += messages.get(i);
+      }
+    }
     ExceptionResponse response = new ExceptionResponse(new Date(), 400,
-            constraintViolationException.getLocalizedMessage(),
-            request.getRequestURI()
-    );
+            errorMessage,
+            request.getRequestURI());
     logger.error("ERROR: "+constraintViolationException+" " + response);
     return response;
   }
@@ -36,7 +49,7 @@ public class ExceptionHandling {
                                                               HttpServletResponse responseCode) {
     responseCode.setStatus(400);
     ExceptionResponse response = new ExceptionResponse(new Date(), 400,
-            illegalArgumentException.getMessage(),
+            illegalArgumentException.getLocalizedMessage(),
             request.getRequestURI()
     );
     logger.error("ERROR: "+illegalArgumentException+" " + response);
@@ -50,7 +63,8 @@ public class ExceptionHandling {
                                                           HttpServletResponse responseCode) {
     responseCode.setStatus(400);
     ExceptionResponse response = new ExceptionResponse(new Date(), 400,
-            missingServletRequestParameterException.getMessage(),
+            "'"+missingServletRequestParameterException.getParameterName()+"'"+" parameter is " +
+                    "missing",
             request.getRequestURI()
     );
     logger.error("ERROR: "+missingServletRequestParameterException+" " + response);

@@ -19,6 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -50,21 +51,30 @@ public class PatientControllerTest {
 
   @Test
   public void updatePatient() throws Exception {
-    patient.setId(123L);
-    when(patientService.updatePatient(patient)).thenReturn(true);
+    String jsonRequest = "{ \"id\":\"134\",\"familyName\":\"Starman\"," +
+            "\"givenName\":\"Emil\"," +
+            "\"dateOfBirth\":\"1982-04-14\"," +
+            "\"gender\":\"m\"," +
+            "\"address\":\"Frankfurt\"," +
+            "\"phoneNumber\":\"654485\"}";
+    when(patientService.updatePatient(any(Patient.class))).thenReturn(true);
     mockMvc.perform(put("/patient/update")
             .contentType(MediaType.APPLICATION_JSON)
-            .flashAttr("patient", patient))
+            .content(jsonRequest))
             .andExpect(status().isOk());
   }
 
   @Test
   public void updatePatientUnknown() throws Exception {
-    patient.setId(123L);
-    when(patientService.updatePatient(patient)).thenReturn(false);
+   String jsonRequest = "{ \"id\":\"134\",\"familyName\":\"Starman\"," +
+            "\"givenName\":\"Emil\"," +
+            "\"dateOfBirth\":\"1982-04-14\",\"gender\":\"m\"," +
+            "\"address\":\"Frankfurt\"," +
+            "\"phoneNumber\":\"654485\"}";
+    when(patientService.updatePatient(any(Patient.class))).thenReturn(false);
     mockMvc.perform(put("/patient/update")
             .contentType(MediaType.APPLICATION_JSON)
-            .flashAttr("patient", patient))
+            .content(jsonRequest))
             .andExpect(status().isConflict());
   }
 
@@ -135,7 +145,7 @@ public class PatientControllerTest {
     mockMvc.perform(get("/patient")
             .param("familyName", patient.getFamilyName())
             .param("givenName", patient.getGivenName()))
-            .andExpect(status().isOk());
+            .andExpect(status().isNotFound());
   }
 
   @Test
