@@ -1,8 +1,0 @@
-2021-04-20 02:52:57,436 DEBUG c.m.p.s.PatientServiceImpl [main] Entering addPatient
-2021-04-20 02:52:57,443 DEBUG c.m.p.s.PatientServiceImpl [main] patient saved, returning true.
-2021-04-20 02:52:57,446 DEBUG c.m.p.s.PatientServiceImpl [main] Entering updatePatient
-2021-04-20 02:52:57,447 DEBUG c.m.p.s.PatientServiceImpl [main] patient dont exist. Returning false
-2021-04-20 02:52:57,452 DEBUG c.m.p.s.PatientServiceImpl [main] Entering addPatient
-2021-04-20 02:52:57,453 DEBUG c.m.p.s.PatientServiceImpl [main] patient already exist. Returning false
-2021-04-20 02:52:57,456 DEBUG c.m.p.s.PatientServiceImpl [main] Entering updatePatient
-2021-04-20 02:52:57,456 DEBUG c.m.p.s.PatientServiceImpl [main] patient updated, returning true.

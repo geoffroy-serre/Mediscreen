@@ -29,9 +29,14 @@ public class PatientController {
                                  message="given must be between {min} and {max} characters long")  String given,
                          @RequestParam @NotNull @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dob,
                          @RequestParam @Gender  Character sex,
-                         @RequestParam @Size(min = 2, max = 255, message="address must be between" +
+                         @RequestParam(defaultValue = "not specified",required = false) @Size(min = 2, max =
+                                 255,
+                                 message="address must be " +
+                                 "between" +
                                  " {min} and {max} characters long") String address,
-                         @RequestParam @Size(min = 2, max = 255,message="phone must be between " +
+                         @RequestParam (defaultValue = "not specified",required = false) @Size(min = 2, max =
+                                 255,
+                                 message="phone must be between " +
                                  "{min} and {max} characters long") String phone,
                          HttpServletResponse response) {
     logger.info("Enter addPatient in patient microservice");
@@ -48,6 +53,13 @@ public class PatientController {
   @PutMapping("patient/update")
   public void updatePatient(@RequestBody @Valid Patient patient, HttpServletResponse response) {
     logger.info("Entering updatePatient for patient id "+patient.getId());
+    if (patient.getAddress().isEmpty()){
+      patient.setAddress("not specified");
+    }
+    if (patient.getPhoneNumber().isEmpty()){
+      patient.setPhoneNumber("not specified");
+    }
+
     if (patientService.updatePatient(patient)) {
       logger.debug("Patient updated: status 200");
       response.setStatus(200);

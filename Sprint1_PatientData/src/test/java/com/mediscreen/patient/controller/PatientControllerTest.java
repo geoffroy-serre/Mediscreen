@@ -19,7 +19,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -79,12 +79,44 @@ public class PatientControllerTest {
   }
 
   @Test
-  public void updatePatientNotValid() throws Exception {
-    patient.setAddress("");
+  public void updatePatientNoAdress() throws Exception {
+    String jsonRequest = "{ \"id\":\"134\",\"familyName\":\"Starman\"," +
+            "\"givenName\":\"Emil\"," +
+            "\"dateOfBirth\":\"1982-04-14\",\"gender\":\"m\"," +
+            "\"address\":\"\"," +
+            "\"phoneNumber\":\"654485\"}";
+    when(patientService.updatePatient(any(Patient.class))).thenReturn(true);
     mockMvc.perform(put("/patient/update")
             .contentType(MediaType.APPLICATION_JSON)
-            .flashAttr("patient", patient))
+            .content(jsonRequest))
+            .andExpect(status().isOk());
+  }
+  @Test
+  public void updatePatientNoAdressNoFamily() throws Exception {
+    String jsonRequest = "{ \"id\":\"134\",\"familyName\":\"\"," +
+            "\"givenName\":\"Emil\"," +
+            "\"dateOfBirth\":\"1982-04-14\",\"gender\":\"m\"," +
+            "\"address\":\"\"," +
+            "\"phoneNumber\":\"654485\"}";
+    when(patientService.updatePatient(any(Patient.class))).thenReturn(true);
+    mockMvc.perform(put("/patient/update")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonRequest))
             .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  public void updatePatientNoAddressNoPhone() throws Exception {
+    String jsonRequest = "{ \"id\":\"134\",\"familyName\":\"Starman\"," +
+            "\"givenName\":\"Emil\"," +
+            "\"dateOfBirth\":\"1982-04-14\",\"gender\":\"m\"," +
+            "\"address\":\"\"," +
+            "\"phoneNumber\":\"\"}";
+    when(patientService.updatePatient(any(Patient.class))).thenReturn(true);
+    mockMvc.perform(put("/patient/update")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonRequest))
+            .andExpect(status().isOk());
   }
 
   @Test
@@ -104,7 +136,7 @@ public class PatientControllerTest {
   }
 
   @Test
-  public void addPatientMissingParam() throws Exception {
+  public void addPatientMissingMandatoryParam() throws Exception {
     mockMvc.perform(post("/patient/add")
             .param("given", patient.getGivenName())
             .param("dob", patient.getDateOfBirth().toString())
@@ -112,6 +144,42 @@ public class PatientControllerTest {
             .param("address", patient.getAddress())
             .param("phone", patient.getPhoneNumber()))
             .andExpect(status().isBadRequest());
+  }
+  @Test
+  public void addPatientNoAddressOk() throws Exception {
+    when(patientService.addPatient(anyString(),anyString(),any(LocalDate.class),anyChar(),
+            anyString(),anyString())).thenReturn(true);
+    mockMvc.perform(post("/patient/add")
+            .param("family",patient.getFamilyName())
+            .param("given", patient.getGivenName())
+            .param("dob", patient.getDateOfBirth().toString())
+            .param("sex", patient.getGender().toString())
+            .param("phone", patient.getPhoneNumber()))
+            .andExpect(status().isOk());
+  }
+
+  @Test
+  public void addPatientNoAddressNoPhoneOk() throws Exception {
+    when(patientService.addPatient(anyString(),anyString(),any(LocalDate.class),anyChar(),
+            anyString(),anyString())).thenReturn(true);
+    mockMvc.perform(post("/patient/add")
+            .param("family",patient.getFamilyName())
+            .param("given", patient.getGivenName())
+            .param("dob", patient.getDateOfBirth().toString())
+            .param("sex", patient.getGender().toString()))
+            .andExpect(status().isOk());
+  }
+  @Test
+  public void addPatientNoPhoneOk() throws Exception {
+    when(patientService.addPatient(anyString(),anyString(),any(LocalDate.class),anyChar(),
+            anyString(),anyString())).thenReturn(true);
+    mockMvc.perform(post("/patient/add")
+            .param("family",patient.getFamilyName())
+            .param("given", patient.getGivenName())
+            .param("dob", patient.getDateOfBirth().toString())
+            .param("sex", patient.getGender().toString())
+            .param("address", patient.getAddress()))
+            .andExpect(status().isOk());
   }
 
   @Test

@@ -1,0 +1,2 @@
+2021-04-20 04:08:20,901 DEBUG c.m.p.s.PatientServiceImpl [http-nio-8081-exec-1] Entering findPatientByFamilyNameAndGivenName :TestNone Test
+2021-04-20 04:08:20,972 DEBUG c.m.p.c.PatientController [http-nio-8081-exec-1] Patient found for TestNone Test returning patient

@@ -36,15 +36,16 @@ public class Patient {
   @Column(name = "gender")
   Character gender;
 
-  @NotBlank
+
   @Column(name = "address")
-  @Size(min = 2, max = 255,message ="Address '${validatedValue}' must be between {min} and {max} " +
+  @Size(max = 255,message ="Address '${validatedValue}' must be between {min} and {max}" +
+          " " +
           "characters long")
   String address;
 
-  @NotBlank
+
   @Column(name = "phone_number")
-  @Size(min = 2, max = 15,message ="Phone '${validatedValue}' must be between {min} and {max} " +
+  @Size(max = 15,message ="Phone '${validatedValue}' must be between {min} and {max} " +
           "characters long")
   String phoneNumber;
 

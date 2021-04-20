@@ -19,13 +19,7 @@ public class GenderValidator implements ConstraintValidator<Gender,Character> {
       {
         return true;
       }
-      if (sex.equals('F') || sex.equals('M'))
-        return true;
-
-      else
-      {
-        return false;
-      }
+      return sex.equals('F') || sex.equals('M') || sex.equals('m') || sex.equals('f');
 
     }
   }
