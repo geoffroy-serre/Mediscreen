@@ -159,17 +159,6 @@ public class PatientControllerTest {
   }
 
   @Test
-  public void addPatientNoAddressNoPhoneOk() throws Exception {
-    when(patientService.addPatient(anyString(),anyString(),any(LocalDate.class),anyChar(),
-            anyString(),anyString())).thenReturn(true);
-    mockMvc.perform(post("/patient/add")
-            .param("family",patient.getFamilyName())
-            .param("given", patient.getGivenName())
-            .param("dob", patient.getDateOfBirth().toString())
-            .param("sex", patient.getGender().toString()))
-            .andExpect(status().isOk());
-  }
-  @Test
   public void addPatientNoPhoneOk() throws Exception {
     when(patientService.addPatient(anyString(),anyString(),any(LocalDate.class),anyChar(),
             anyString(),anyString())).thenReturn(true);
@@ -179,6 +168,18 @@ public class PatientControllerTest {
             .param("dob", patient.getDateOfBirth().toString())
             .param("sex", patient.getGender().toString())
             .param("address", patient.getAddress()))
+            .andExpect(status().isOk());
+  }
+
+  @Test
+  public void addPatientNoAddressNoPhoneOk() throws Exception {
+    when(patientService.addPatient(anyString(),anyString(),any(LocalDate.class),anyChar(),
+            anyString(),anyString())).thenReturn(true);
+    mockMvc.perform(post("/patient/add")
+            .param("family",patient.getFamilyName())
+            .param("given", patient.getGivenName())
+            .param("dob", patient.getDateOfBirth().toString())
+            .param("sex", patient.getGender().toString()))
             .andExpect(status().isOk());
   }
 
@@ -195,6 +196,21 @@ public class PatientControllerTest {
             .param("address", patient.getAddress())
             .param("phone", patient.getPhoneNumber()))
             .andExpect(status().isOk());
+  }
+
+  @Test
+  public void addPatientAlreadyExists() throws Exception {
+    when(patientService.addPatient(patient.getFamilyName(),patient.getGivenName(),
+            patient.getDateOfBirth(),patient.getGender(),patient.getAddress(),
+            patient.getPhoneNumber())).thenReturn(false);
+    mockMvc.perform(post("/patient/add")
+            .param("family", patient.getFamilyName())
+            .param("given", patient.getGivenName())
+            .param("dob", patient.getDateOfBirth().toString())
+            .param("sex", patient.getGender().toString())
+            .param("address", patient.getAddress())
+            .param("phone", patient.getPhoneNumber()))
+            .andExpect(status().isConflict());
   }
 
   @Test

@@ -57,6 +57,11 @@
             <version>2.0.1.Final</version>
         </dependency>
         <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
@@ -116,6 +121,7 @@
                         <exclude>**/utils/*</exclude>
                         <exclude>**/exceptions/*</exclude>
                         <exclude>**/PatientApplication.class</exclude>
+                        <exclude>**/config/*</exclude>
                     </excludes>
                 </configuration>
             </plugin>

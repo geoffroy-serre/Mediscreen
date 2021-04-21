@@ -87,5 +87,6 @@ if(patient ==null){
  /*TODO Create Delete Controller by id.
  * TODO Create Get patient list (all).
  *  TODO write tests for those.
+ *   TODO Deal with appointements: create table, get post put delete controller for 'em.
   */
 }
