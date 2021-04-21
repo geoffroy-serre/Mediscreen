@@ -1,0 +1,47 @@
+
+<main>
+  <div class="data-content">
+    <h2>Patients List</h2>
+    <div class="table-wrapper">
+      <table class="table-data">
+        <thead>
+        <tr>
+          <th>Id Patient</th>
+          <th>Family Name</th>
+          <th>Given Name</th>
+          <th>Date of birth</th>
+          <th>Gender</th>
+          <th>Address</th>
+          <th>Phone Number</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let tempPatient of patient">
+          <td>
+            {{tempPatient.id}}
+          </td>
+          <td>
+            {{tempPatient.familyName}}
+          </td>
+          <td>
+            {{tempPatient.givenName}}
+          </td>
+          <td>
+            {{tempPatient.dateOfBirth}}
+          </td>
+          <td>
+            {{tempPatient.gender}}
+          </td>
+          <td>
+            {{tempPatient.address}}
+          </td>
+          <td>
+            {{tempPatient.phoneNumber}}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>

@@ -4,5 +4,10 @@
       "name": "jasypt.encryptor.password",
       "type": "java.lang.String",
       "description": "Description for jasypt.encryptor.password."
-  }
-] }
+    },
+    {
+      "name": "mediscreen.cross.origin",
+      "type": "java.lang.String",
+      "description": "Define allowed app to access micro service"
+    }
+  ] }
