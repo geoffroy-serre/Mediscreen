@@ -1,19 +1,13 @@
 package com.mediscreen.patient.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import com.mediscreen.patient.entity.Patient;
-import com.mediscreen.patient.repository.PatientRepository;
 import com.mediscreen.patient.service.PatientService;
-import com.mediscreen.patient.service.PatientServiceImpl;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -22,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -66,7 +59,7 @@ public class PatientControllerTest {
 
   @Test
   public void updatePatientUnknown() throws Exception {
-   String jsonRequest = "{ \"id\":\"134\",\"familyName\":\"Starman\"," +
+    String jsonRequest = "{ \"id\":\"134\",\"familyName\":\"Starman\"," +
             "\"givenName\":\"Emil\"," +
             "\"dateOfBirth\":\"1982-04-14\",\"gender\":\"m\"," +
             "\"address\":\"Frankfurt\"," +
@@ -79,7 +72,7 @@ public class PatientControllerTest {
   }
 
   @Test
-  public void updatePatientNoAdress() throws Exception {
+  public void updatePatientNoAddress() throws Exception {
     String jsonRequest = "{ \"id\":\"134\",\"familyName\":\"Starman\"," +
             "\"givenName\":\"Emil\"," +
             "\"dateOfBirth\":\"1982-04-14\",\"gender\":\"m\"," +
@@ -91,8 +84,9 @@ public class PatientControllerTest {
             .content(jsonRequest))
             .andExpect(status().isOk());
   }
+
   @Test
-  public void updatePatientNoAdressNoFamily() throws Exception {
+  public void updatePatientNoAddressNoFamily() throws Exception {
     String jsonRequest = "{ \"id\":\"134\",\"familyName\":\"\"," +
             "\"givenName\":\"Emil\"," +
             "\"dateOfBirth\":\"1982-04-14\",\"gender\":\"m\"," +
@@ -122,8 +116,8 @@ public class PatientControllerTest {
   @Test
   public void addPatientNotValid() throws Exception {
     patient.setAddress("m");
-    when(patientService.addPatient(patient.getFamilyName(),patient.getGivenName(),
-            patient.getDateOfBirth(),patient.getGender(),patient.getAddress(),
+    when(patientService.addPatient(patient.getFamilyName(), patient.getGivenName(),
+            patient.getDateOfBirth(), patient.getGender(), patient.getAddress(),
             patient.getPhoneNumber())).thenReturn(true);
     mockMvc.perform(post("/patient/add")
             .param("family", patient.getFamilyName())
@@ -145,12 +139,13 @@ public class PatientControllerTest {
             .param("phone", patient.getPhoneNumber()))
             .andExpect(status().isBadRequest());
   }
+
   @Test
   public void addPatientNoAddressOk() throws Exception {
-    when(patientService.addPatient(anyString(),anyString(),any(LocalDate.class),anyChar(),
-            anyString(),anyString())).thenReturn(true);
+    when(patientService.addPatient(anyString(), anyString(), any(LocalDate.class), anyChar(),
+            anyString(), anyString())).thenReturn(true);
     mockMvc.perform(post("/patient/add")
-            .param("family",patient.getFamilyName())
+            .param("family", patient.getFamilyName())
             .param("given", patient.getGivenName())
             .param("dob", patient.getDateOfBirth().toString())
             .param("sex", patient.getGender().toString())
@@ -160,10 +155,10 @@ public class PatientControllerTest {
 
   @Test
   public void addPatientNoPhoneOk() throws Exception {
-    when(patientService.addPatient(anyString(),anyString(),any(LocalDate.class),anyChar(),
-            anyString(),anyString())).thenReturn(true);
+    when(patientService.addPatient(anyString(), anyString(), any(LocalDate.class), anyChar(),
+            anyString(), anyString())).thenReturn(true);
     mockMvc.perform(post("/patient/add")
-            .param("family",patient.getFamilyName())
+            .param("family", patient.getFamilyName())
             .param("given", patient.getGivenName())
             .param("dob", patient.getDateOfBirth().toString())
             .param("sex", patient.getGender().toString())
@@ -173,10 +168,10 @@ public class PatientControllerTest {
 
   @Test
   public void addPatientNoAddressNoPhoneOk() throws Exception {
-    when(patientService.addPatient(anyString(),anyString(),any(LocalDate.class),anyChar(),
-            anyString(),anyString())).thenReturn(true);
+    when(patientService.addPatient(anyString(), anyString(), any(LocalDate.class), anyChar(),
+            anyString(), anyString())).thenReturn(true);
     mockMvc.perform(post("/patient/add")
-            .param("family",patient.getFamilyName())
+            .param("family", patient.getFamilyName())
             .param("given", patient.getGivenName())
             .param("dob", patient.getDateOfBirth().toString())
             .param("sex", patient.getGender().toString()))
@@ -185,8 +180,8 @@ public class PatientControllerTest {
 
   @Test
   public void addPatient() throws Exception {
-    when(patientService.addPatient(patient.getFamilyName(),patient.getGivenName(),
-            patient.getDateOfBirth(),patient.getGender(),patient.getAddress(),
+    when(patientService.addPatient(patient.getFamilyName(), patient.getGivenName(),
+            patient.getDateOfBirth(), patient.getGender(), patient.getAddress(),
             patient.getPhoneNumber())).thenReturn(true);
     mockMvc.perform(post("/patient/add")
             .param("family", patient.getFamilyName())
@@ -200,8 +195,8 @@ public class PatientControllerTest {
 
   @Test
   public void addPatientAlreadyExists() throws Exception {
-    when(patientService.addPatient(patient.getFamilyName(),patient.getGivenName(),
-            patient.getDateOfBirth(),patient.getGender(),patient.getAddress(),
+    when(patientService.addPatient(patient.getFamilyName(), patient.getGivenName(),
+            patient.getDateOfBirth(), patient.getGender(), patient.getAddress(),
             patient.getPhoneNumber())).thenReturn(false);
     mockMvc.perform(post("/patient/add")
             .param("family", patient.getFamilyName())
@@ -215,16 +210,17 @@ public class PatientControllerTest {
 
   @Test
   public void getPatient() throws Exception {
-    when(patientService.findPatientByFamilyNameAndGivenName(patient.getFamilyName() ,
+    when(patientService.findPatientByFamilyNameAndGivenName(patient.getFamilyName(),
             patient.getGivenName())).thenReturn(patient);
     mockMvc.perform(get("/patient")
             .param("familyName", patient.getFamilyName())
             .param("givenName", patient.getGivenName()))
             .andExpect(status().isOk());
   }
+
   @Test
   public void getPatientNoResult() throws Exception {
-    when(patientService.findPatientByFamilyNameAndGivenName(patient.getFamilyName() ,
+    when(patientService.findPatientByFamilyNameAndGivenName(patient.getFamilyName(),
             patient.getGivenName())).thenReturn(null);
     mockMvc.perform(get("/patient")
             .param("familyName", patient.getFamilyName())
@@ -240,11 +236,22 @@ public class PatientControllerTest {
             .param("givenName", patient.getGivenName()))
             .andExpect(status().isBadRequest());
   }
+
   @Test
   public void getPatientMissingParam() throws Exception {
     mockMvc.perform(get("/patient")
             .param("givenName", patient.getGivenName()))
             .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  public void getPatients() throws Exception {
+List<Patient> patients = new ArrayList<>();
+patients.add(patient);
+    when(patientService.findPatients()).thenReturn(patients);
+    mockMvc.perform(get("/patients")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk());
   }
 
 

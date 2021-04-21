@@ -3,6 +3,8 @@ package com.mediscreen.patient.service;
 import com.mediscreen.patient.entity.Patient;
 import com.mediscreen.patient.repository.PatientRepository;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -75,6 +78,13 @@ class PatientServiceImplTest {
     assertTrue(patientService.updatePatient(patient));
     Mockito.verify(patientRepository, Mockito.times(1)).existsPatientById(patient.getId());
     Mockito.verify(patientRepository, Mockito.times(1)).save(any(Patient.class));
+  }
+  @Test
+  void getPatients() {
+    List<Patient> patients = new ArrayList<>();
+    when(patientRepository.findAll()).thenReturn(patients);
+    assertNotNull(patientService.findPatients());
+    Mockito.verify(patientRepository, Mockito.times(1)).findAll();
   }
 
   @Test

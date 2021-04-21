@@ -4,6 +4,7 @@ import com.mediscreen.patient.entity.Patient;
 import com.mediscreen.patient.repository.PatientRepository;
 import com.mediscreen.patient.utils.UtilsStringFormatter;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,5 +84,10 @@ public class PatientServiceImpl implements PatientService {
     logger.debug("Entering existsPatientByFamilyAndGivenAndDob :"+family+" "+given+" "+ dob);
     return patientRepository.existsPatientByFamilyNameAndGivenNameAndDateOfBirth(family, given,
             dob);
+  }
+
+  @Override
+  public List<Patient> findPatients() {
+    return patientRepository.findAll();
   }
 }

@@ -2,6 +2,7 @@ package com.mediscreen.patient.service;
 
 import com.mediscreen.patient.entity.Patient;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 public interface PatientService {
@@ -49,4 +50,10 @@ public interface PatientService {
    * @return boolean
    */
   boolean existsPatientByFamilyAndGivenAndDob(String family, String given, LocalDate dob);
+
+  /**
+   * Find All patients
+   * @return List of Patients
+   */
+  List<Patient> findPatients();
 }

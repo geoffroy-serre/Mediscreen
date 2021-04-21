@@ -4,6 +4,7 @@ import com.mediscreen.patient.customValidator.Gender;
 import com.mediscreen.patient.entity.Patient;
 import com.mediscreen.patient.service.PatientService;
 import java.time.LocalDate;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +83,12 @@ if(patient ==null){
 }
     logger.debug("Patient found for "+familyName+" "+givenName+" returning patient");
     return patient;
+  }
+
+  @GetMapping("patients")
+  public List<Patient> getAllPatient() {
+    logger.debug("Return Patients List");
+    return patientService.findPatients();
   }
 
  /*TODO Create Delete Controller by id.
