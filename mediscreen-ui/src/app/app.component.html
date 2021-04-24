@@ -1,15 +1,38 @@
 <header>
-  <img src="../assets/imgs/header.png" alt="header logo"/>
+  <img src="assets/imgs/header.png" alt="">
   <div class="nav-bar">
     <h1 class="header-title">Mediscreen</h1>
     <nav class="top-nav">
-      <a href="index.html" class="nav-link">Accueil</a>
-      <a href="patient.html" class="nav-link">Patients</a>
-      <a href="#" class="nav-link">Statistiques</a>
-      <a href="#" class="nav-link">Contact</a>
+      <div class="dropdown">
+        <button
+          class="dropbtn"><i class="fa fa-home" aria-hidden="true"></i><a href="home">&nbsp;Home</a></button>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn" data-toggle="dropdown"><i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;Patients&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></button>
+        <div class="dropdown-content">
+          <a href="#">Add</a>
+          <a href="patients">List</a>
+          <a href="#">Search</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-calendar-alt" aria-hidden="true"></i>&nbsp;Appointements&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></button>
+        <div class="dropdown-content">
+          <a href="#">Add</a>
+          <a href="#">List</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-chart-area" aria-hidden="true"></i>&nbsp;Stats&nbsp;</button>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact</button>
+      </div>
+
     </nav>
   </div>
+
 </header>
-<app-patients-list></app-patients-list>
+<router-outlet></router-outlet>
 
 
