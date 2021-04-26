@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PatientService} from "../../services/patient.service";
 import {Patient} from "../../common/patient";
+import {HttpResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-patients-list',
@@ -9,7 +10,9 @@ import {Patient} from "../../common/patient";
 })
 export class PatientsListComponent implements OnInit {
 
-  patient! : Patient[];
+  patients! : HttpResponse<Patient[]>;
+  status!:number;
+  message!:string;
   constructor(private patientService:PatientService) { }
 
   ngOnInit(): void {
@@ -18,8 +21,14 @@ export class PatientsListComponent implements OnInit {
 
   listPatients() {
     this.patientService.getPatients().subscribe(
+
       data => {
-        this.patient = data;
+        this.patients = data;
+        this.status = data.status;
+      },
+      error => {
+        this.status = error.status;
+        this.message = error.error.error;
       }
     )
   }

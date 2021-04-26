@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -96,7 +97,7 @@ public class PatientController {
   @GetMapping("patients")
   public List<Patient> getAllPatient() {
     logger.debug("Return Patients List");
-    return patientService.findPatients();
+   return patientService.findPatients();
   }
 
   /*TODO Create Delete Controller by id.

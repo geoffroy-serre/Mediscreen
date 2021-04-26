@@ -1,22 +1,31 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpResponse} from "@angular/common/http";
+import {Observable, throwError} from "rxjs";
 import {Patient} from "../common/patient";
-import {map} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
 
+
   private baseUrl = 'http://localhost:8081/patients';
 
   constructor(private httpClient: HttpClient) {
   }
 
-  getPatients(): Observable<Patient[]> {
-    return this.httpClient.get<Patient[]>(this.baseUrl);
+  getPatients(): Observable<HttpResponse<Patient[]>> {
+    return this.httpClient.get<Patient[]>(this.baseUrl,{observe:'response'})
+      .pipe(
+        catchError(err => {
+          console.log(err);
+          return throwError(err)
+        })
+      )
   }
+
+
 }
 
   interface GetResponse {

@@ -1,8 +1,7 @@
-
 <main>
   <div class="data-content">
     <h1 class="content-title">Patients</h1>
-    <div class="table-wrapper">
+    <div class="table-wrapper" *ngIf="status==200 else Errors">
       <table class="table-data">
         <thead>
         <tr>
@@ -13,11 +12,10 @@
           <th>Gender</th>
           <th>Address</th>
           <th>Phone Number</th>
-
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let tempPatient of patient">
+        <tr *ngFor="let tempPatient of patients.body">
           <td>
             {{tempPatient.id}}
           </td>
@@ -44,4 +42,16 @@
       </table>
     </div>
   </div>
+  <ng-template #Errors>
+      <div class="data-content">
+        <div class="error-message" *ngIf="status==404"><span>No Patients Found.</span>
+          <span>Add patients and/or check connection with database</span>
+        </div>
+        <div class="error-message" *ngIf="status==400"><span>Bad Parameters used</span>
+          <span>{{message}}</span>
+        </div>
+      </div>
+  </ng-template>
 </main>
+
+

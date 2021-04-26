@@ -8,20 +8,27 @@ import {PatientService} from "./services/patient.service";
 import {RouterModule, Routes} from "@angular/router";
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
+import { AppointementsCalendarComponent } from './components/appointements-calendar/appointements-calendar.component';
+
 
 const routes: Routes = [
+
+  {path: 'appointment/list', component: AppointementsCalendarComponent},
   {path: 'patients', component: PatientsListComponent},
   {path: 'home', component: HomeComponent},
   {path: '', redirectTo:'/home', pathMatch: 'full'},
   {path: 'error', component: NotFoundComponent},
   {path:'**', component: NotFoundComponent}
 ]
+
+
 @NgModule({
   declarations: [
     AppComponent,
     PatientsListComponent,
     NotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    AppointementsCalendarComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
