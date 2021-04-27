@@ -1,9 +1,14 @@
 <main>
   <div class="data-content" *ngIf="patient !=null else Test">
-    <h2></h2>
+    <h2 class="content-title">Patient</h2>
+    <div
+      class="button-div">
+      <button class="btn-delete"><i class="fa fa-trash"></i></button>
+      <button class="btn-call"><i class="fa fa-phone-alt"></i></button>
+    </div>
     <div class="patient-data-card">
       <div class="infos-persos">
-        <span class="civility-card">{{patient.body.givenName}}</span>
+        <span class="civility-card"></span>
         <span class="civility-card">Picard</span>
       </div>
       <div class="patient-data">
