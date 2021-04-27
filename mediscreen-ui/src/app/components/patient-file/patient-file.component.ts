@@ -31,7 +31,7 @@ export class PatientFileComponent implements OnInit {
     this.patientService.getPatient(this.idParam).subscribe(
       data => {
         console.log(data);
-        console.log("Data body in ts: "+data.body);
+        console.log("Data body in ts: ",data.body);
         this.patient = data;
         console.log('PAtient body in ts:',this.patient.body);
       },

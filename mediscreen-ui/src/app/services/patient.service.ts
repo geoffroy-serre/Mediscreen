@@ -26,7 +26,7 @@ export class PatientService {
   }
 
   getPatient(id: string): Observable<HttpResponse<Patient>> {
-    const patientFileUrl = this.baseUrl+'/patient/file?id=' + id;
+    const patientFileUrl = this.baseUrl+'/patient/file?id='+id;
     console.log(patientFileUrl)
     return this.httpClient.get<Patient>(patientFileUrl, {observe: 'response'})
       .pipe(
