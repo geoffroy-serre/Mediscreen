@@ -9,14 +9,15 @@ import {RouterModule, Routes} from "@angular/router";
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppointementsCalendarComponent } from './components/appointements-calendar/appointements-calendar.component';
+import { PatientFileComponent } from './components/patient-file/patient-file.component';
 
 
 const routes: Routes = [
-
+  {path: 'patient/:id', component: PatientFileComponent},
   {path: 'appointment/list', component: AppointementsCalendarComponent},
   {path: 'patients', component: PatientsListComponent},
   {path: 'home', component: HomeComponent},
-  {path: '', redirectTo:'/home', pathMatch: 'full'},
+  {path: '', component: HomeComponent},
   {path: 'error', component: NotFoundComponent},
   {path:'**', component: NotFoundComponent}
 ]
@@ -28,7 +29,8 @@ const routes: Routes = [
     PatientsListComponent,
     NotFoundComponent,
     HomeComponent,
-    AppointementsCalendarComponent
+    AppointementsCalendarComponent,
+    PatientFileComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

@@ -70,4 +70,18 @@ public class ExceptionHandling {
     return response;
   }
 
+  @ExceptionHandler(PatientNotFoundException.class)
+  @ResponseBody
+  public ExceptionResponse handlePatientNotFoundException(PatientNotFoundException patientNotFoundException,
+                                                                         HttpServletRequest request,
+                                                                         HttpServletResponse responseCode) {
+    responseCode.setStatus(404);
+    ExceptionResponse response = new ExceptionResponse(new Date(), 404,
+            "Patient not found for this id",
+            request.getRequestURI()
+    );
+    logger.debug("ERROR: "+patientNotFoundException+" " + response);
+    return response;
+  }
+
 }

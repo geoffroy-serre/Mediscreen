@@ -10,7 +10,7 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class PatientsListComponent implements OnInit {
 
-  patients! : HttpResponse<Patient[]>;
+  patients! : HttpResponse<Patient[]>
   status!:number;
   message!:string;
   constructor(private patientService:PatientService) { }
@@ -21,7 +21,6 @@ export class PatientsListComponent implements OnInit {
 
   listPatients() {
     this.patientService.getPatients().subscribe(
-
       data => {
         this.patients = data;
         this.status = data.status;

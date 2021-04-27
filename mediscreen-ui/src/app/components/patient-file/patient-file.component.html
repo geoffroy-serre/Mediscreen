@@ -1,0 +1,23 @@
+<main>
+  <div class="data-content" *ngIf="patient !=null else Test">
+    <h2></h2>
+    <div class="patient-data-card">
+      <div class="infos-persos">
+        <span class="civility-card">{{patient.body.givenName}}</span>
+        <span class="civility-card">{{patient.body.familyName}}</span>
+      </div>
+      <div class="patient-data">
+        <span>Patient ID: <span>{{patient.body.id}}</span></span>
+        <span>Given Name: <span>{{patient.body.givenName}}</span></span>
+        <span>Family Name: <span>{{patient.body.familyName}}</span></span>
+        <span>Address: <span>{{patient.body.address}}</span></span>
+        <span>Gender: <span>{{patient.body.gender}}</span></span>
+        <span>Phone: <span>{{patient.body.phoneNumber}}</span></span>
+        <span>Notes: Vulcan man who tried to kolinar with a frog like a Klingon</span>
+      </div>
+    </div>
+  </div>
+  <ng-template #Test>
+  <div >On met un truc</div>
+  </ng-template>
+</main>

@@ -90,4 +90,9 @@ public class PatientServiceImpl implements PatientService {
   public List<Patient> findPatients() {
     return patientRepository.findAll();
   }
+
+  @Override
+  public Optional<Patient> findById(long id) {
+    return patientRepository.findById(id);
+  }
 }

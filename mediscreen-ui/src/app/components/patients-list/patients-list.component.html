@@ -15,42 +15,43 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let tempPatient of patients.body">
-          <td>
-            {{tempPatient.id}}
-          </td>
-          <td>
-            {{tempPatient.familyName}}
-          </td>
-          <td>
-            {{tempPatient.givenName}}
-          </td>
-          <td>
-            {{tempPatient.dateOfBirth}}
-          </td>
-          <td>
-            {{tempPatient.gender}}
-          </td>
-          <td>
-            {{tempPatient.address}}
-          </td>
-          <td>
-            {{tempPatient.phoneNumber}}
-          </td>
+        <tr *ngFor="let tempPatient of patients.body" routerLink="../patient/{{tempPatient.id}}">
+            <td>
+              {{tempPatient.id}}
+            </td>
+            <td>
+              {{tempPatient.familyName}}
+            </td>
+            <td>
+              {{tempPatient.givenName}}
+            </td>
+            <td>
+              {{tempPatient.dateOfBirth}}
+            </td>
+            <td>
+              {{tempPatient.gender}}
+            </td>
+            <td>
+              {{tempPatient.address}}
+            </td>
+            <td>
+              {{tempPatient.phoneNumber}}
+            </td>
         </tr>
+
         </tbody>
       </table>
     </div>
   </div>
   <ng-template #Errors>
-      <div class="data-content">
-        <div class="error-message" *ngIf="status==404"><span>No Patients Found.</span>
-          <span>Add patients and/or check connection with database</span>
-        </div>
-        <div class="error-message" *ngIf="status==400"><span>Bad Parameters used</span>
-          <span>{{message}}</span>
-        </div>
+    <div class="data-content">
+      <div class="error-message" *ngIf="status==404"><span>No Patients Found.</span>
+        <span>Add patients and/or check connection with database</span>
       </div>
+      <div class="error-message" *ngIf="status==400"><span>Bad Parameters used</span>
+        <span>{{message}}</span>
+      </div>
+    </div>
   </ng-template>
 </main>
 

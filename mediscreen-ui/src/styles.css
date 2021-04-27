@@ -224,3 +224,7 @@ main {
   margin: 5% 0 0 0 ;
 }
 
+.table-data tr:hover{
+  background: aquamarine;
+  cursor: pointer;
+}

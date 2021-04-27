@@ -1,22 +1,22 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {Observable, throwError} from "rxjs";
 import {Patient} from "../common/patient";
-import {catchError, map} from "rxjs/operators";
+import {catchError} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
 
+  private baseUrl = 'http://localhost:8081';
 
-  private baseUrl = 'http://localhost:8081/patients';
 
   constructor(private httpClient: HttpClient) {
   }
 
   getPatients(): Observable<HttpResponse<Patient[]>> {
-    return this.httpClient.get<Patient[]>(this.baseUrl,{observe:'response'})
+    return this.httpClient.get<Patient[]>(this.baseUrl + "/patients", {observe: 'response'})
       .pipe(
         catchError(err => {
           console.log(err);
@@ -25,10 +25,17 @@ export class PatientService {
       )
   }
 
-
+  getPatient(id: string): Observable<HttpResponse<Patient>> {
+    const patientFileUrl = this.baseUrl+'/patient/file?id=' + id;
+    console.log(patientFileUrl)
+    return this.httpClient.get<Patient>(patientFileUrl, {observe: 'response'})
+      .pipe(
+        catchError(err => {
+          console.log(err);
+          return throwError(err)
+        })
+      )
+  }
 }
 
-  interface GetResponse {
- patient:Patient[];
-}
 

@@ -56,4 +56,6 @@ public interface PatientService {
    * @return List of Patients
    */
   List<Patient> findPatients();
+
+  Optional<Patient> findById(long id);
 }

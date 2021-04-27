@@ -2,25 +2,25 @@ package com.mediscreen.patient.controller;
 
 import com.mediscreen.patient.customValidator.Gender;
 import com.mediscreen.patient.entity.Patient;
+import com.mediscreen.patient.exceptions.PatientNotFoundException;
 import com.mediscreen.patient.service.PatientService;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @RestController
 @Validated
-@CrossOrigin(origins = {"UI_DOCKER_NAME","http://localhost:4200"})
+@CrossOrigin(origins = {"UI_DOCKER_NAME", "http://localhost:4200"})
 public class PatientController {
 
   @Autowired
@@ -95,13 +95,27 @@ public class PatientController {
 
 
   @GetMapping("patients")
-  public List<Patient> getAllPatient() {
+  public List<Patient> getAllPatient(HttpServletResponse response) {
     logger.debug("Return Patients List");
-   return patientService.findPatients();
+    List<Patient> patients = patientService.findPatients();
+    if (patients.isEmpty()) {
+      response.setStatus(404);
+      return patients;
+    }
+    return patients;
   }
 
+  @GetMapping("patient/file")
+  public Optional<Patient> getPatientById(@RequestParam long id) {
+    logger.debug("Return Patients List");
+    if (patientService.findById(id).isEmpty()) {
+      throw new PatientNotFoundException();
+    }
+    return patientService.findById(id);
+  }
+
+
   /*TODO Create Delete Controller by id.
-   * TODO Create Get patient list (all).
    *  TODO write tests for those.
    *   TODO Deal with appointements: create table, get post put delete controller for 'em.
    */
