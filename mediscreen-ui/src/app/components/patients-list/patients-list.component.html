@@ -1,7 +1,7 @@
 <main>
   <div class="data-content">
     <h1 class="content-title">Patients</h1>
-    <div class="table-wrapper" *ngIf="status==200 else Errors">
+    <div class="table-wrapper" *ngIf="status ==200 else Errors">
       <table class="table-data">
         <thead>
         <tr>
@@ -15,7 +15,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let tempPatient of patients.body" routerLink="../patient/{{tempPatient.id}}">
+        <tr *ngFor="let tempPatient of patients"
+            routerLink="../patient/file/{{tempPatient.id}}">
             <td>
               {{tempPatient.id}}
             </td>

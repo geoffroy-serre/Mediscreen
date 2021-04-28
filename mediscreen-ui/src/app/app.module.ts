@@ -10,10 +10,12 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { AppointementsCalendarComponent } from './components/appointements-calendar/appointements-calendar.component';
 import { PatientFileComponent } from './components/patient-file/patient-file.component';
+import { PatientAddComponent } from './components/patient-add/patient-add.component';
 
 
 const routes: Routes = [
-  {path: 'patient/:id', component: PatientFileComponent},
+  {path: 'patient/file/:id', component: PatientFileComponent},
+  {path: 'patient/add', component: PatientAddComponent},
   {path: 'appointment/list', component: AppointementsCalendarComponent},
   {path: 'patients', component: PatientsListComponent},
   {path: 'home', component: HomeComponent},
@@ -30,12 +32,12 @@ const routes: Routes = [
     NotFoundComponent,
     HomeComponent,
     AppointementsCalendarComponent,
-    PatientFileComponent
+    PatientFileComponent,
+    PatientAddComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
-    BrowserModule,
-    HttpClientModule
+    BrowserModule
   ],
   providers: [PatientService],
   bootstrap: [AppComponent]

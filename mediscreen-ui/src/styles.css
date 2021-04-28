@@ -285,6 +285,17 @@ main {
   background: #16B6D3;
 }
 
+.patient-data-form {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin:0;
+  padding: 0 0 0 0px;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  flex-direction: column;
+
+}
 .patient-data-field-name{
   font-size: 1em;
   font-weight: bold;
@@ -294,4 +305,34 @@ main {
   padding-left: 10px;
   font-weight: normal;
   color: #4FC3A1;
+}
+.radio-container {
+  background: #fff;
+  display: inline-block;
+  padding: 5px;
+
+}
+.radio-container label {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  transition: 0.2s all ease-in-out;
+  width: 80px;
+  cursor: pointer;
+  color: #324960;
+}
+.radio-container input[type="radio"] {
+  display: none;
+  cursor: pointer;
+}
+.radio-container input[type="radio"]:checked + label {
+  color: #4FC3A1;
+  background: #324960;
+  cursor: pointer;
 }

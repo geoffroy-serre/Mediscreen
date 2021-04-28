@@ -1,0 +1,36 @@
+<main>
+  <div class="data-content">
+    <h2 class="content-title">Add new patient</h2>
+    <div
+      class="button-div">
+      <button class="btn-delete"><i class="fa fa-trash"></i></button>
+      <button class="btn-modify"><i class="fa fa-pen"></i></button>
+      <button class="btn-call"><i class="fa fa-phone-alt"></i></button>
+    </div>
+    <div class="patient-data-card">
+      <div class="infos-persos">
+        <img src="assets/imgs/logo.png">
+      </div>
+      <div class="patient-data-form">
+        <label for="familyName" class="patient-data-field-name">Family Name : </label>
+        <input id="familyName" placeholder="Family Name" type="text">
+        <label for="givenName" class="patient-data-field-name">Given Name : </label>
+        <input id="givenName" placeholder="Given Name" type="text">
+        <label for="address" class="patient-data-field-name">Address :  </label>
+        <input id="address" placeholder="Adress" type="text">
+        <div class="radio-container">
+          <label for="patient-gender-female" class="patient-data-field-name">Gender : </label>
+          <input checked='' id='patient-gender-female' name='patient-gender' type='radio'
+                 value='f'>
+          <label for='patient-gender-female'>Female</label>
+          <input id='patient-gender-male' name='patient-gender' type='radio' value='m'>
+          <label for='patient-gender-male'>Male</label>
+        </div>
+        <label for="phone" class="patient-data-field-name">Phone : </label>
+        <input id="phone" placeholder="Family Name" type="text">
+
+
+      </div>
+    </div>
+  </div>
+</main>

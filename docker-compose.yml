@@ -11,7 +11,18 @@ services:
     volumes:
       - mysql_db_data_container:/var/lib/mysql
       
-
+  mongodb:
+    image: mongo:4
+    container_name: mediscreen_mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootroot
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+      
 volumes:
   mysql_db_data_container:
+  mongodb_data_container:
 

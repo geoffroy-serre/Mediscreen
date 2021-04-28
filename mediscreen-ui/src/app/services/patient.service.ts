@@ -1,8 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpResponse} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
-import {Patient} from "../common/patient";
-import {catchError} from "rxjs/operators";
+import axios from "axios";
 
 @Injectable({
   providedIn: 'root'
@@ -11,29 +8,17 @@ export class PatientService {
 
   private baseUrl = 'http://localhost:8081';
 
-  constructor(private httpClient: HttpClient) {
+  constructor() {
   }
 
-  getPatients(): Observable<HttpResponse<Patient[]>> {
-    return this.httpClient.get<Patient[]>(this.baseUrl + "/patients", {observe: 'response'})
-      .pipe(
-        catchError(err => {
-          console.log(err);
-          return throwError(err)
-        })
-      )
+  getPatients() {
+    const patientsUrl = this.baseUrl + "/patients";
+    return axios.get(patientsUrl);
   }
 
-  getPatient(id: string): Observable<HttpResponse<Patient>> {
-    const patientFileUrl = this.baseUrl+'/patient/file?id='+id;
-    console.log(patientFileUrl)
-    return this.httpClient.get<Patient>(patientFileUrl, {observe: 'response'})
-      .pipe(
-        catchError(err => {
-          console.log(err);
-          return throwError(err)
-        })
-      )
+  getPatient(id: string) {
+    const patientFileUrl = this.baseUrl + '/patient/file?id=' + id;
+    return axios.get(patientFileUrl);
   }
 
 }

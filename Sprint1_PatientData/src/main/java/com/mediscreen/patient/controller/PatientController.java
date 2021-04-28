@@ -107,7 +107,7 @@ public class PatientController {
 
   @GetMapping("patient/file")
   public Optional<Patient> getPatientById(@RequestParam long id) {
-    logger.debug("Return Patients List");
+    logger.debug("Return Patient with id:"+id);
     if (patientService.findById(id).isEmpty()) {
       throw new PatientNotFoundException();
     }

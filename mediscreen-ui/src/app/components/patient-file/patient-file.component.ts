@@ -3,7 +3,7 @@ import {Patient} from "../../common/patient";
 import {PatientService} from "../../services/patient.service";
 import {ActivatedRoute} from "@angular/router";
 import {HttpResponse} from "@angular/common/http";
-import {map} from "rxjs/operators";
+import {timeout} from "rxjs/operators";
 
 @Component({
   selector: 'app-patient-file',
@@ -11,37 +11,21 @@ import {map} from "rxjs/operators";
   styleUrls: ['./patient-file.component.css']
 })
 export class PatientFileComponent implements OnInit {
-  patient!: HttpResponse<Patient>;
+  patient!: Patient;
   status!: number;
   message!: string;
   private idParam!: string;
 
   constructor(private patientService: PatientService, private route: ActivatedRoute) {
-    // @ts-ignore
-    this.idParam = this.route.snapshot.paramMap.get('id');
   }
 
-
   ngOnInit(): void {
-    this.route.queryParams.subscribe(() => {
-      this.patientFile();
-    })
-
+    this.idParam = this.route.snapshot.paramMap.get('id')||'0';
+    this.patientFile().then((response) => {this.patient=response.data; this.status=response.status})
+      .catch((err) => {this.message=err.response.data.error; this.status=err.response.status});
   }
 
   private patientFile() {
-    this.patientService.getPatient(this.idParam).subscribe(
-      data => {
-        map((response: { body: any; }) => response.body)
-        console.log(data);
-        console.log("Data body in ts: ", data.body);
-        this.patient = data;
-        console.log('Patient body in ts:', this.patient.body);
-      },
-      error => {
-        this.status = error.status;
-        this.message = error.error.error;
-      }
-    )
+    return this.patientService.getPatient(this.idParam);
   }
 }

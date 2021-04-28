@@ -10,26 +10,18 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class PatientsListComponent implements OnInit {
 
-  patients! : HttpResponse<Patient[]>
+  patients! : Patient[];
   status!:number;
   message!:string;
   constructor(private patientService:PatientService) { }
 
   ngOnInit(): void {
-    this.listPatients();
+    this.listPatients().then((response) => {this.patients=response.data; this.status=response.status})
+      .catch((err) => {this.message=err.response.data.error; this.status=err.response.status});
   }
 
   listPatients() {
-    this.patientService.getPatients().subscribe(
-      data => {
-        this.patients = data;
-        this.status = data.status;
-      },
-      error => {
-        this.status = error.status;
-        this.message = error.error.error;
-      }
-    )
+    return this.patientService.getPatients();
   }
 
 }
