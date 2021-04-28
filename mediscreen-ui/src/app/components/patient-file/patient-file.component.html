@@ -1,23 +1,27 @@
 <main>
-  <div class="data-content" *ngIf="patient !=null else Test">
+  <div class="data-content" *ngIf="patient.body !=null else Test" >
     <h2 class="content-title">Patient</h2>
     <div
       class="button-div">
       <button class="btn-delete"><i class="fa fa-trash"></i></button>
+      <button class="btn-modify"><i class="fa fa-pen"></i></button>
       <button class="btn-call"><i class="fa fa-phone-alt"></i></button>
     </div>
     <div class="patient-data-card">
       <div class="infos-persos">
-        <span class="civility-card"></span>
-        <span class="civility-card">Picard</span>
+        <span class="civility-card">{{patient.body.givenName}}</span>
+        <span class="civility-card">{{patient.body.familyName}}</span>
       </div>
       <div class="patient-data">
-        <span>Patient ID: <span></span></span>
-        <span>Given Name: JeanLuc</span>
-        <span>Family Name: Picard</span>
-        <span>Address: Enterprise NCC 1701.D Starfleet Academy</span>
-        <span>Gender: Vulcan</span>
-        <span>Notes: Vulcan man who tried to kolinar with a frog like a Klingon</span>
+        <span class="patient-data-field-name">Patient ID:
+          <span class="patient-data-field-data">{{patient.body.id}}</span></span>
+        <span class="patient-data-field-name">Given Name: <span
+          class="patient-data-field-data">{{patient.body.givenName}}</span></span>
+        <span class="patient-data-field-name">Family Name: <span class="patient-data-field-data"
+        >{{patient.body.familyName}}</span></span>
+        <span class="patient-data-field-name">Address: <span class="patient-data-field-data">{{patient.body.address}}</span></span>
+        <span class="patient-data-field-name">Gender: <span class="patient-data-field-data">{{patient.body.gender}}</span></span>
+        <span class="patient-data-field-name">Notes: Vulcan man who tried to kolinar with a frog like a Klingon</span>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ import {Patient} from "../../common/patient";
 import {PatientService} from "../../services/patient.service";
 import {ActivatedRoute} from "@angular/router";
 import {HttpResponse} from "@angular/common/http";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-patient-file',
@@ -13,7 +14,7 @@ export class PatientFileComponent implements OnInit {
   patient!: HttpResponse<Patient>;
   status!: number;
   message!: string;
-  idParam!:string;
+  private idParam!: string;
 
   constructor(private patientService: PatientService, private route: ActivatedRoute) {
     // @ts-ignore
@@ -23,17 +24,19 @@ export class PatientFileComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(() => {
-      this.handlePatientFile();
+      this.patientFile();
     })
+
   }
 
-  private handlePatientFile() {
+  private patientFile() {
     this.patientService.getPatient(this.idParam).subscribe(
       data => {
+        map((response: { body: any; }) => response.body)
         console.log(data);
-        console.log("Data body in ts: ",data.body);
+        console.log("Data body in ts: ", data.body);
         this.patient = data;
-        console.log('PAtient body in ts:',this.patient.body);
+        console.log('Patient body in ts:', this.patient.body);
       },
       error => {
         this.status = error.status;

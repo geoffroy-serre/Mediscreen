@@ -11,7 +11,6 @@ export class PatientService {
 
   private baseUrl = 'http://localhost:8081';
 
-
   constructor(private httpClient: HttpClient) {
   }
 
