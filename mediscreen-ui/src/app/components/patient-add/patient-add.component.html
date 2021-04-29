@@ -1,36 +1,56 @@
 <main>
   <div class="data-content">
     <h2 class="content-title">Add new patient</h2>
-    <div
-      class="button-div">
-      <button class="btn-delete"><i class="fa fa-trash"></i></button>
-      <button class="btn-modify"><i class="fa fa-pen"></i></button>
-      <button class="btn-call"><i class="fa fa-phone-alt"></i></button>
-    </div>
     <div class="patient-data-card">
       <div class="infos-persos">
-        <img src="assets/imgs/logo.png">
+        <img src="assets/imgs/logo.png" alt="logo mediscreen">
       </div>
-      <div class="patient-data-form">
-        <label for="familyName" class="patient-data-field-name">Family Name : </label>
-        <input id="familyName" placeholder="Family Name" type="text">
-        <label for="givenName" class="patient-data-field-name">Given Name : </label>
-        <input id="givenName" placeholder="Given Name" type="text">
-        <label for="address" class="patient-data-field-name">Address :  </label>
-        <input id="address" placeholder="Adress" type="text">
-        <div class="radio-container">
-          <label for="patient-gender-female" class="patient-data-field-name">Gender : </label>
-          <input checked='' id='patient-gender-female' name='patient-gender' type='radio'
-                 value='f'>
-          <label for='patient-gender-female'>Female</label>
-          <input id='patient-gender-male' name='patient-gender' type='radio' value='m'>
-          <label for='patient-gender-male'>Male</label>
+      <form #addUser="ngForm" (ngSubmit)="onSubmit(addUser.value)" class="patient-data-form">
+        <div class="set-fields">
+          <label for="familyName" class="patient-data-field-name">Family Name : </label>
+          <input [(ngModel)]="patient.familyName" id="familyName" placeholder="Family Name"
+                 type="text"
+                 class="patient-data-field-data" name="familyName" >
         </div>
-        <label for="phone" class="patient-data-field-name">Phone : </label>
-        <input id="phone" placeholder="Family Name" type="text">
-
-
-      </div>
+        <div class="set-fields">
+          <label for="givenName" class="patient-data-field-name">Given Name : </label>
+          <input [(ngModel)]="patient.givenName" id="givenName" placeholder="Given Name" type="text"
+                 class="patient-data-field-data" name="givenName" >
+        </div>
+        <div class="set-fields">
+          <label for="address" class="patient-data-field-name">Address : </label>
+          <input [(ngModel)]="patient.address" id="address" placeholder="Address" type="text"
+                 class="patient-data-field-data"
+                 name="address" >
+        </div>
+        <div class="set-fields">
+          <label for="birthdate" class="patient-data-field-name">BirthDate : </label>
+          <input [(ngModel)]="patient.dateOfBirth" id="birthdate" placeholder="BirthDate"
+                 type="date"
+                 class="patient-data-field-data" name = "birthdate">
+        </div>
+        <div class="set-fields">
+          <label for="patient-gender-female" class="patient-data-field-name">Gender : </label>
+          <div class="radio-container">
+            <input [(ngModel)]="patient.gender" checked='' id='patient-gender-female'
+                   name='gender' type='radio'
+                   value='f' >
+            <label for='patient-gender-female'>Female</label>
+            <input [(ngModel)]="patient.gender" id='patient-gender-male' name='gender'
+                   type='radio' value='m'>
+            <label for='patient-gender-male'>Male</label>
+          </div>
+        </div>
+        <div class="set-fields">
+          <label for="phone" class="patient-data-field-name">Phone : </label>
+          <input id="phone" placeholder="Family Name" type="text" class="patient-data-field-data"
+                 name="phone" [(ngModel)]="patient.phoneNumber">
+        </div>
+        <div class="button-div btn-form">
+          <button class="btn-delete"><i class="fa fa-times"></i></button>
+          <button class="btn-valid" type="submit"><i class="fa fa-check"></i></button>
+        </div>
+      </form>
     </div>
   </div>
 </main>

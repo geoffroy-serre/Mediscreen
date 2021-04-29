@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AppointementsCalendarComponent } from './components/appointements-calendar/appointements-calendar.component';
 import { PatientFileComponent } from './components/patient-file/patient-file.component';
 import { PatientAddComponent } from './components/patient-add/patient-add.component';
+import {FormsModule} from "@angular/forms";
 
 
 const routes: Routes = [
@@ -24,7 +25,6 @@ const routes: Routes = [
   {path:'**', component: NotFoundComponent}
 ]
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +37,9 @@ const routes: Routes = [
   ],
   imports: [
     RouterModule.forRoot(routes),
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [PatientService],
   bootstrap: [AppComponent]

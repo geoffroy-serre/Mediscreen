@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PatientService} from "../../services/patient.service";
 import {Patient} from "../../common/patient";
 import {HttpResponse} from "@angular/common/http";
@@ -10,18 +10,28 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class PatientsListComponent implements OnInit {
 
-  patients! : Patient[];
-  status!:number;
-  message!:string;
-  constructor(private patientService:PatientService) { }
+  patients!: HttpResponse<Patient[]>
+  status!: number;
+  message!: string;
+
+  constructor(private patientService: PatientService) {
+  }
 
   ngOnInit(): void {
-    this.listPatients().then((response) => {this.patients=response.data; this.status=response.status})
-      .catch((err) => {this.message=err.response.data.error; this.status=err.response.status});
+    this.listPatients();
   }
 
   listPatients() {
-    return this.patientService.getPatients();
+    this.patientService.getPatients().subscribe(
+      data => {
+        this.patients = data;
+        this.status = data.status;
+      },
+      error => {
+        this.status = error.status;
+        this.message = error.error.error;
+      }
+    )
   }
 
 }

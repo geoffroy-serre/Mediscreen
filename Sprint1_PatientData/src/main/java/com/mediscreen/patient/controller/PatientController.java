@@ -114,6 +114,17 @@ public class PatientController {
     return patientService.findById(id);
   }
 
+  @DeleteMapping("patient/delete")
+  public void deletePatientById(@RequestParam @Valid Long id, HttpServletResponse response){
+    if(patientService.existsPatientById(id)){
+      patientService.deletePatient(id);
+      response.setStatus(200);
+    }
+    else{
+      response.setStatus(404);
+    }
+  }
+
 
   /*TODO Create Delete Controller by id.
    *  TODO write tests for those.

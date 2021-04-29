@@ -58,4 +58,8 @@ public interface PatientService {
   List<Patient> findPatients();
 
   Optional<Patient> findById(long id);
+
+  boolean existsPatientById(Long id);
+
+  void deletePatient(Long id);
 }

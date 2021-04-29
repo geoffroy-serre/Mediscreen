@@ -1,30 +1,53 @@
 <main>
-  <div class="data-content" *ngIf="status ==200 else Errors" >
-    <h2 class="content-title">Patient</h2>
-    <div
-      class="button-div">
-      <button class="btn-delete"><i class="fa fa-trash"></i></button>
-      <button class="btn-modify"><i class="fa fa-pen"></i></button>
-      <button class="btn-call"><i class="fa fa-phone-alt"></i></button>
-    </div>
-    <div class="patient-data-card">
-      <div class="infos-persos">
-        <span class="civility-card">{{patient.givenName}}</span>
-        <span class="civility-card">{{patient.familyName}}</span>
+    <div class="data-content" *ngIf="status==200 !=null  else Errors">
+      <h2 class="content-title">Patient</h2>
+      <div
+        class="button-div">
+        <button class="btn-delete" (click)="deletePatient()"><i class="fa fa-trash"></i></button>
+        <button class="btn-modify"><i class="fa fa-pen"></i></button>
       </div>
-      <div class="patient-data">
-        <span class="patient-data-field-name">Patient ID:
-          <span class="patient-data-field-data">{{patient.id}}</span></span>
-        <span class="patient-data-field-name">Given Name: <span
-          class="patient-data-field-data">{{patient.givenName}}</span></span>
-        <span class="patient-data-field-name">Family Name: <span class="patient-data-field-data"
-        >{{patient.familyName}}</span></span>
-        <span class="patient-data-field-name">Address: <span class="patient-data-field-data">{{patient.address}}</span></span>
-        <span class="patient-data-field-name">Gender: <span class="patient-data-field-data">{{patient.gender}}</span></span>
-        <span class="patient-data-field-name">Notes: Vulcan man who tried to kolinar with a frog like a Klingon</span>
+      <div class="patient-data-card">
+        <div class="infos-persos">
+          <div class="civility-card">{{patient?.body?.givenName}}</div>
+          <div class="civility-card">{{patient?.body?.familyName}}</div>
+        </div>
+        <div class="patient-data">
+          <div class="patient-file-set">
+            <div class="patient-data-file-name">Patient ID:</div>
+              <div class="patient-data-file-data">{{patient?.body?.id}}</div>
+          </div>
+          <div class="patient-file-set">
+            <div class="patient-data-file-name">Given Name: </div>
+              <div
+                class="patient-data-file-data">{{patient?.body?.givenName}}</div>
+          </div>
+          <div class="patient-file-set">
+            <div class="patient-data-file-name">Family Name:</div>
+              <div class="patient-data-file-data">{{patient?.body?.familyName}}</div>
+          </div>
+          <div class="patient-file-set">
+            <div class="patient-data-file-name">BirthDate: </div>
+            <div
+              class="patient-data-file-data">{{patient?.body?.dateOfBirth}}</div>
+          </div>
+          <div class="patient-file-set">
+            <div class="patient-data-file-name">Gender:</div>
+            <div
+              class="patient-data-file-data">{{patient?.body?.gender}}</div>
+          </div>
+          <div class="patient-file-set">
+            <div class="patient-data-file-name">Address:</div>
+              <div
+                class="patient-data-file-data">{{patient?.body?.address}}</div>
+          </div>
+          <div class="patient-file-set">
+            <div class="patient-data-file-name">Notes:</div>
+            <div class="patient-data-file-data">Vulcan man who try to kolinar with a frog like
+            a Klingon</div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
   <ng-template #Errors>
     <div class="data-content">
       <div class="error-message" *ngIf="status==404"><span>No Patients Found.</span>
@@ -33,6 +56,7 @@
       <div class="error-message" *ngIf="status==400"><span>Bad Parameters used</span>
         <span>{{message}}</span>
       </div>
+      <div>MEEERDE</div>
     </div>
   </ng-template>
 </main>

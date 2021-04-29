@@ -1,8 +1,3 @@
-:root{
-  --form-input-size:70%;
-}
-
-
 html, body {
   margin: 0%;
 }
@@ -204,29 +199,28 @@ main {
 
 .patient-data {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  margin:10px;
-  padding: 10px 10px 10px 10px;
+  margin:10;
+  padding: 0 0 0 12px;
+  display: flex;
   width: 100%;
   height: 100%;
-  display: flex;
+  justify-content: center;
   flex-direction: column;
 }
 .patient-file-set{
-  padding: 0 0 5px 0;
+  padding: 0 0 10px 0;
   display:flex;
   justify-content: space-between;
 }
 .patient-data-file-name{
-  font-size: 0.9em;
+  font-size: 1em;
   font-weight: bold;
   color: #324960;
-  display: flex;
-  flex-direction: row;
 }
 .patient-data-file-data{
+  padding-left: 10px;
   font-weight: normal;
   color: #4FC3A1;
-  width: 80%;
 }
 
 .civility-card {
@@ -271,16 +265,6 @@ main {
   color: #F8F8F8;
   border:none;
 }
-.btn-valid{
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  font-size: 1em;
-  width:100px ;
-  height:30px;
-  background: darkgreen;
-  color: #F8F8F8;
-  border:none;
-}
 .btn-call{
   height:30px;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
@@ -304,15 +288,13 @@ main {
 .btn-delete:hover{
   background: red;
 }
-.btn-valid:hover{
-  background: forestgreen;
-}
 .btn-modify:hover{
   background: #FDAB08;
 }
 .btn-call:hover{
   background: #16B6D3;
 }
+
 
 .patient-data-form {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -333,13 +315,9 @@ main {
 .patient-data-field-data{
   font-weight: normal;
   color: #4FC3A1;
-  min-width: var(--form-input-size);
+  width: 300px;
   border: 1px solid lightgray;
   border-radius: 5px;
-}
-.patient-data-field-data:focus{
-  outline-width: 0.5px;
-  outline-color: #4FC3A1;
 }
 
 .set-fields{
@@ -352,7 +330,7 @@ main {
   background: #fff;
   padding: 5px;
   display: flex;
-  width:var(--form-input-size);
+  width:300px;
   justify-content: space-around;
 }
 .radio-container label {
@@ -380,7 +358,7 @@ main {
 .btn-form{
   margin: 0;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   padding-top: 20px;
   padding-left: 0;
 
