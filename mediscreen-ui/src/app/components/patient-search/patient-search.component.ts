@@ -25,7 +25,7 @@ searchForm!:FormGroup;
       given:['',Validators.required]
     })
   }
-  get f() { return this.searchForm.controls; }
+  get validator() { return this.searchForm.controls; }
   onSubmit() {
 
     if (this.searchForm.invalid) {

@@ -339,12 +339,19 @@ main {
 .patient-data-field-data:focus{
   outline-width: 0.5px;
   outline-color: #4FC3A1;
+
 }
 
 .set-fields{
   padding: 0 0 10px 0;
   display:flex;
   justify-content: space-between;
+}
+
+.flex-for-errors-form{
+display: flex;
+  min-width: var(--form-input-size);
+  flex-direction: column;
 }
 
 .radio-container {
@@ -416,6 +423,35 @@ main {
 .search-field{
   border: 1px solid lightgray;
   border-radius: 3px;
+
+}
+.btn-valid:disabled{
+  background: grey;
+}
+
+.invalid-feedback{
+  color: red;
+  font-style: italic;
+  font-size: smaller;
+  padding: 0;
+  margin: 0;
+}
+
+.mandatory-star {
+  color: red;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 0.7em;
+  font-style: italic;
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+.mandatory-explanation{
+  color: red;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 0.7em;
+  font-style: italic;
+
 
 }
 

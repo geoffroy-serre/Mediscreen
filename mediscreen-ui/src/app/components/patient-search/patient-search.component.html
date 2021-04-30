@@ -3,11 +3,11 @@
     <div class="search-inputs">
       <input formControlName="family" id="family" type="text" placeholder="Family Name"
              class="search-field" [ngClass]="{ 'is-invalid':
-             f.family.errors }">
+             validator.family.errors }">
       <input formControlName="given" id="given" type="text" placeholder="Given Name"
              class="search-field"
              style="margin-left: 5px" [ngClass]="{ 'is-invalid':
-             f.given.errors }">
+             validator.given.errors }">
     </div>
     <button class="button-search"><i
       class="fa fa-search"></i> </button>
