@@ -5,8 +5,7 @@ import com.mediscreen.patient.entity.Patient;
 import com.mediscreen.patient.exceptions.PatientNotFoundException;
 import com.mediscreen.patient.service.PatientService;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,22 +74,25 @@ public class PatientController {
     }
   }
 
-  @GetMapping("patient")
-  public Patient getPatientByFamilyAndGivenName(
+  @GetMapping("patient/search")
+  public List<Patient> getPatientByFamilyAndGivenName(
           @RequestParam @Size(min = 2, max = 255, message = "familyName must be between {min} and" +
                   " {max} characters long") String familyName,
           @RequestParam @Size(min = 2, max = 255, message = "givenName must be between {min} and " +
                   "{max}" +
                   " characters long") String givenName,
           HttpServletResponse response) {
-    Patient patient = patientService.findPatientByFamilyNameAndGivenName(familyName, givenName);
-    if (patient == null) {
+    List<Patient> patients = patientService.findPatientByFamilyNameAndGivenName(familyName,
+            givenName);
+    if (patients.isEmpty()) {
       logger.debug("No patient found for " + familyName + " " + givenName);
       response.setStatus(404);
-      return null;
+      return new ArrayList<Patient>();
     }
+
+
     logger.debug("Patient found for " + familyName + " " + givenName + " returning patient");
-    return patient;
+    return patients;
   }
 
 
@@ -124,7 +126,6 @@ public class PatientController {
       response.setStatus(404);
     }
   }
-
 
   /*TODO Create Delete Controller by id.
    *  TODO write tests for those.

@@ -1,11 +1,11 @@
 <main>
   <div class="data-content">
-    <h2 class="content-title">Add new patient</h2>
+    <h2 class="content-title">Add patient</h2>
     <div class="patient-data-card">
       <div class="infos-persos">
         <img src="assets/imgs/logo.png" alt="logo mediscreen">
       </div>
-      <form #addUser="ngForm" (ngSubmit)="onSubmit(addUser.value)" class="patient-data-form">
+      <form  (ngSubmit)="onSubmit()" class="patient-data-form">
         <div class="set-fields">
           <label for="familyName" class="patient-data-field-name">Family Name : </label>
           <input [(ngModel)]="patient.familyName" id="familyName" placeholder="Family Name"
@@ -34,10 +34,10 @@
           <div class="radio-container">
             <input [(ngModel)]="patient.gender" checked='' id='patient-gender-female'
                    name='gender' type='radio'
-                   value='f' >
+                   value='F' >
             <label for='patient-gender-female'>Female</label>
             <input [(ngModel)]="patient.gender" id='patient-gender-male' name='gender'
-                   type='radio' value='m'>
+                   type='radio' value='M'>
             <label for='patient-gender-male'>Male</label>
           </div>
         </div>
@@ -47,7 +47,7 @@
                  name="phone" [(ngModel)]="patient.phoneNumber">
         </div>
         <div class="button-div btn-form">
-          <button class="btn-delete"><i class="fa fa-times"></i></button>
+          <button class="btn-delete" routerLink="/patients"><i class="fa fa-times"></i></button>
           <button class="btn-valid" type="submit"><i class="fa fa-check"></i></button>
         </div>
       </form>

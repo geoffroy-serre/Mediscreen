@@ -1,5 +1,1 @@
-2021-04-29 20:35:07,678 INFO c.m.p.c.PatientController [http-nio-8081-exec-6] Enter addPatient in patient microservice
-2021-04-29 20:35:07,680 DEBUG c.m.p.s.PatientServiceImpl [http-nio-8081-exec-6] Entering addPatient
-2021-04-29 20:35:07,680 DEBUG c.m.p.s.PatientServiceImpl [http-nio-8081-exec-6] Entering existsPatientByFamilyAndGivenAndDob :S<EF<Z3E Z3FSE<<FD 8714-04-15
-2021-04-29 20:35:07,692 DEBUG c.m.p.s.PatientServiceImpl [http-nio-8081-exec-6] patient saved, returning true.
-2021-04-29 20:35:07,692 DEBUG c.m.p.c.PatientController [http-nio-8081-exec-6] Patient added: status 200
+2021-04-30 17:08:28,075 DEBUG c.m.p.c.PatientController [http-nio-8081-exec-8] Return Patients List

@@ -23,17 +23,15 @@ header {
 
 .top-nav {
   display: flex;
-  flex: 3;
+  flex: 1;
   justify-content: flex-end;
   align-items: flex-end;
-
 }
 
 .dropdown {
   position: relative;
   display: inline-block;
 }
-
 
 .dropbtn {
   background-color: #324960;
@@ -44,6 +42,7 @@ header {
   height: 50px;
   font-size: 1em;
   border: none;
+  cursor:pointer;
 }
 .dropbtn a{
   color: white;
@@ -383,6 +382,40 @@ main {
   justify-content: space-evenly;
   padding-top: 20px;
   padding-left: 0;
+
+}
+.search-form{
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+}
+.search-form-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.button-search{
+  background: none;
+  color: #F8F8F8;
+  border: none;
+  height: 20px;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+.button-search:hover{
+  color: #4FC3A1;
+  cursor: pointer;
+}
+.search-field:focus{
+  outline-width: 1px;
+  outline-color: #4FC3A1;
+}
+
+.search-field{
+  border: 1px solid lightgray;
+  border-radius: 3px;
 
 }
 

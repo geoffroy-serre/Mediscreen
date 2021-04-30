@@ -62,7 +62,7 @@ public class PatientServiceImpl implements PatientService {
    * @inheritDoc
    */
   @Override
-  public Patient findPatientByFamilyNameAndGivenName(String family, String given) {
+  public List<Patient> findPatientByFamilyNameAndGivenName(String family, String given) {
     logger.debug("Entering findPatientByFamilyNameAndGivenName :" + family + " " + given);
     return patientRepository.findPatientByFamilyNameAndGivenName(family, given);
   }

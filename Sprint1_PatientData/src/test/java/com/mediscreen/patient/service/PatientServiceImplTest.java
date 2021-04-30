@@ -97,8 +97,10 @@ class PatientServiceImplTest {
 
   @Test
   void findPatientByFamilyNameAndGivenName() {
+    List<Patient> patients = new ArrayList<>();
+    patients.add(patient);
     when(patientRepository.findPatientByFamilyNameAndGivenName(patient.getFamilyName(),
-            patient.getGivenName())).thenReturn(patient);
+            patient.getGivenName())).thenReturn(patients);
     assertNotNull(patientService.findPatientByFamilyNameAndGivenName(patient.getFamilyName(),
             patient.getGivenName()));
     Mockito.verify(patientRepository, Mockito.times(1)).findPatientByFamilyNameAndGivenName(patient.getFamilyName(),

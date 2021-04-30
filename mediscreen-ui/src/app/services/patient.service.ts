@@ -18,7 +18,6 @@ export class PatientService {
     return this.httpClient.get<Patient[]>(this.baseUrl + '/patients', {observe: 'response'})
       .pipe(
         catchError(err => {
-          console.log(err);
           return throwError(err);
         })
       );
@@ -26,27 +25,32 @@ export class PatientService {
 
   getPatient(id: string): Observable<HttpResponse<Patient>> {
     const patientFileUrl = this.baseUrl + '/patient/file?id=' + id;
-    console.log(patientFileUrl);
     return this.httpClient.get<Patient>(patientFileUrl, {observe: 'response'})
       .pipe(
         catchError(err => {
-          console.log(err);
           return throwError(err);
         })
       );
   }
 
-  addPatient(patient:Patient): Observable<any> {
+  addPatient(patient: Patient): Observable<any> {
     const params = new HttpParams()
       .set('family', patient.familyName)
-      .set('given',patient.givenName)
-      .set('dob',patient.dateOfBirth.toString())
-      .set('address',patient.address)
-      .set('sex',patient.gender)
-      .set('phone',patient.phoneNumber);
-    console.log("REQUEST:"+this.baseUrl+'/patient/add',{params});
-    //return this.httpClient.post<Patient>(this.baseUrl+'/patient/add',params);
-    return this.httpClient.post<Patient>(this.baseUrl+'/patient/add',params, {observe: 'response'})
+      .set('given', patient.givenName)
+      .set('dob', patient.dateOfBirth.toString())
+      .set('address', patient.address)
+      .set('sex', patient.gender)
+      .set('phone', patient.phoneNumber);
+    return this.httpClient.post<Patient>(this.baseUrl + '/patient/add', params, {observe: 'response'})
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        })
+      );
+  }
+
+  deletePatient(id: string) {
+    return this.httpClient.delete<Patient>(this.baseUrl + '/patient/delete?id=' + id, {observe: 'response'})
       .pipe(
         catchError(err => {
           console.log(err);
@@ -55,11 +59,14 @@ export class PatientService {
       );
   }
 
-  deletePatient(id:string){
-    return this.httpClient.delete<Patient>(this.baseUrl+'/patient/delete?id='+id, {observe: 'response'})
+  searchPatient(family: string, given: string): Observable<HttpResponse<Patient[]>> {
+    const params = new HttpParams()
+      .set('familyName', family)
+      .set('givenName', given);
+    const searchUrl = this.baseUrl + '/patient/search?' + params;
+    return this.httpClient.get<Patient[]>(searchUrl, {observe: 'response'})
       .pipe(
         catchError(err => {
-          console.log(err);
           return throwError(err);
         })
       );

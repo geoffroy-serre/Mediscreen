@@ -11,11 +11,13 @@ import { HomeComponent } from './components/home/home.component';
 import { AppointementsCalendarComponent } from './components/appointements-calendar/appointements-calendar.component';
 import { PatientFileComponent } from './components/patient-file/patient-file.component';
 import { PatientAddComponent } from './components/patient-add/patient-add.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { PatientSearchComponent } from './components/patient-search/patient-search.component';
 
 
 const routes: Routes = [
   {path: 'patient/file/:id', component: PatientFileComponent},
+  {path: 'patient/search/:family/:given', component: PatientsListComponent},
   {path: 'patient/add', component: PatientAddComponent},
   {path: 'appointment/list', component: AppointementsCalendarComponent},
   {path: 'patients', component: PatientsListComponent},
@@ -33,13 +35,15 @@ const routes: Routes = [
     HomeComponent,
     AppointementsCalendarComponent,
     PatientFileComponent,
-    PatientAddComponent
+    PatientAddComponent,
+    PatientSearchComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [PatientService],
   bootstrap: [AppComponent]

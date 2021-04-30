@@ -210,8 +210,10 @@ public class PatientControllerTest {
 
   @Test
   public void getPatient() throws Exception {
+    List<Patient> patients = new ArrayList<>();
+    patients.add(patient);
     when(patientService.findPatientByFamilyNameAndGivenName(patient.getFamilyName(),
-            patient.getGivenName())).thenReturn(patient);
+            patient.getGivenName())).thenReturn(patients);
     mockMvc.perform(get("/patient")
             .param("familyName", patient.getFamilyName())
             .param("givenName", patient.getGivenName()))

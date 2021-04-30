@@ -2,31 +2,39 @@
   <img src="assets/imgs/header.png" alt="">
   <div class="nav-bar">
     <h1 class="header-title">Mediscreen</h1>
+    <div class="search-form-div">
+      <app-patient-search></app-patient-search>
+    </div>
     <nav class="top-nav">
       <div class="dropdown">
         <button
-          class="dropbtn"><i class="fa fa-home" aria-hidden="true"></i><a href="home">&nbsp;Home</a></button>
+          class="dropbtn"><i class="fa fa-home" aria-hidden="true"></i><a href="home">&nbsp;Home</a>
+        </button>
       </div>
       <div class="dropdown">
-        <button class="dropbtn" data-toggle="dropdown"><i class="fa fa-address-card" aria-hidden="true"></i>&nbsp;Patients&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></button>
+        <button class="dropbtn" data-toggle="dropdown"><i class="fa fa-address-card"
+                                                          aria-hidden="true"></i>&nbsp;Patients&nbsp;<i
+          class="fa fa-caret-down" aria-hidden="true"></i></button>
         <div class="dropdown-content">
           <a href="patient/add">Add a patient</a>
           <a href="patients">List all patients</a>
-          <a href="#">Search for a patient</a>
         </div>
       </div>
       <div class="dropdown">
-        <button class="dropbtn"><i class="fa fa-calendar-alt" aria-hidden="true"></i>&nbsp;Appointements&nbsp;<i class="fa fa-caret-down" aria-hidden="true"></i></button>
+        <button class="dropbtn"><i class="fa fa-calendar-alt" aria-hidden="true"></i>&nbsp;Appointements&nbsp;<i
+          class="fa fa-caret-down" aria-hidden="true"></i></button>
         <div class="dropdown-content">
           <a href="appointment/add">Add appointment</a>
           <a href="appointment/list">List appointements</a>
         </div>
       </div>
       <div class="dropdown">
-        <button class="dropbtn"><i class="fa fa-chart-area" aria-hidden="true"></i>&nbsp;Stats&nbsp;</button>
+        <button class="dropbtn"><i class="fa fa-chart-area" aria-hidden="true"></i>&nbsp;Stats&nbsp;
+        </button>
       </div>
       <div class="dropdown">
-        <button class="dropbtn"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact</button>
+        <button class="dropbtn"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;Contact
+        </button>
       </div>
 
     </nav>

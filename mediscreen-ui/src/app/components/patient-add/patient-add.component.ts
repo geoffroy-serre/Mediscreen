@@ -14,14 +14,13 @@ export class PatientAddComponent implements OnInit {
   status!:number;
   message!:string;
   error!:string
-  private router!: Router;
 
-  constructor(private patientService: PatientService) { }
+  constructor(private patientService: PatientService, private router: Router) {}
 
   ngOnInit(): void {
   }
 
-  onSubmit(data:any){
+  onSubmit(){
     this.patientService.addPatient(this.patient).subscribe(
       data => {
         this.status = data.status;
@@ -31,6 +30,8 @@ export class PatientAddComponent implements OnInit {
         this.message = error.error.error;
       }
     );
+    setTimeout(()=>this.router.navigate(['/patients']),10);
+
   }
 
 

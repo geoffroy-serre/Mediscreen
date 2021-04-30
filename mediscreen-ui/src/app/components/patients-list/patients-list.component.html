@@ -47,7 +47,7 @@
   <ng-template #Errors>
     <div class="data-content">
       <div class="error-message" *ngIf="status==404"><span>No Patients Found.</span>
-        <span>Add patients and/or check connection with database</span>
+        <span>Add patients and/or verify spelling for a search.</span>
       </div>
       <div class="error-message" *ngIf="status==400"><span>Bad Parameters used</span>
         <span>{{message}}</span>

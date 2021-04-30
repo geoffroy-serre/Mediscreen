@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Patient} from "../../common/patient";
 import {PatientService} from "../../services/patient.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {HttpResponse} from "@angular/common/http";
 import {map, timeout} from "rxjs/operators";
 
@@ -16,7 +16,7 @@ export class PatientFileComponent implements OnInit {
   message!: string;
   private idParam!: string;
 
-  constructor(private patientService: PatientService, private route: ActivatedRoute) {
+  constructor(private patientService: PatientService, private route: ActivatedRoute, private router:Router) {
     this.idParam = this.route.snapshot.paramMap.get('id') || '0';
   }
 
@@ -52,6 +52,6 @@ export class PatientFileComponent implements OnInit {
           this.message = error.error.error;
         }
       );
-
+    setTimeout(()=>this.router.navigate(['/patients']),50);
   }
 }
