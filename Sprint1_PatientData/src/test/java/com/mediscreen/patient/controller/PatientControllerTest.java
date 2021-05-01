@@ -5,10 +5,13 @@ import com.mediscreen.patient.service.PatientService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -18,17 +21,13 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 @WebMvcTest(PatientController.class)
 public class PatientControllerTest {
 
   @MockBean
   private PatientService patientService;
-
-
   @Autowired
   MockMvc mockMvc;
-
   Patient patient;
 
   @BeforeEach()
@@ -209,12 +208,12 @@ public class PatientControllerTest {
   }
 
   @Test
-  public void getPatient() throws Exception {
+  public void getPatientSearch() throws Exception {
     List<Patient> patients = new ArrayList<>();
     patients.add(patient);
     when(patientService.findPatientByFamilyNameAndGivenName(patient.getFamilyName(),
             patient.getGivenName())).thenReturn(patients);
-    mockMvc.perform(get("/patient")
+    mockMvc.perform(get("/patient/search")
             .param("familyName", patient.getFamilyName())
             .param("givenName", patient.getGivenName()))
             .andExpect(status().isOk());
@@ -231,24 +230,35 @@ public class PatientControllerTest {
   }
 
   @Test
-  public void getPatientNotValid() throws Exception {
+  public void getPatientSearchNotValid() throws Exception {
     patient.setFamilyName("r");
-    mockMvc.perform(get("/patient")
+    mockMvc.perform(get("/patient/search")
             .param("familyName", patient.getFamilyName())
             .param("givenName", patient.getGivenName()))
             .andExpect(status().isBadRequest());
   }
 
   @Test
-  public void getPatientMissingParam() throws Exception {
-    mockMvc.perform(get("/patient")
+  public void getPatientSearchMissingParam() throws Exception {
+    mockMvc.perform(get("/patient/search")
             .param("givenName", patient.getGivenName()))
             .andExpect(status().isBadRequest());
+  }
+  @Test
+  public void getPatientSearchMNotFound() throws Exception {
+    List<Patient> patients = new ArrayList<>();
+    when(patientService.findPatientByFamilyNameAndGivenName(patient.getFamilyName(),
+            patient.getGivenName())).thenReturn(patients);
+    mockMvc.perform(get("/patient/search")
+            .param("familyName", patient.getFamilyName())
+            .param("givenName", patient.getGivenName()))
+            .andExpect(status().isNotFound());
   }
 
   @Test
   public void getPatients() throws Exception {
 List<Patient> patients = new ArrayList<>();
+
 patients.add(patient);
     when(patientService.findPatients()).thenReturn(patients);
     mockMvc.perform(get("/patients")
@@ -256,6 +266,62 @@ patients.add(patient);
             .andExpect(status().isOk());
   }
 
+  @Test
+  public void getPatientsEmpty() throws Exception {
+    List<Patient> patients = new ArrayList<>();
+    when(patientService.findPatients()).thenReturn(patients);
+    mockMvc.perform(get("/patients")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNotFound());
+  }
 
+  @Test
+  public void getPatientID() throws Exception {
+    patient.setId(134L);
+    Optional<Patient> patientO = Optional.of(patient);
+    when(patientService.findById(134L)).thenReturn(patientO);
+    mockMvc.perform(get("/patient/file")
+            .param("id",patient.getId().toString() ))
+            .andExpect(status().isOk());
+  }
+
+  @Test
+  public void getPatientIDNotValid() throws Exception {
+    patient.setId(134L);
+    when(patientService.findById(134L)).thenReturn(Optional.empty());
+    mockMvc.perform(get("/patient/file")
+            .param("id",patient.getId().toString()))
+            .andExpect(status().isNotFound());
+  }
+
+  @Test
+  public void getPatientIDMissingParam() throws Exception {
+    mockMvc.perform(get("/patient/file"))
+            .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  public void deletePatientIDexist() throws Exception {
+    patient.setId(134L);
+    when(patientService.existsPatientById(134L)).thenReturn(true);
+    mockMvc.perform(delete("/patient/delete")
+            .param("id",patient.getId().toString() ))
+            .andExpect(status().isOk());
+  }
+
+  @Test
+  public void deletePatientIDDontExist() throws Exception {
+    patient.setId(134L);
+    when(patientService.existsPatientById(134L)).thenReturn(false);
+    mockMvc.perform(delete("/patient/delete")
+            .param("id",patient.getId().toString()))
+            .andExpect(status().isNotFound());
+  }
+
+  @Test
+  public void deletePatientIDMissingParam() throws Exception {
+    mockMvc.perform(delete("/patient/delete"))
+            .andExpect(status().isBadRequest());
+  }
 }
 

@@ -119,7 +119,7 @@ public class PatientController {
   @DeleteMapping("patient/delete")
   public void deletePatientById(@RequestParam @Valid Long id, HttpServletResponse response){
     if(patientService.existsPatientById(id)){
-      patientService.deletePatient(id);
+      patientService.deletePatientById(id);
       response.setStatus(200);
     }
     else{

@@ -86,23 +86,32 @@ public class PatientServiceImpl implements PatientService {
             dob);
   }
 
+  /**
+   * @inheritDoc
+   */
   @Override
   public List<Patient> findPatients() {
     return patientRepository.findAll();
   }
-
+  /**
+   * @inheritDoc
+   */
   @Override
   public Optional<Patient> findById(long id) {
     return patientRepository.findById(id);
   }
-
+  /**
+   * @inheritDoc
+   */
   @Override
   public boolean existsPatientById(Long id) {
     return patientRepository.existsPatientById(id);
   }
-
+  /**
+   * @inheritDoc
+   */
   @Override
-  public void deletePatient(Long id) {
+  public void deletePatientById(Long id) {
     patientRepository.deleteById(id);
   }
 }

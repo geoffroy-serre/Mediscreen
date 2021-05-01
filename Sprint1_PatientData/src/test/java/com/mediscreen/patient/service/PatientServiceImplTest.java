@@ -5,6 +5,7 @@ import com.mediscreen.patient.repository.PatientRepository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -142,5 +143,36 @@ class PatientServiceImplTest {
     assertFalse(patientService.existsPatientByFamilyAndGivenAndDob(patient.getFamilyName()
             ,patient.getGivenName(),patient.getDateOfBirth()));
     Mockito.verify(patientRepository, Mockito.times(1)).existsPatientByFamilyNameAndGivenNameAndDateOfBirth(patient.getFamilyName() ,patient.getGivenName(),patient.getDateOfBirth());
+  }
+
+  @Test
+  void findById() {
+    when(patientRepository.findById(134L)).thenReturn(Optional.of(patient));
+    assertFalse(patientService.findById(134L).isEmpty());
+    Mockito.verify(patientRepository, Mockito.times(1)).findById(134L);
+  }
+  @Test
+  void findByIdEmpty() {
+    when(patientRepository.findById(134L)).thenReturn(Optional.empty());
+    assertTrue(patientService.findById(134L).isEmpty());
+    Mockito.verify(patientRepository, Mockito.times(1)).findById(134L);
+  }
+  @Test
+  void existsPatientById() {
+    when(patientRepository.existsPatientById(134L)).thenReturn(true);
+    assertTrue(patientService.existsPatientById(134L));
+    Mockito.verify(patientRepository, Mockito.times(1)).existsPatientById(134L);
+  }
+  @Test
+  void existsByIdEmpty() {
+    when(patientRepository.existsPatientById(134L)).thenReturn(false);
+    assertFalse(patientService.existsPatientById(134L));
+    Mockito.verify(patientRepository, Mockito.times(1)).existsPatientById(134L);
+  }
+  @Test
+  void deleteById() {
+    //Check that no errors at all are thrown
+    assertAll(()->patientService.deletePatientById(134L));
+    Mockito.verify(patientRepository, Mockito.times(1)).deleteById(134L);
   }
 }
