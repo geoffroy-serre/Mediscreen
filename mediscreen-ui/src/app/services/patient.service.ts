@@ -1,5 +1,11 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams, HttpResponse} from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+  HttpParams,
+  HttpResponse
+} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {Patient} from '../common/patient';
 import {catchError} from 'rxjs/operators';
@@ -14,26 +20,19 @@ export class PatientService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getPatients(): Observable<HttpResponse<Patient[]>> {
-    return this.httpClient.get<Patient[]>(this.baseUrl + '/patients', {observe: 'response'})
-      .pipe(
-        catchError(err => {
-          return throwError(err);
-        })
-      );
+  getPatients(): Observable<Patient[]> {
+    console.log(this.httpClient.get<Patient[]>(this.baseUrl + '/patients'));
+    return this.httpClient.get<Patient[]>(this.baseUrl + '/patients')
+      .pipe(catchError(this.handleError));
   }
 
-  getPatient(id: string): Observable<HttpResponse<Patient>> {
+  getPatient(id: string): Observable<Patient> {
     const patientFileUrl = this.baseUrl + '/patient/file?id=' + id;
-    return this.httpClient.get<Patient>(patientFileUrl, {observe: 'response'})
-      .pipe(
-        catchError(err => {
-          return throwError(err);
-        })
-      );
+    return this.httpClient.get<Patient>(patientFileUrl)
+      .pipe(catchError(this.handleError));
   }
 
-  addPatient(patient: Patient): Observable<any> {
+  addPatient(patient: Patient): Observable<Patient> {
     const params = new HttpParams()
       .set('family', patient.familyName)
       .set('given', patient.givenName)
@@ -41,37 +40,43 @@ export class PatientService {
       .set('address', patient.address)
       .set('sex', patient.gender)
       .set('phone', patient.phoneNumber);
-    return this.httpClient.post<Patient>(this.baseUrl + '/patient/add', params, {observe: 'response'})
-      .pipe(
-        catchError(err => {
-          return throwError(err);
-        })
-      );
+    return this.httpClient.post<Patient>(this.baseUrl + '/patient/add', params, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    })
+      .pipe(catchError(this.handleError));
   }
 
   deletePatient(id: string) {
     return this.httpClient.delete<Patient>(this.baseUrl + '/patient/delete?id=' + id, {observe: 'response'})
-      .pipe(
-        catchError(err => {
-          console.log(err);
-          return throwError(err);
-        })
-      );
+      .pipe(catchError(this.handleError));
   }
 
-  searchPatient(family: string, given: string): Observable<HttpResponse<Patient[]>> {
+  searchPatient(family: string, given: string): Observable<Patient[]> {
     const params = new HttpParams()
       .set('familyName', family)
       .set('givenName', given);
     const searchUrl = this.baseUrl + '/patient/search?' + params;
-    return this.httpClient.get<Patient[]>(searchUrl, {observe: 'response'})
-      .pipe(
-        catchError(err => {
-          return throwError(err);
-        })
-      );
+    return this.httpClient.get<Patient[]>(searchUrl)
+      .pipe(catchError(this.handleError));
   }
 
+  updatePatient(patient: Patient): Observable<void> {
+    console.error(patient.toString());
+    return this.httpClient.put<void>(this.baseUrl + '/patient/update', patient,
+      {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })
+      })
+      .pipe(catchError(this.handleError));
+
+  }
+
+  private handleError(errorResponse: HttpErrorResponse) {
+    return throwError(errorResponse);
+  }
 }
 
 

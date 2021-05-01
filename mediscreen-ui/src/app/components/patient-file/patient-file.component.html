@@ -4,41 +4,42 @@
       <div
         class="button-div">
         <button class="btn-delete" (click)="deletePatient()"><i class="fa fa-trash"></i></button>
-        <button class="btn-modify" routerLink="/patient/update"><i class="fa fa-pen"></i></button>
+        <button class="btn-modify"
+                routerLink="/patient/update/{{patient?.id}}"><i class="fa fa-pen"></i></button>
       </div>
       <div class="patient-data-card">
         <div class="infos-persos">
-          <div class="civility-card">{{patient?.body?.givenName}}</div>
-          <div class="civility-card">{{patient?.body?.familyName}}</div>
+          <div class="civility-card">{{patient?.givenName}}</div>
+          <div class="civility-card">{{patient?.familyName}}</div>
         </div>
         <div class="patient-data">
           <div class="patient-file-set">
             <div class="patient-data-file-name">Patient ID:</div>
-              <div class="patient-data-file-data">{{patient?.body?.id}}</div>
+              <div class="patient-data-file-data">{{patient?.id}}</div>
           </div>
           <div class="patient-file-set">
             <div class="patient-data-file-name">Given Name: </div>
               <div
-                class="patient-data-file-data">{{patient?.body?.givenName}}</div>
+                class="patient-data-file-data">{{patient?.givenName}}</div>
           </div>
           <div class="patient-file-set">
             <div class="patient-data-file-name">Family Name:</div>
-              <div class="patient-data-file-data">{{patient?.body?.familyName}}</div>
+              <div class="patient-data-file-data">{{patient?.familyName}}</div>
           </div>
           <div class="patient-file-set">
             <div class="patient-data-file-name">BirthDate: </div>
             <div
-              class="patient-data-file-data">{{patient?.body?.dateOfBirth}}</div>
+              class="patient-data-file-data">{{patient?.dateOfBirth}}</div>
           </div>
           <div class="patient-file-set">
             <div class="patient-data-file-name">Gender:</div>
             <div
-              class="patient-data-file-data">{{patient?.body?.gender}}</div>
+              class="patient-data-file-data">{{patient?.gender}}</div>
           </div>
           <div class="patient-file-set">
             <div class="patient-data-file-name">Address:</div>
               <div
-                class="patient-data-file-data">{{patient?.body?.address}}</div>
+                class="patient-data-file-data">{{patient?.address}}</div>
           </div>
           <div class="patient-file-set">
             <div class="patient-data-file-name">Notes:</div>

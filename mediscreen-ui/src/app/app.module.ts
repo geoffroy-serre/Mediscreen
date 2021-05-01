@@ -13,9 +13,12 @@ import { PatientFileComponent } from './components/patient-file/patient-file.com
 import { PatientAddComponent } from './components/patient-add/patient-add.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { PatientSearchComponent } from './components/patient-search/patient-search.component';
+import { PatientUpdateComponent } from './components/patient-update/patient-update.component';
+import {DatePipe} from "@angular/common";
 
 
 const routes: Routes = [
+  {path: 'patient/update/:id', component: PatientUpdateComponent},
   {path: 'patient/file/:id', component: PatientFileComponent},
   {path: 'patient/search/:family/:given', component: PatientsListComponent},
   {path: 'patient/add', component: PatientAddComponent},
@@ -36,7 +39,8 @@ const routes: Routes = [
     AppointementsCalendarComponent,
     PatientFileComponent,
     PatientAddComponent,
-    PatientSearchComponent
+    PatientSearchComponent,
+    PatientUpdateComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -45,7 +49,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [PatientService],
+  providers: [PatientService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

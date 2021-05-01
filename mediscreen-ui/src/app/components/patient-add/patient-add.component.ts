@@ -11,7 +11,7 @@ import {FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@ang
   styleUrls: ['./patient-add.component.css']
 })
 export class PatientAddComponent implements OnInit {
-
+patient!:Patient;
   status!: number;
   message!: string;
   error!: string;
@@ -35,24 +35,27 @@ export class PatientAddComponent implements OnInit {
 
   onSubmit() {
     if (this.addUserForm.invalid) {
-      console.log(this.addUserForm.invalid);
       return;
     }
-    const patient = new Patient(this.addUserForm.value.family, this.addUserForm.value.given,
-      this.addUserForm.value.birthdate, this.addUserForm.value.gender,
-      this.addUserForm.value.address, this.addUserForm.value.phone);
-    this.patientService.addPatient(patient).subscribe(
-      data => {
-        this.status = data.status;
-      },
-      error => {
-        this.status = error.status;
-        this.message = error.error.error;
+    this.mapFormValuesToPatient();
+    this.patientService.addPatient(this.patient).subscribe(
+      () => this.router.navigate(['/patients']),
+      (err: any) => {
+        console.log(err)
+        this.status = err.status;
+        this.message = err.message;
       }
     );
-    setTimeout(() => this.router.navigate(['/patients']), 10);
-
   }
+    mapFormValuesToPatient() {
+      this.patient.id = this.addUserForm.value.family;
+      this.patient.familyName = this.addUserForm.value.family;
+      this.patient.givenName = this.addUserForm.value.given;
+      this.patient.address = this.addUserForm.value.address;
+      this.patient.gender = this.addUserForm.value.gender;
+      this.patient.dateOfBirth = this.addUserForm.value.birthdate;
+      this.patient.phoneNumber = this.addUserForm.value.phone;
+    }
 
   get validator() {
     console.log(this.addUserForm.controls);

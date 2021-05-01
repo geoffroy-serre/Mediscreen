@@ -3,6 +3,7 @@ import {PatientService} from "../../services/patient.service";
 import {Patient} from "../../common/patient";
 import {HttpResponse} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-patients-list',
@@ -11,8 +12,8 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class PatientsListComponent implements OnInit {
 
-  patients!: HttpResponse<Patient[]>
-  status!: number;
+  patients!: Patient[];
+  status: number = 200;
   message!: string;
   searchMode: boolean = false;
 
@@ -26,21 +27,18 @@ export class PatientsListComponent implements OnInit {
   listPatients() {
     this.searchMode = this.route.snapshot.paramMap.has('family' && 'given');
     if (this.searchMode) {
-
       this.handleSearchPatient();
     } else {
       this.handlePatientsList();
     }
-
   }
 
   handleSearchPatient() {
     const family = this.route.snapshot.paramMap.get('family')||'none';
     const given = this.route.snapshot.paramMap.get('given')||'none';
     this.patientService.searchPatient(family,given).subscribe(
-      data => {
-        this.patients = data;
-        this.status = data.status;
+      (patients:Patient[]) => {
+        this.patients = patients;
       },
       error => {
         this.status = error.status;
@@ -51,15 +49,17 @@ export class PatientsListComponent implements OnInit {
 
   handlePatientsList() {
     this.patientService.getPatients().subscribe(
-      data => {
-        this.patients = data;
-        this.status = data.status;
+      (patients:Patient[]) => {
+        this.patients=patients;
+        console.log(patients);
       },
-      error => {
-        this.status = error.status;
-        this.message = error.error.error;
-      }
+      (err: any) => {
+        this.status = err.status;
+        console.error(err)
+      },
+
     )
+    console.log(this.status);
   }
 
 }

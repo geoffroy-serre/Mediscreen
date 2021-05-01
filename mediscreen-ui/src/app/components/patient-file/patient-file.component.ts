@@ -4,6 +4,7 @@ import {PatientService} from "../../services/patient.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpResponse} from "@angular/common/http";
 import {map, timeout} from "rxjs/operators";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-patient-file',
@@ -11,7 +12,7 @@ import {map, timeout} from "rxjs/operators";
   styleUrls: ['./patient-file.component.css']
 })
 export class PatientFileComponent implements OnInit {
-  patient!: HttpResponse<Patient>;
+  patient!: Patient;
   status!: number;
   message!: string;
   private idParam!: string;
@@ -28,16 +29,13 @@ export class PatientFileComponent implements OnInit {
 
   private patientFile() {
     this.patientService.getPatient(this.idParam).subscribe(
-      data => {
-        map((response: { body: any; }) => response.body);
-        console.log(data);
-        console.log('Data body in ts: ', data.body);
-        this.patient = data;
-        console.log('Patient body in ts:', this.patient.body);
+      (patient: Patient) => {
+        this.patient = patient;
       },
-      error => {
-        this.status = error.status;
-        this.message = error.error.error;
+      (err: any) => {
+        this.status = err.status;
+        this.message = err.message;
+        console.error(err)
       }
     );
   }
