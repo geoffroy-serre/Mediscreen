@@ -28,20 +28,20 @@ public class PatientController {
   Logger logger = LoggerFactory.getLogger(PatientController.class);
 
   @PostMapping("patient/add")
-  public void addPatient(@RequestParam @Size(min = 2, max = 255, message = "family must be " +
+  public void addPatient(@RequestParam @Size(min = 2, max = 60, message = "family must be " +
           "between {min} and {max} characters long") String family,
-                         @RequestParam @Valid @Size(min = 2, max = 255,
+                         @RequestParam @Valid @Size(min = 2, max = 60,
                                  message = "given must be between {min} and {max} characters " +
                                          "long") String given,
                          @RequestParam @NotNull @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate dob,
                          @RequestParam @Gender Character sex,
                          @RequestParam(defaultValue = "not specified", required = false) @Size(min = 2, max =
-                                 255,
+                                 100,
                                  message = "address must be " +
                                          "between" +
                                          " {min} and {max} characters long") String address,
                          @RequestParam(defaultValue = "not specified", required = false) @Size(min = 2, max =
-                                 255,
+                                 20,
                                  message = "phone must be between " +
                                          "{min} and {max} characters long") String phone,
                          HttpServletResponse response) {
@@ -69,8 +69,8 @@ public class PatientController {
       logger.debug("Patient updated: status 200");
       response.setStatus(200);
     } else {
-      logger.debug("Patient not updated: status 409");
-      response.setStatus(409);
+      logger.debug("Patient not updated: status 404");
+      response.setStatus(404);
     }
   }
 

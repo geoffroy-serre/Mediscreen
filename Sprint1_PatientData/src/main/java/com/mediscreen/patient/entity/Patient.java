@@ -18,13 +18,14 @@ public class Patient {
 
   @NotBlank
   @Column(name = "familly_name")
-  @Size(min = 2, max = 255,message ="Family '${validatedValue}' must be between {min} and {max} " +
+  @Size(min = 2, max = 60,message ="Family '${validatedValue}' must be between {min} and {max} " +
           "characters long")
   String familyName;
 
   @NotBlank
   @Column(name = "given_name")
-  @Size(min = 2, max = 255,message ="Given '${validatedValue}' must be between {min} and {max} characters long")
+  @Size(min = 2, max = 60,message ="Given '${validatedValue}' must be between {min} and {max} " +
+          "characters long")
   String givenName;
 
   @NotNull
@@ -38,14 +39,14 @@ public class Patient {
 
 
   @Column(name = "address")
-  @Size(max = 255,message ="Address '${validatedValue}' must be between {min} and {max}" +
+  @Size(max = 100,message ="Address '${validatedValue}' must be between {min} and {max}" +
           " " +
           "characters long")
   String address;
 
 
   @Column(name = "phone_number")
-  @Size(max = 15,message ="Phone '${validatedValue}' must be between {min} and {max} " +
+  @Size(max = 20,message ="Phone '${validatedValue}' must be between {min} and {max} " +
           "characters long")
   String phoneNumber;
 
