@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 
 @RestController
 @Validated
-@CrossOrigin(origins = {"UI_DOCKER_NAME", "http://localhost:4200"})
+@CrossOrigin(origins = "${mediscreen.ui.cross.origin}")
 public class PatientController {
 
   @Autowired
@@ -127,8 +127,5 @@ public class PatientController {
     }
   }
 
-  /*TODO Create Delete Controller by id.
-   *  TODO write tests for those.
-   *   TODO Deal with appointements: create table, get post put delete controller for 'em.
-   */
+
 }

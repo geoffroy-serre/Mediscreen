@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Patient} from "../../common/patient";
-import {PatientService} from "../../services/patient.service";
 import {Router} from "@angular/router";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-patient-search',
@@ -14,18 +12,22 @@ export class PatientSearchComponent implements OnInit {
   status!: number;
   message!: string;
   error!: string;
-searchForm!:FormGroup;
+  searchForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
-      family:['',Validators.required],
-      given:['',Validators.required]
+      family: ['', Validators.required],
+      given: ['', Validators.required]
     })
   }
-  get validator() { return this.searchForm.controls; }
+
+  get validator() {
+    return this.searchForm.controls;
+  }
+
   onSubmit() {
 
     if (this.searchForm.invalid) {

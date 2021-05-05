@@ -33,14 +33,22 @@ export class PatientService {
   }
 
   addPatient(patient: Patient): Observable<Patient> {
+    console.log (patient);
     const params = new HttpParams()
       .set('family', patient.familyName)
       .set('given', patient.givenName)
       .set('dob', patient.dateOfBirth.toString())
-      .set('address', patient.address)
-      .set('sex', patient.gender)
-      .set('phone', patient.phoneNumber);
-    return this.httpClient.post<Patient>(this.baseUrl + '/patient/add', params, {
+
+      .set('sex', patient.gender);
+
+    if (patient.address!=null){
+    params.set('address', patient.address);
+    }
+    if (patient.phoneNumber!=null){
+params.set('phone', patient.phoneNumber);
+    }
+    const addUrl = this.baseUrl + '/patient/add?'+params;
+    return this.httpClient.post<Patient>(addUrl, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })

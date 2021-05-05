@@ -18,9 +18,11 @@
              validator.family.errors }">
             <div *ngIf="validator?.family?.errors" class="invalid-feedback">
               <div *ngIf="addUserForm?.controls?.family?.errors?.minlength">Family Name must
-                have at least 2 characters</div>
+                have at least 2 characters
+              </div>
               <div *ngIf="addUserForm?.controls?.family?.errors?.required">Family Name
-                required</div>
+                required
+              </div>
             </div>
           </div>
         </div>
@@ -29,14 +31,16 @@
           <label for="givenName" class="patient-data-field-name">Given Name<span
             class="mandatory-star"> *</span> : </label>
           <div class="flex-for-errors-form">
-          <input formControlName="given" id="givenName" placeholder="Given Name" type="text"
-                 class="patient-data-field-data" name="givenName" [ngClass]="{ 'is-invalid':
+            <input formControlName="given" id="givenName" placeholder="Given Name" type="text"
+                   class="patient-data-field-data" name="givenName" [ngClass]="{ 'is-invalid':
              validator.given.errors }">
             <div *ngIf="validator?.family?.errors" class="invalid-feedback">
               <div *ngIf="addUserForm?.controls?.given?.errors?.minlength">Given Name must
-                have at least 2 characters</div>
+                have at least 2 characters
+              </div>
               <div *ngIf="addUserForm?.controls?.given?.errors?.required">Given Name
-                required</div>
+                required
+              </div>
             </div>
           </div>
         </div>
@@ -44,19 +48,19 @@
         <div class="set-fields">
           <label for="address" class="patient-data-field-name">Address : </label>
           <div class="flex-for-errors-form">
-          <input  id="address" placeholder="Address" type="text"
-                 class="patient-data-field-data"
-                 name="address">
-            </div>
+            <input formControlName="address" id="address" placeholder="Address" type="text"
+                   class="patient-data-field-data"
+                   name="address">
           </div>
+        </div>
 
         <div class="set-fields">
           <label for="birthdate" class="patient-data-field-name">BirthDate<span
             class="mandatory-star"> *</span> : </label>
           <div class="flex-for-errors-form">
-          <input formControlName="birthdate" id="birthdate" placeholder="BirthDate"
-                 type="date"
-                 class="patient-data-field-data" name="birthdate" [ngClass]="{ 'is-invalid':
+            <input formControlName="birthdate" id="birthdate" placeholder="BirthDate"
+                   type="date"
+                   class="patient-data-field-data" name="birthdate" [ngClass]="{ 'is-invalid':
              validator.birthdate.errors }">
             <div *ngIf="validator?.birthdate?.errors" class="invalid-feedback">
               <div *ngIf="validator?.birthdate?.errors?.required">BirthDate is required</div>
@@ -69,18 +73,18 @@
           <label for="patient-gender-female" class="patient-data-field-name">Gender<span
             class="mandatory-star"> *</span> : </label>
           <div class="flex-for-errors-form">
-          <div class="radio-container">
-            <input formControlName="gender" checked='' id='patient-gender-female'
-                   name='gender' type='radio'
-                   value='F' [ngClass]="{ 'is-invalid':
-             validator.gender.errors }">
-            <label for='patient-gender-female'>Female</label>
-            <input formControlName="gender" id='patient-gender-male' name='gender'
-                   type='radio' value='M' [ngClass]="{ 'is-invalid':
-             validator.gender.errors }">
-            <label for='patient-gender-male'>Male</label>
+            <div class="radio-container">
+              <input formControlName="gender" checked='' id='patient-gender-female'
+                     name='gender' type='radio'
+                     value='F' [ngClass]="{ 'is-invalid':
+             validator?.gender?.errors }">
+              <label for='patient-gender-female'>Female</label>
+              <input formControlName="gender" id='patient-gender-male' name='gender'
+                     type='radio' value='M' [ngClass]="{ 'is-invalid':
+             validator?.gender?.errors }">
+              <label for='patient-gender-male'>Male</label>
 
-          </div>
+            </div>
             <div *ngIf="validator?.gender?.errors" class="invalid-feedback">
               <div *ngIf="validator?.gender?.errors?.required">Gender is required</div>
             </div>
@@ -90,14 +94,14 @@
         <div class="set-fields">
           <label for="phone" class="patient-data-field-name">Phone : </label>
           <div class="flex-for-errors-form">
-          <input  id="phone" placeholder="Phone number" type="text"
-                 class="patient-data-field-data"
-                 name="phone" >
+            <input formControlName="phone" id="phone" placeholder="Phone number" type="text"
+                   class="patient-data-field-data"
+                   name="phone">
           </div>
         </div>
-<div class="mandatory-explanation">
-   * Mandatory fields
-</div>
+        <div class="mandatory-explanation">
+          * Mandatory fields
+        </div>
         <div class="button-div btn-form">
           <button class="btn-delete" routerLink="/patients"><i class="fa fa-times"></i></button>
           <button class="btn-valid" type="submit" [disabled]="!addUserForm.valid"><i

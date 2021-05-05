@@ -41,7 +41,7 @@ export class PatientUpdateComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.populateValues();
+   // this.populateValues();
     this.cdr.detectChanges();
   }
 
@@ -105,8 +105,8 @@ export class PatientUpdateComponent implements OnInit, AfterViewInit {
     console.log("DATE IN: " + formatDate(patient.dateOfBirth,'dd-MM-yyyy','en'));
   }
 
-  populateValues() {
+  /*populateValues() {
     this.updateUserForm.get('family')?.setValue(`${this.patient?.familyName}`);
-  }
+  }*/
 
 }
