@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {PatientService} from "../../services/patient.service";
 import {Patient} from "../../common/patient";
-import {HttpResponse} from "@angular/common/http";
 import {ActivatedRoute} from "@angular/router";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-patients-list',
@@ -34,10 +32,10 @@ export class PatientsListComponent implements OnInit {
   }
 
   handleSearchPatient() {
-    const family = this.route.snapshot.paramMap.get('family')||'none';
-    const given = this.route.snapshot.paramMap.get('given')||'none';
-    this.patientService.searchPatient(family,given).subscribe(
-      (patients:Patient[]) => {
+    const family = this.route.snapshot.paramMap.get('family') || 'none';
+    const given = this.route.snapshot.paramMap.get('given') || 'none';
+    this.patientService.searchPatient(family, given).subscribe(
+      (patients: Patient[]) => {
         this.patients = patients;
       },
       error => {
@@ -49,15 +47,14 @@ export class PatientsListComponent implements OnInit {
 
   handlePatientsList() {
     this.patientService.getPatients().subscribe(
-      (patients:Patient[]) => {
-        this.patients=patients;
+      (patients: Patient[]) => {
+        this.patients = patients;
         console.log(patients);
       },
       (err: any) => {
         this.status = err.status;
         console.error(err)
       },
-
     )
     console.log(this.status);
   }

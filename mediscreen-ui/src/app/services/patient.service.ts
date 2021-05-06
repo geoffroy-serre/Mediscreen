@@ -1,11 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-  HttpParams,
-  HttpResponse
-} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {Patient} from '../common/patient';
 import {catchError} from 'rxjs/operators';
@@ -33,21 +27,20 @@ export class PatientService {
   }
 
   addPatient(patient: Patient): Observable<Patient> {
-    console.log (patient);
+    console.log(patient);
     const params = new HttpParams()
       .set('family', patient.familyName)
       .set('given', patient.givenName)
       .set('dob', patient.dateOfBirth.toString())
-
       .set('sex', patient.gender);
 
-    if (patient.address!=null){
-    params.set('address', patient.address);
+    if (patient.address != null) {
+      params.set('address', patient.address);
     }
-    if (patient.phoneNumber!=null){
-params.set('phone', patient.phoneNumber);
+    if (patient.phoneNumber != null) {
+      params.set('phone', patient.phoneNumber);
     }
-    const addUrl = this.baseUrl + '/patient/add?'+params;
+    const addUrl = this.baseUrl + '/patient/add?' + params;
     return this.httpClient.post<Patient>(addUrl, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
