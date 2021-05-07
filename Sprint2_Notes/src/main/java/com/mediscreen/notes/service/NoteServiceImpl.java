@@ -83,7 +83,7 @@ public class NoteServiceImpl implements NoteService {
    * @inheritDoc
    */
   @Override
-  public boolean deleteNote(Long id) {
+  public boolean deleteNote(String id) {
     logger.debug("Entering deleteNote with Note:{}.", id);
     if (existByID(id)) {
       logger.debug("deleteNote: Note with id {}. exist proceeding to suppression", id);
@@ -98,7 +98,7 @@ public class NoteServiceImpl implements NoteService {
    * @inheritDoc
    */
   @Override
-  public boolean existByID(Long id) {
+  public boolean existByID(String id) {
     logger.debug("Entering existsById with id:{}.", id);
     return noteRepository.existsById(id);
   }

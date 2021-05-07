@@ -64,7 +64,7 @@ public interface NoteService {
    * @param id Long
    * @return true if note is deleted
    */
-  boolean deleteNote(Long id);
+  boolean deleteNote(String id);
 
   /**
    * Exist by id boolean.
@@ -72,5 +72,5 @@ public interface NoteService {
    * @param id Long
    * @return true if note with this id exist.
    */
-  boolean existByID(Long id);
+  boolean existByID(String id);
 }

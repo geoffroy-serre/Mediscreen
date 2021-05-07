@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 public class Note {
 
   @Id
-  private Long id;
+  private String id;
 
   @NotNull
   @Field(value="patient_id")
@@ -25,10 +25,10 @@ public class Note {
   @Field(value = "note")
   private String note;
 
-  public Long getId() {
+  public String getId() {
     return id;
   }
-  public void setId(Long id) {
+  public void setId(String id) {
     this.id = id;
   }
   public Long getPatientId() {
