@@ -1,0 +1,61 @@
+<script src="patient-add.component.ts"></script>
+<main>
+  <div class="data-content">
+    <h2 class="content-title">Add Note for : {{patient?.familyName}} {{patient?.givenName}}</h2>
+    <div class="patient-data-card">
+      <div class="infos-persos">
+        <img src="assets/imgs/logo.png" alt="logo mediscreen">
+      </div>
+      <form [formGroup]="addNoteForm" (ngSubmit)="onSubmit()" class="patient-data-form">
+        <div class="set-fields">
+          <label for="noteTitle" class="patient-data-field-name">Title:<span
+            class="mandatory-star"> *</span> :
+          </label>
+          <div class="flex-for-errors-form">
+            <input formControlName="title" id="noteTitle" placeholder="Title"
+                   type="text"
+                   class="patient-data-field-data" name="noteTitle" [ngClass]="{ 'is-invalid':
+             validator.title.errors }">
+            <div *ngIf="validator?.title?.errors" class="invalid-feedback">
+              <div *ngIf="addNoteForm?.controls?.title?.errors?.minlength">Title must
+                have at least 2 characters
+              </div>
+              <div *ngIf="addNoteForm?.controls?.title?.errors?.required">Title
+                required
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="set-fields">
+          <label for="noteContent" class="patient-data-field-name">Note Content<span
+            class="mandatory-star"> *</span> : </label>
+          <div class="flex-for-errors-form">
+            <textarea formControlName="note" rows="20" cols="50" id="noteContent"
+                      placeholder="Note Content"
+                      type="text"
+                   class="patient-data-field-data" name="noteContent" [ngClass]="{ 'is-invalid':
+             validator.note.errors }"></textarea>
+            <div *ngIf="validator?.note?.errors" class="invalid-feedback">
+              <div *ngIf="addNoteForm?.controls?.note?.errors?.minlength">Note must
+                have at least 2 characters
+              </div>
+              <div *ngIf="addNoteForm?.controls?.note?.errors?.required">Note
+                required
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mandatory-explanation">
+          * Mandatory fields
+        </div>
+        <div class="button-div btn-form">
+          <button class="btn-delete" routerLink="/patients"><i class="fa fa-times"></i></button>
+          <button class="btn-valid" type="submit" [disabled]="!addNoteForm.valid"><i
+            class="fa fa-check"></i></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>

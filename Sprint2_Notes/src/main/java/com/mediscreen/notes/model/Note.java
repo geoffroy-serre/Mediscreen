@@ -17,6 +17,10 @@ public class Note {
   @Field(value="patient_id")
   private Long patientId;
 
+  @NotBlank
+  @Field(value = "title")
+  private String title;
+
   @NotNull
   @Field(value="date")
   private LocalDate date;
@@ -48,6 +52,12 @@ public class Note {
   }
   public void setNote(String note) {
     this.note = note;
+  }
+  public String getTitle() {
+    return title;
+  }
+  public void setTitle(String title) {
+    this.title = title;
   }
 
   @Override

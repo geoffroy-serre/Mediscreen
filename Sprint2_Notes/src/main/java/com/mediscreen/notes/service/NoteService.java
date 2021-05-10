@@ -14,7 +14,7 @@ public interface NoteService {
    * @param id the id
    * @return Optional Note
    */
-  Optional<Note> getNoteById(Long id);
+  Optional<Note> getNoteById(String id);
 
 
   /**
@@ -31,7 +31,7 @@ public interface NoteService {
    * @param date LocalDate
    * @return List of Note by patient id and by date
    */
-  List<Note> getNotesByPatientIdAndByDate(Long id, LocalDate date);
+  List<Note> getNotesByPatientIdAndByDate(String id, LocalDate date);
 
   /**
    * Gets notes by patient id.
@@ -39,7 +39,7 @@ public interface NoteService {
    * @param id Long
    * @return List of Note for given patient id
    */
-  List<Note> getNotesByPatientId(Long id);
+  List<Note> getNotesByPatientId(String id);
 
   /**
    * Add note.

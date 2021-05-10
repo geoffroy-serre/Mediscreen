@@ -23,7 +23,7 @@ public class NoteServiceImpl implements NoteService {
    * @inheritDoc
    */
   @Override
-  public Optional<Note> getNoteById(Long id) {
+  public Optional<Note> getNoteById(String id) {
     logger.debug("Entering getNoteById with id:{}.", id);
     return noteRepository.findById(id);
   }
@@ -41,7 +41,7 @@ public class NoteServiceImpl implements NoteService {
    * @inheritDoc
    */
   @Override
-  public List<Note> getNotesByPatientIdAndByDate(Long id, LocalDate date) {
+  public List<Note> getNotesByPatientIdAndByDate(String id, LocalDate date) {
     logger.debug("Entering getNotesByPatientIdAndByDate with id {}. and date {}.", id, date);
     return noteRepository.findByPatientIdAndDate(id, date);
   }
@@ -50,7 +50,7 @@ public class NoteServiceImpl implements NoteService {
    * @inheritDoc
    */
   @Override
-  public List<Note> getNotesByPatientId(Long id) {
+  public List<Note> getNotesByPatientId(String id) {
     logger.debug("Entering getNotesByPatientId with id:{}.", id);
     return noteRepository.findByPatientId(id);
   }

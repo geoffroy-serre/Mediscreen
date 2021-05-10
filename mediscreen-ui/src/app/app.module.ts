@@ -15,9 +15,11 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { PatientSearchComponent } from './components/patient-search/patient-search.component';
 import { PatientUpdateComponent } from './components/patient-update/patient-update.component';
 import {DatePipe} from "@angular/common";
+import { NoteAddComponent } from './components/note-add/note-add.component';
 
 
 const routes: Routes = [
+  {path: 'note/patient/:id', component: NoteAddComponent},
   {path: 'patient/update/:id', component: PatientUpdateComponent},
   {path: 'patient/file/:id', component: PatientFileComponent},
   {path: 'patient/search/:family/:given', component: PatientsListComponent},
@@ -40,7 +42,8 @@ const routes: Routes = [
     PatientFileComponent,
     PatientAddComponent,
     PatientSearchComponent,
-    PatientUpdateComponent
+    PatientUpdateComponent,
+    NoteAddComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
