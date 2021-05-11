@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpResponse} from "@angular/common/http";
 import {map, timeout} from "rxjs/operators";
 import {Observable} from "rxjs";
+import {NoteService} from "../../services/note.service";
+import {Note} from "../../common/note";
 
 @Component({
   selector: 'app-patient-file',
@@ -13,18 +15,21 @@ import {Observable} from "rxjs";
 })
 export class PatientFileComponent implements OnInit {
   patient!: Patient;
+  notes!: Note[];
   status!: number;
   message!: string;
   private idParam!: string;
 
-  constructor(private patientService: PatientService, private route: ActivatedRoute, private router:Router) {
+  constructor(private noteService: NoteService,private patientService: PatientService, private route: ActivatedRoute, private router:Router) {
     this.idParam = this.route.snapshot.paramMap.get('id') || '0';
   }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(() => {
       this.patientFile();
+
     });
+    this.getNotes();
   }
 
   private patientFile() {
@@ -51,5 +56,18 @@ export class PatientFileComponent implements OnInit {
         }
       );
     setTimeout(()=>this.router.navigate(['/patients']),50);
+  }
+
+  getNotes(){
+    this.noteService.getNotesForPatientID(this.idParam).subscribe(
+      (notes: Note[]) => {
+        this.notes = notes;
+        console.log("NOTES: "+notes.toString());
+      },
+      (err: any) => {
+        this.status = err.status;
+        console.error(err)
+      },
+    )
   }
 }

@@ -42,7 +42,7 @@ public class NoteController {
   }
 
   @GetMapping("notes/patient")
-  public List<Note> getNotesByPatientId (@RequestParam String id){
+  public List<Note> getNotesByPatientId (@RequestParam Long id){
     return noteService.getNotesByPatientId(id);
   }
 

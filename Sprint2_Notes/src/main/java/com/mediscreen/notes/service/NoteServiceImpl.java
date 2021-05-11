@@ -50,9 +50,9 @@ public class NoteServiceImpl implements NoteService {
    * @inheritDoc
    */
   @Override
-  public List<Note> getNotesByPatientId(String id) {
-    logger.debug("Entering getNotesByPatientId with id:{}.", id);
-    return noteRepository.findByPatientId(id);
+  public List<Note> getNotesByPatientId(Long id) {
+    logger.info("Entering getNotesByPatientId with id:{}.", id);
+    return noteRepository.findNoteByPatientId(id);
   }
 
   /**

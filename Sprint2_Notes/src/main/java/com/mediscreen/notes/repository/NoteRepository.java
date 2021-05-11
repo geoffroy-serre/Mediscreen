@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 public interface NoteRepository extends MongoRepository<Note,Long> {
 
   boolean deleteNoteById(String id);
-  List<Note> findByPatientId(String id);
+  List<Note> findNoteByPatientId(Long id);
   List<Note> findByPatientIdAndDate(String id, LocalDate date);
   void deleteById(String id);
   boolean existsById(String id);

@@ -5,7 +5,7 @@
         class="button-div">
         <button class="btn-delete" (click)="deletePatient()"><i class="fa fa-trash"></i></button>
         <button class="btn-call"
-                routerLink="/note/patient/{{patient.id}}"><i class="fa fa-file"></i></button>
+                routerLink="/note/patient/{{patient?.id}}"><i class="fa fa-file"></i></button>
         <button class="btn-modify"
                 routerLink="/patient/update/{{patient?.id}}"><i class="fa fa-pen"></i></button>
       </div>
@@ -55,6 +55,19 @@
           </div>
         </div>
       </div>
+      <div class="notes-wrapper">
+        <h1 class="content-title">Notes</h1>
+        <div class="note-content" *ngFor="let tempNote of notes">
+        <div class="note-header">
+          <div class="note-title-info">
+         <p class="note-title-date">{{tempNote.date}}</p>
+          <p class="note-title-title">{{tempNote.title}}</p>
+          </div>
+          <div class="note-title-icon"><i class="fa fa-arrow-alt-circle-down"></i> </div>
+        </div>
+        <div class="note-dropdown-content" [innerText]="tempNote.note"></div>
+        </div>
+      </div>
     </div>
   <ng-template #Errors>
     <div class="data-content">
@@ -64,7 +77,6 @@
       <div class="error-message" *ngIf="status==400"><span>Bad Parameters used</span>
         <span>{{message}}</span>
       </div>
-      <div>MEEERDE</div>
     </div>
   </ng-template>
 </main>

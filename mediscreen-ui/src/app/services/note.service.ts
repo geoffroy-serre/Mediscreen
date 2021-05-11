@@ -28,7 +28,7 @@ export class NoteService {
   }
 
   getNotesForPatientID(id: string): Observable<Note[]> {
-    const patientFileUrl = this.baseUrl + '/note/patient?id=' + id;
+    const patientFileUrl = this.baseUrl + '/notes/patient?id=' + id;
     return this.httpClient.get<Note[]>(patientFileUrl)
       .pipe(catchError(this.handleError));
   }
@@ -60,6 +60,8 @@ export class NoteService {
       .pipe(catchError(this.handleError));
 
   }
+
+
 
   private handleError(errorResponse: HttpErrorResponse) {
     return throwError(errorResponse);

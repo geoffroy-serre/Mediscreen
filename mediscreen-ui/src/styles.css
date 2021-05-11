@@ -2,11 +2,9 @@
   --form-input-size:70%;
 }
 
-
 html, body {
   margin: 0%;
 }
-
 header {
   display: flex;
   background-color: #324960;
@@ -20,19 +18,16 @@ header {
   height: 50px;
   box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
 }
-
 .top-nav {
   display: flex;
   flex: 1;
   justify-content: flex-end;
   align-items: flex-end;
 }
-
 .dropdown {
   position: relative;
   display: inline-block;
 }
-
 .dropbtn {
   background-color: #324960;
   color: white;
@@ -53,8 +48,6 @@ header {
 .dropdown:hover .fa-caret-down {
   transform: rotate(-90deg);
 }
-
-
 .dropdown-content{
   display: none;
   position: absolute;
@@ -63,7 +56,6 @@ header {
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-
 .dropdown-content a {
   color: #4FC3A1;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -71,17 +63,14 @@ header {
   text-decoration: none;
   display: block;
 }
-
 .dropdown-content a:hover {
   background-color: #4FC3A1;
   color: #324960;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
 .dropdown:hover .dropbtn {
   background-color: #4FC3A1;
 }
@@ -92,7 +81,6 @@ header {
   color: white;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-
 .nav-link {
   color: white;
   text-decoration: none;
@@ -102,13 +90,11 @@ header {
   display: flex;
   align-items: center;
 }
-
 .nav-link:active {
   color: #ffffff;
   background-color: #4FC3A1;
   text-decoration: none;
 }
-
 .nav-link:hover {
   color: #ffffff;
   background-color: #4FC3A1;
@@ -140,7 +126,6 @@ main {
   margin: 10px 70px 70px;
   box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
 }
-
 .table-data {
   border-radius: 5px;
   font-size: 12px;
@@ -152,17 +137,14 @@ main {
   white-space: nowrap;
   background-color: white;
 }
-
 .table-data td, .table-data th {
   text-align: center;
   padding: 8px;
 }
-
 .table-data td {
   border-right: 1px solid #f8f8f8;
   font-size: 1.2em;
 }
-
 .table-data thead th {
   color: #ffffff;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -170,12 +152,10 @@ main {
   background: #4FC3A1;
   font-weight: normal;
 }
-
 .table-data thead th:nth-child(odd) {
   color: #ffffff;
   background: #324960;
 }
-
 .table-data tr:nth-child(even) {
   background: #F8F8F8;
 }
@@ -190,7 +170,6 @@ main {
   margin: 0;
 
 }
-
 .infos-persos {
   background-color: #324960;
   color: #4FC3A1;
@@ -200,7 +179,6 @@ main {
   justify-content: center;
   align-items: center;
 }
-
 .patient-data {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin:10px;
@@ -227,7 +205,6 @@ main {
   color: #4FC3A1;
   width: 80%;
 }
-
 .civility-card {
   font-weight: bold;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -454,4 +431,59 @@ display: flex;
 
 
 }
+
+.notes-wrapper{
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vh;
+}
+
+.note-content{
+
+  width: 100vh;
+}
+
+.note-header{
+cursor: pointer;
+  border-bottom: #4FC3A1 1px solid;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  min-width: 100%;
+  background: #324960;
+  color: #F8F8F8;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.note-dropdown-content{
+background: #F8F8F8;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  color: #324960;
+  border-left: #324960 1px solid;
+  border-right: #324960 1px solid;
+  padding-left: 10px;
+}
+.note-title-info{
+  display: flex;
+  justify-content: space-between;
+  width: 90vh;
+}
+.note-title-date{
+  display: flex;
+flex:1;
+}
+.note-title-title{
+  display: flex;
+  flex: 4;
+}
+.note-title-icon{
+  justify-content: flex-end;
+}
+.note-header:hover{
+  color: darkorange;
+}
+
+
 

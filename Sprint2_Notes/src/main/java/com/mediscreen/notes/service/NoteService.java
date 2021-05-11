@@ -39,7 +39,7 @@ public interface NoteService {
    * @param id Long
    * @return List of Note for given patient id
    */
-  List<Note> getNotesByPatientId(String id);
+  List<Note> getNotesByPatientId(Long id);
 
   /**
    * Add note.

@@ -5,6 +5,7 @@ import{Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Patient} from "../../common/patient";
 import{PatientService} from "../../services/patient.service";
+import {Note} from "../../common/note";
 
 @Component({
   selector: 'app-note-add',
@@ -48,7 +49,17 @@ export class NoteAddComponent implements OnInit {
     if (this.addNoteForm.invalid) {
       return;
     }
+    const note = new Note(+this.idParam,new Date(),this.addNoteForm.value.title,this.addNoteForm.value.note)
     console.log(this.note);
+
+    this.noteService.addNote(note).subscribe(
+      () => this.router.navigate(['/patient/file',this.idParam]),
+      (err: any) => {
+        console.log(err)
+        this.status = err.status;
+        this.message = err.message;
+      }
+    );
 
   }
 
