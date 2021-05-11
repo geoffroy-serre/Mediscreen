@@ -16,6 +16,7 @@ import { PatientSearchComponent } from './components/patient-search/patient-sear
 import { PatientUpdateComponent } from './components/patient-update/patient-update.component';
 import {DatePipe} from "@angular/common";
 import { NoteAddComponent } from './components/note-add/note-add.component';
+import {ModalModule} from "./_modal";
 
 
 const routes: Routes = [
@@ -50,7 +51,8 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModalModule
   ],
   providers: [PatientService, DatePipe],
   bootstrap: [AppComponent]

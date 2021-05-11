@@ -7,6 +7,7 @@ import {map, timeout} from "rxjs/operators";
 import {Observable} from "rxjs";
 import {NoteService} from "../../services/note.service";
 import {Note} from "../../common/note";
+import {ModalService} from "../../_modal";
 
 @Component({
   selector: 'app-patient-file',
@@ -20,7 +21,7 @@ export class PatientFileComponent implements OnInit {
   message!: string;
   private idParam!: string;
 
-  constructor(private noteService: NoteService,private patientService: PatientService, private route: ActivatedRoute, private router:Router) {
+  constructor(private modalService: ModalService,private noteService: NoteService,private patientService: PatientService, private route: ActivatedRoute, private router:Router) {
     this.idParam = this.route.snapshot.paramMap.get('id') || '0';
   }
 
@@ -69,5 +70,12 @@ export class PatientFileComponent implements OnInit {
         console.error(err)
       },
     )
+  }
+
+  openModal(id:string){
+    this.modalService.open(id);
+  }
+  closeModal(id: string) {
+    this.modalService.close(id);
   }
 }

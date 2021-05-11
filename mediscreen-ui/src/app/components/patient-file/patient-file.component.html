@@ -1,74 +1,90 @@
 <main>
-    <div class="data-content" *ngIf="status==200 !=null  else Errors">
-      <h2 class="content-title">Patient</h2>
-      <div
-        class="button-div">
-        <button class="btn-delete" (click)="deletePatient()"><i class="fa fa-trash"></i></button>
-        <button class="btn-call"
-                routerLink="/note/patient/{{patient?.id}}"><i class="fa fa-file"></i></button>
-        <button class="btn-modify"
-                routerLink="/patient/update/{{patient?.id}}"><i class="fa fa-pen"></i></button>
+  <div class="data-content" *ngIf="status==200 !=null  else Errors">
+    <h2 class="content-title">Patient</h2>
+    <div
+      class="button-div">
+      <button class="btn-delete" (click)="deletePatient()"><i class="fa fa-trash"></i></button>
+      <button class="btn-call"
+              routerLink="/note/patient/{{patient?.id}}"><i class="fa fa-file"></i></button>
+      <button class="btn-modify"
+              routerLink="/patient/update/{{patient?.id}}"><i class="fa fa-pen"></i></button>
+    </div>
+    <div class="patient-data-card">
+      <div class="infos-persos">
+        <div class="civility-card">{{patient?.givenName}}</div>
+        <div class="civility-card">{{patient?.familyName}}</div>
       </div>
-      <div class="patient-data-card">
-        <div class="infos-persos">
-          <div class="civility-card">{{patient?.givenName}}</div>
-          <div class="civility-card">{{patient?.familyName}}</div>
+      <div class="patient-data">
+        <div class="patient-file-set">
+          <div class="patient-data-file-name">Patient ID:</div>
+          <div class="patient-data-file-data">{{patient?.id}}</div>
         </div>
-        <div class="patient-data">
-          <div class="patient-file-set">
-            <div class="patient-data-file-name">Patient ID:</div>
-              <div class="patient-data-file-data">{{patient?.id}}</div>
-          </div>
-          <div class="patient-file-set">
-            <div class="patient-data-file-name">Given Name: </div>
-              <div
-                class="patient-data-file-data">{{patient?.givenName}}</div>
-          </div>
-          <div class="patient-file-set">
-            <div class="patient-data-file-name">Family Name:</div>
-              <div class="patient-data-file-data">{{patient?.familyName}}</div>
-          </div>
-          <div class="patient-file-set">
-            <div class="patient-data-file-name">BirthDate: </div>
-            <div
-              class="patient-data-file-data">{{patient?.dateOfBirth}}</div>
-          </div>
-          <div class="patient-file-set">
-            <div class="patient-data-file-name">Gender:</div>
-            <div
-              class="patient-data-file-data">{{patient?.gender}}</div>
-          </div>
-          <div class="patient-file-set">
-            <div class="patient-data-file-name">Address:</div>
-              <div
-                class="patient-data-file-data">{{patient?.address}}</div>
-          </div>
-          <div class="patient-file-set">
-            <div class="patient-data-file-name">Phone:</div>
-            <div
-              class="patient-data-file-data">{{patient?.phoneNumber}}</div>
-          </div>
-          <div class="patient-file-set">
-            <div class="patient-data-file-name">Notes:</div>
-            <div class="patient-data-file-data">Vulcan man who try to kolinar with a frog like
-            a Klingon</div>
-          </div>
+        <div class="patient-file-set">
+          <div class="patient-data-file-name">Given Name:</div>
+          <div
+            class="patient-data-file-data">{{patient?.givenName}}</div>
         </div>
-      </div>
-      <div class="notes-wrapper">
-        <h1 class="content-title">Notes</h1>
-        <div class="note-content" *ngFor="let tempNote of notes">
-        <div class="note-header">
-          <div class="note-title-info">
-         <p class="note-title-date">{{tempNote.date}}</p>
-          <p class="note-title-title">{{tempNote.title}}</p>
-          </div>
-          <div class="note-title-icon"><i class="fa fa-arrow-alt-circle-down"></i> </div>
+        <div class="patient-file-set">
+          <div class="patient-data-file-name">Family Name:</div>
+          <div class="patient-data-file-data">{{patient?.familyName}}</div>
         </div>
-        <div class="note-dropdown-content" [innerText]="tempNote.note"></div>
+        <div class="patient-file-set">
+          <div class="patient-data-file-name">BirthDate:</div>
+          <div
+            class="patient-data-file-data">{{patient?.dateOfBirth}}</div>
+        </div>
+        <div class="patient-file-set">
+          <div class="patient-data-file-name">Gender:</div>
+          <div
+            class="patient-data-file-data">{{patient?.gender}}</div>
+        </div>
+        <div class="patient-file-set">
+          <div class="patient-data-file-name">Address:</div>
+          <div
+            class="patient-data-file-data">{{patient?.address}}</div>
+        </div>
+        <div class="patient-file-set">
+          <div class="patient-data-file-name">Phone:</div>
+          <div
+            class="patient-data-file-data">{{patient?.phoneNumber}}</div>
+        </div>
+        <div class="patient-file-set">
+          <div class="patient-data-file-name">Notes:</div>
+          <div class="patient-data-file-data">Vulcan man who try to kolinar with a frog like
+            a Klingon
+          </div>
         </div>
       </div>
     </div>
+    <div class="notes-wrapper">
+      <h1 class="content-title">Notes</h1>
+      <div class="note-content" *ngFor="let tempNote of notes">
+        <button (click)="openModal(tempNote.id)">
+          <div class="note-header">
+            <div class="note-title-info">
+              <p class="note-title-date">{{tempNote.date}}</p>
+              <p class="note-title-title">{{tempNote.title}}</p>
+            </div>
+          </div>
+          <jw-modal id="{{tempNote.id}}">
+            <div class="note-modal">
+              <div class="modal-note-title">
+                <div class="modal-field-name">Title:</div>
+                <span>{{tempNote.title}}</span>
+              </div>
+              <div class="modal-note-note">
+                <div class="modal-field-name">Note:</div>
+                <div class="note-modal-area" [innerText]="tempNote.note"></div>
+              </div>
+            </div>
+            <button (click)="closeModal(tempNote.id);" class="modal-close">Close</button>
+          </jw-modal>
+        </button>
+
+      </div>
+    </div>
+  </div>
+
   <ng-template #Errors>
     <div class="data-content">
       <div class="error-message" *ngIf="status==404"><span>No Patients Found.</span>
