@@ -65,6 +65,7 @@ public class Note {
     return "id=" + this.id +
             ", patientId=" + this.patientId +
             ", date=" + this.date +
+            ", title=" + this.title +
             ", note='" + this.note + '\'' +
             '}';
   }

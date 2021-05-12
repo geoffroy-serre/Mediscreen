@@ -8,10 +8,8 @@ import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -244,6 +242,7 @@ public class PatientControllerTest {
             .param("givenName", patient.getGivenName()))
             .andExpect(status().isBadRequest());
   }
+
   @Test
   public void getPatientSearchMNotFound() throws Exception {
     List<Patient> patients = new ArrayList<>();
@@ -257,9 +256,9 @@ public class PatientControllerTest {
 
   @Test
   public void getPatients() throws Exception {
-List<Patient> patients = new ArrayList<>();
+    List<Patient> patients = new ArrayList<>();
 
-patients.add(patient);
+    patients.add(patient);
     when(patientService.findPatients()).thenReturn(patients);
     mockMvc.perform(get("/patients")
             .contentType(MediaType.APPLICATION_JSON))
@@ -281,7 +280,7 @@ patients.add(patient);
     Optional<Patient> patientO = Optional.of(patient);
     when(patientService.findById(134L)).thenReturn(patientO);
     mockMvc.perform(get("/patient/file")
-            .param("id",patient.getId().toString() ))
+            .param("id", patient.getId().toString()))
             .andExpect(status().isOk());
   }
 
@@ -290,7 +289,7 @@ patients.add(patient);
     patient.setId(134L);
     when(patientService.findById(134L)).thenReturn(Optional.empty());
     mockMvc.perform(get("/patient/file")
-            .param("id",patient.getId().toString()))
+            .param("id", patient.getId().toString()))
             .andExpect(status().isNotFound());
   }
 
@@ -305,7 +304,7 @@ patients.add(patient);
     patient.setId(134L);
     when(patientService.existsPatientById(134L)).thenReturn(true);
     mockMvc.perform(delete("/patient/delete")
-            .param("id",patient.getId().toString() ))
+            .param("id", patient.getId().toString()))
             .andExpect(status().isOk());
   }
 
@@ -314,7 +313,7 @@ patients.add(patient);
     patient.setId(134L);
     when(patientService.existsPatientById(134L)).thenReturn(false);
     mockMvc.perform(delete("/patient/delete")
-            .param("id",patient.getId().toString()))
+            .param("id", patient.getId().toString()))
             .andExpect(status().isNotFound());
   }
 

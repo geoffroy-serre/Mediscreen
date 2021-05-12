@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @RestController
 @Validated
@@ -23,7 +24,7 @@ public class NoteController {
   NoteService noteService;
 
   @PostMapping("note/add")
-  public void addNote(@RequestBody Note note, HttpServletResponse response){
+  public void addNote(@RequestBody @Valid Note note, HttpServletResponse response){
     if(noteService.addNote(note)){
       response.setStatus(200);
     }
@@ -31,18 +32,36 @@ public class NoteController {
   }
 
   @GetMapping("notes")
-  public List<Note> getNotes(){
-    return noteService.getNotes();
+  public List<Note> getNotes(HttpServletResponse response){
+    List<Note> result = noteService.getNotes();
+    if(!result.isEmpty()){
+      response.setStatus(200);
+      return result;
+    }
+      response.setStatus(404);
+      return result;
+
   }
 
   @DeleteMapping("notes/delete")
-  public void deleteNote(@RequestParam String id){
-    noteService.deleteNote(id);
+  public void deleteNote(@RequestParam String id, HttpServletResponse response){
+    if(noteService.deleteNote(id)){
+      response.setStatus(200);
+    }
+    else {
+      response.setStatus(404);
+    }
   }
 
   @GetMapping("note")
-  public Optional<Note> getNoteById(@RequestParam String id){
-      return noteService.getNoteById(id);
+  public Optional<Note> getNoteById(@RequestParam String id, HttpServletResponse response){
+    Optional<Note> result = noteService.getNoteById(id);
+    if(result.isEmpty()){
+      response.setStatus(404);
+      return result;
+    }
+    response.setStatus(200);
+    return noteService.getNoteById(id);
   }
 
   @GetMapping("notes/patient")
