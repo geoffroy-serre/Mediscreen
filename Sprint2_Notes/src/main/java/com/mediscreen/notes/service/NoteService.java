@@ -31,7 +31,7 @@ public interface NoteService {
    * @param date LocalDate
    * @return List of Note by patient id and by date
    */
-  List<Note> getNotesByPatientIdAndByDate(String id, LocalDate date);
+  List<Note> getNotesByPatientIdAndByDate(Long id, LocalDate date);
 
   /**
    * Gets notes by patient id.
@@ -46,7 +46,7 @@ public interface NoteService {
    *
    * @param note Note
    */
-  void addNote(Note note);
+  boolean addNote(Note note);
 
   /**
    * Update note boolean.

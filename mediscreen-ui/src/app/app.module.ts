@@ -22,6 +22,7 @@ import { NoteUpdateComponent } from './components/note-update/note-update.compon
 
 const routes: Routes = [
   {path: 'note/update/:id', component: NoteUpdateComponent},
+  {path: 'note/add/:id', component: NoteAddComponent},
   {path: 'patient/update/:id', component: PatientUpdateComponent},
   {path: 'patient/file/:id', component: PatientFileComponent},
   {path: 'patient/search/:family/:given', component: PatientsListComponent},

@@ -5,7 +5,7 @@
       class="button-div">
       <button class="btn-delete" (click)="deletePatient()"><i class="fa fa-trash"></i></button>
       <button class="btn-call"
-              routerLink="/note/patient/{{patient?.id}}"><i class="fa fa-file"></i></button>
+              routerLink="/note/add/{{patient?.id}}"><i class="fa fa-file"></i></button>
       <button class="btn-modify"
               routerLink="/patient/update/{{patient?.id}}"><i class="fa fa-pen"></i></button>
     </div>
@@ -73,7 +73,6 @@
                 <span>{{tempNote.title}}</span>
               </div>
               <div class="modal-note-note">
-                <div class="modal-field-name">Note:</div>
                 <div class="note-modal-area" [innerText]="tempNote.note"></div>
               </div>
             </div>

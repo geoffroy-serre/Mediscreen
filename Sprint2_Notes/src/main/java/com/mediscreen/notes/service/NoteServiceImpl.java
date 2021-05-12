@@ -41,7 +41,7 @@ public class NoteServiceImpl implements NoteService {
    * @inheritDoc
    */
   @Override
-  public List<Note> getNotesByPatientIdAndByDate(String id, LocalDate date) {
+  public List<Note> getNotesByPatientIdAndByDate(Long id, LocalDate date) {
     logger.debug("Entering getNotesByPatientIdAndByDate with id {}. and date {}.", id, date);
     return noteRepository.findByPatientIdAndDate(id, date);
   }
@@ -59,9 +59,14 @@ public class NoteServiceImpl implements NoteService {
    * @inheritDoc
    */
   @Override
-  public void addNote(Note note) {
+  public boolean addNote(Note note) {
     logger.debug("Entering addNote with Note:{}.", note.toString());
-    noteRepository.save(note);
+    if(note.getId()==null){
+      logger.debug("Note doesn't exist, proceeding to save");
+      noteRepository.save(note);
+      return true;
+    }
+    else return false;
   }
 
   /**
@@ -70,7 +75,7 @@ public class NoteServiceImpl implements NoteService {
   @Override
   public boolean updateNote(Note note) {
     logger.debug("Entering updateNote with Note:{}.", note.toString());
-    if (existByID(note.getId())) {
+    if (note.getId()!=null && existByID(note.getId())) {
       logger.debug("updateNote: Note with id {}. exist proceeding to save", note.getId());
       noteRepository.save(note);
       return true;
@@ -100,7 +105,8 @@ public class NoteServiceImpl implements NoteService {
   @Override
   public boolean existByID(String id) {
     logger.debug("Entering existsById with id:{}.", id);
-    return noteRepository.existsById(id);
+      return noteRepository.existsById(id);
+
   }
 
 

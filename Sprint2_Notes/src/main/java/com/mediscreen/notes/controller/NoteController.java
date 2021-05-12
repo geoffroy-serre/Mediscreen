@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @Validated
@@ -22,8 +23,11 @@ public class NoteController {
   NoteService noteService;
 
   @PostMapping("note/add")
-  public void addNote(@RequestBody Note note){
-    noteService.addNote(note);
+  public void addNote(@RequestBody Note note, HttpServletResponse response){
+    if(noteService.addNote(note)){
+      response.setStatus(200);
+    }
+    else response.setStatus(400);
   }
 
   @GetMapping("notes")

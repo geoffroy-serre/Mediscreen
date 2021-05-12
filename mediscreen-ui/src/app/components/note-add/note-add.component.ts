@@ -29,6 +29,7 @@ export class NoteAddComponent implements OnInit {
       title: ['', [Validators.required, Validators.minLength(2)]],
       note: ['', [Validators.required, Validators.minLength(2)]],
     });
+    this.patientFile();
 
   }
 
@@ -52,6 +53,19 @@ export class NoteAddComponent implements OnInit {
 
   get validator() {
     return this.addNoteForm.controls;
+  }
+
+  private patientFile() {
+    this.patientService.getPatient(this.idParam).subscribe(
+      (patient: Patient) => {
+        this.patient = patient;
+      },
+      (err: any) => {
+        this.status = err.status;
+        this.message = err.message;
+        console.error(err)
+      }
+    );
   }
 
 }

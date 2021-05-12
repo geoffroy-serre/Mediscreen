@@ -10,8 +10,8 @@ public interface NoteRepository extends MongoRepository<Note,Long> {
 
   boolean deleteNoteById(String id);
   List<Note> findNoteByPatientId(Long id);
-  List<Note> findByPatientIdAndDate(String id, LocalDate date);
-  void deleteById(String id);
+  List<Note> findByPatientIdAndDate(Long id, LocalDate date);
+  boolean deleteById(String id);
   boolean existsById(String id);
   Optional<Note> findById(String id);
 }
