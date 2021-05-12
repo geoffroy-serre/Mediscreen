@@ -46,5 +46,10 @@ public class NoteController {
     return noteService.getNotesByPatientId(id);
   }
 
+  @PutMapping("notes/update")
+  public void updateNote (@RequestBody Note note){
+    noteService.updateNote(note);
+  }
+
 
 }

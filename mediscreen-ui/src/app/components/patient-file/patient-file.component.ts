@@ -17,6 +17,7 @@ import {ModalService} from "../../_modal";
 export class PatientFileComponent implements OnInit {
   patient!: Patient;
   notes!: Note[];
+  sortedNotes!:Note[];
   status!: number;
   message!: string;
   private idParam!: string;
@@ -59,17 +60,37 @@ export class PatientFileComponent implements OnInit {
     setTimeout(()=>this.router.navigate(['/patients']),50);
   }
 
-  getNotes(){
+  deleteNote(id:string){
+    this.noteService.deleteNote(id).subscribe(
+      data => {
+        this.status = data.status;
+      },
+      error => {
+        this.status = error.status;
+        this.message = error.error.error;
+      }
+    );
+    this.closeModal(id);
+    window.location.reload();
+  }
+
+  private getNotes(){
     this.noteService.getNotesForPatientID(this.idParam).subscribe(
       (notes: Note[]) => {
         this.notes = notes;
-        console.log("NOTES: "+notes.toString());
+        this.sortData();
       },
       (err: any) => {
         this.status = err.status;
         console.error(err)
       },
     )
+  }
+
+ private sortData() {
+    return this?.notes?.sort((a:any, b:any) => {
+      return Date.parse(b.date) - Date.parse(a.date);
+    });
   }
 
   openModal(id:string){

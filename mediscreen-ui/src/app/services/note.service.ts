@@ -45,13 +45,13 @@ export class NoteService {
   }
 
   deleteNote(id: string) {
-    return this.httpClient.delete<Note>(this.baseUrl + '/patient/delete?id=' + id, {observe: 'response'})
+    return this.httpClient.delete<Note>(this.baseUrl + '/notes/delete?id=' + id, {observe: 'response'})
       .pipe(catchError(this.handleError));
   }
 
   updateNote(note: Note): Observable<void> {
     console.error(note.toString());
-    return this.httpClient.put<void>(this.baseUrl + '/patient/update', note,
+    return this.httpClient.put<void>(this.baseUrl + '/notes/update', note,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'

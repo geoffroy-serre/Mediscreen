@@ -22,7 +22,6 @@ export class NoteAddComponent implements OnInit {
 
   constructor(private patientService:PatientService,private noteService: NoteService, private route: ActivatedRoute, private router: Router,private formBuilder: FormBuilder) {
     this.idParam = this.route.snapshot.paramMap.get('id') || '0';
-    this.patientFile();
   }
 
   ngOnInit(): void {
@@ -31,18 +30,6 @@ export class NoteAddComponent implements OnInit {
       note: ['', [Validators.required, Validators.minLength(2)]],
     });
 
-  }
-  private patientFile() {
-    this.patientService.getPatient(this.idParam).subscribe(
-      (patient: Patient) => {
-        this.patient = patient;
-      },
-      (err: any) => {
-        this.status = err.status;
-        this.message = err.message;
-        console.error(err)
-      }
-    );
   }
 
   onSubmit() {

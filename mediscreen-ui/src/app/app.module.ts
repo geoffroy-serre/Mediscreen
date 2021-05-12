@@ -17,10 +17,11 @@ import { PatientUpdateComponent } from './components/patient-update/patient-upda
 import {DatePipe} from "@angular/common";
 import { NoteAddComponent } from './components/note-add/note-add.component';
 import {ModalModule} from "./_modal";
+import { NoteUpdateComponent } from './components/note-update/note-update.component';
 
 
 const routes: Routes = [
-  {path: 'note/patient/:id', component: NoteAddComponent},
+  {path: 'note/update/:id', component: NoteUpdateComponent},
   {path: 'patient/update/:id', component: PatientUpdateComponent},
   {path: 'patient/file/:id', component: PatientFileComponent},
   {path: 'patient/search/:family/:given', component: PatientsListComponent},
@@ -44,7 +45,8 @@ const routes: Routes = [
     PatientAddComponent,
     PatientSearchComponent,
     PatientUpdateComponent,
-    NoteAddComponent
+    NoteAddComponent,
+    NoteUpdateComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

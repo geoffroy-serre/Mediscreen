@@ -36,8 +36,6 @@ export class PatientUpdateComponent implements OnInit, AfterViewInit {
     this.route.queryParams.subscribe(() => {
       this.getPatientForUpdate();
     });
-
-
   }
 
   ngAfterViewInit() {
@@ -47,7 +45,6 @@ export class PatientUpdateComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
     if (this.updateUserForm.invalid) {
-      console.log(this.updateUserForm.invalid);
       return;
     }
     this.mapFormValuesToPatient();
@@ -63,7 +60,7 @@ export class PatientUpdateComponent implements OnInit, AfterViewInit {
   }
 
   mapFormValuesToPatient() {
-    this.patient.id = this.updateUserForm.value.family;
+    this.patient.id = +this.idParam;
     this.patient.familyName = this.updateUserForm.value.family;
     this.patient.givenName = this.updateUserForm.value.given;
     this.patient.address = this.updateUserForm.value.address;
@@ -81,18 +78,15 @@ export class PatientUpdateComponent implements OnInit, AfterViewInit {
       (patient: Patient) => {
         this.patient = patient;
         this.editPatient(patient);
-        console.error(patient);
       },
       (err: any) => {
         this.status = err.status;
         this.message = err.message;
-        console.error(err)
       }
     );
   }
 
   editPatient(patient: Patient) {
-    console.log(this.updateUserForm.value.birthdate);
     this.updateUserForm.patchValue({
       family: patient.familyName,
       given: patient.givenName,
@@ -101,8 +95,6 @@ export class PatientUpdateComponent implements OnInit, AfterViewInit {
       gender: patient.gender,
       birthDate:formatDate(patient.dateOfBirth,'dd-MM-yyyy','en')
     });
-    console.log(this.updateUserForm.value.birthdate);
-    console.log("DATE IN: " + formatDate(patient.dateOfBirth,'dd-MM-yyyy','en'));
   }
 
   /*populateValues() {

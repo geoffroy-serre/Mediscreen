@@ -77,7 +77,14 @@
                 <div class="note-modal-area" [innerText]="tempNote.note"></div>
               </div>
             </div>
-            <button (click)="closeModal(tempNote.id);" class="modal-close">Close</button>
+            <div class="button-div-modal">
+              <button class="modal-close"
+                      (click)="closeModal(tempNote.id)"><i class="fa fa-times"></i></button>
+              <button class="btn-delete"
+                      (click)="deleteNote(tempNote.id)"><i class="fa fa-trash"></i></button>
+              <button class="btn-modify"
+                      routerLink="/note/update/{{tempNote?.id}}"><i class="fa fa-pen"></i></button>
+            </div>
           </jw-modal>
         </button>
 
