@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.mediscreen.notes.model.Note;
 import com.mediscreen.notes.service.NoteService;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,8 +101,7 @@ class NoteControllerTest {
     mockMvc.perform(get("/notes")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(status().isNotFound())
-            .andExpect(content().string("[]"))
-            .andReturn();
+            .andExpect(content().string("[]"));
 
   }
 
@@ -156,10 +153,91 @@ class NoteControllerTest {
   }
 
   @Test
-  void getNotesByPatientId() {
+  void getNotesByPatientId() throws Exception {
+    List<Note> notes = Collections.singletonList(note);
+    when(noteService.getNotesByPatientId(134L)).thenReturn(notes);
+    mockMvc.perform(get("/notes/patient")
+            .param("id", String.valueOf(134L)))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.[0].note").value("noteTest"))
+            .andExpect(jsonPath("$.[0].title").value("titleTest"))
+            .andExpect(jsonPath("$.[0].patientId").value(134));
+  }
+  @Test
+  void getNotesByPatientIdBad() throws Exception {
+    List<Note> notes = Collections.singletonList(note);
+    when(noteService.getNotesByPatientId(134L)).thenReturn(notes);
+    mockMvc.perform(get("/notes/patient")
+            .param("aydi", String.valueOf(134L)))
+            .andExpect(status().isBadRequest());
+
+  }
+  @Test
+  void getNotesByPatientIdNoResult() throws Exception {
+    List<Note> notes = new ArrayList<>();
+    when(noteService.getNotesByPatientId(134L)).thenReturn(notes);
+    mockMvc.perform(get("/notes/patient")
+            .param("id", String.valueOf(134L)))
+            .andExpect(status().isNotFound())
+            .andExpect(content().string("[]"));
+
   }
 
   @Test
-  void updateNote() {
+  void updateNoteBadNotId() throws Exception {
+    String jsonRequest = "{ \"id\":\"\",\"patientId\":\"134\"," +
+            "\"title\":\"titleTest\"," +
+            "\"date\":\"1982-04-14\"," +
+            "\"note\":\"NoteContent\"}";
+    mockMvc.perform(put("/notes/update")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonRequest))
+            .andExpect(status().isBadRequest());
+  }
+  @Test
+  void updateNoteBadEmptyField() throws Exception {
+    String jsonRequest = "{ \"id\":\"134\",\"patientId\":\"134\"," +
+            "\"title\":\"\"," +
+            "\"date\":\"1982-04-14\"," +
+            "\"note\":\"NoteContent\"}";
+    mockMvc.perform(put("/notes/update")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonRequest))
+            .andExpect(status().isBadRequest());
+  }
+  @Test
+  void updateNoteBadMissingField() throws Exception {
+    String jsonRequest = "{ \"id\":\"134\",\"patientId\":\"134\"," +
+            "\"title\":\"TitleTest\"," +
+            "\"note\":\"NoteContent\"}";
+    when(noteService.updateNote(any(Note.class))).thenReturn(true);
+    mockMvc.perform(put("/notes/update")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonRequest))
+            .andExpect(status().isBadRequest());
+  }
+  @Test
+  void updateNoteOk() throws Exception {
+    String jsonRequest = "{ \"id\":\"134\",\"patientId\":\"134\"," +
+            "\"title\":\"TestTitle\"," +
+            "\"date\":\"1982-04-14\"," +
+            "\"note\":\"NoteContent\"}";
+    when(noteService.updateNote(any(Note.class))).thenReturn(true);
+    mockMvc.perform(put("/notes/update")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonRequest))
+            .andExpect(status().isOk());
+  }
+  @Test
+  void updateNote404() throws Exception {
+    String jsonRequest = "{ \"id\":\"134\",\"patientId\":\"134\"," +
+            "\"title\":\"TestTitle\"," +
+            "\"date\":\"1982-04-14\"," +
+            "\"note\":\"NoteContent\"}";
+    when(noteService.updateNote(any(Note.class))).thenReturn(false);
+    mockMvc.perform(put("/notes/update")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(jsonRequest))
+            .andExpect(status().isNotFound());
   }
 }

@@ -45,7 +45,9 @@ export class NoteService {
   }
 
   deleteNote(id: string) {
-    return this.httpClient.delete<Note>(this.baseUrl + '/notes/delete?id=' + id, {observe: 'response'})
+    const params = new HttpParams()
+      .set('id',id);
+    return this.httpClient.delete<Note>(this.baseUrl + '/notes/delete?' + params, {observe: 'response'})
       .pipe(catchError(this.handleError));
   }
 
