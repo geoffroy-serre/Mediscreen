@@ -103,8 +103,10 @@
           * Mandatory fields
         </div>
         <div class="button-div btn-form">
-          <button class="btn-delete" routerLink="/patients"><i class="fa fa-times"></i></button>
-          <button class="btn-valid" type="submit" [disabled]="!addUserForm.valid"><i
+          <button class="btn-delete" routerLink="/patients"
+                  title="Cancel patient creation "><i class="fa fa-times"></i></button>
+          <button class="btn-valid" type="submit" [disabled]="!addUserForm.valid"
+                  title="Save patient"><i
             class="fa fa-check"></i></button>
         </div>
       </form>

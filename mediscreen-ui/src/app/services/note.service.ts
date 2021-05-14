@@ -16,26 +16,26 @@ export class NoteService {
 
 
   getNotes(): Observable<Note[]> {
-    console.log(this.httpClient.get<Note[]>(this.baseUrl + '/notes'));
-    return this.httpClient.get<Note[]>(this.baseUrl + '/notes')
+    console.log(this.httpClient.get<Note[]>(this.baseUrl + '/patHistory'));
+    return this.httpClient.get<Note[]>(this.baseUrl + '/patHistory')
       .pipe(catchError(this.handleError));
   }
 
   getNote(id: string): Observable<Note> {
-    const patientFileUrl = this.baseUrl + '/note?id=' + id;
+    const patientFileUrl = this.baseUrl + '/patHistory/note?id=' + id;
     return this.httpClient.get<Note>(patientFileUrl)
       .pipe(catchError(this.handleError));
   }
 
   getNotesForPatientID(id: string): Observable<Note[]> {
-    const patientFileUrl = this.baseUrl + '/notes/patient?id=' + id;
+    const patientFileUrl = this.baseUrl + '/patHistory/patient?id=' + id;
     return this.httpClient.get<Note[]>(patientFileUrl)
       .pipe(catchError(this.handleError));
   }
 
   addNote(note: Note): Observable<void> {
     console.log(note);
-    const addUrl = this.baseUrl + '/note/add';
+    const addUrl = this.baseUrl + '/patHistory/add';
     return this.httpClient.post<void>(addUrl,note, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -47,13 +47,17 @@ export class NoteService {
   deleteNote(id: string) {
     const params = new HttpParams()
       .set('id',id);
-    return this.httpClient.delete<Note>(this.baseUrl + '/notes/delete?' + params, {observe: 'response'})
+    return this.httpClient.delete<Note>(this.baseUrl + '/patHistory/delete?' + params, {observe: 'response'})
+      .pipe(catchError(this.handleError));
+  }
+  deleteNotesByPatientID(id: number) {
+    return this.httpClient.delete<Note>(this.baseUrl + '/patHistory/patient/delete?id='+id, {observe: 'response'})
       .pipe(catchError(this.handleError));
   }
 
   updateNote(note: Note): Observable<void> {
     console.error(note.toString());
-    return this.httpClient.put<void>(this.baseUrl + '/notes/update', note,
+    return this.httpClient.put<void>(this.baseUrl + '/patHistory/update', note,
       {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
@@ -62,8 +66,6 @@ export class NoteService {
       .pipe(catchError(this.handleError));
 
   }
-
-
 
   private handleError(errorResponse: HttpErrorResponse) {
     return throwError(errorResponse);

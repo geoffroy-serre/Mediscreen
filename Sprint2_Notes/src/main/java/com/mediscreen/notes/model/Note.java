@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -14,48 +16,60 @@ public class Note {
   private String id;
 
   @NotNull
-  @Field(value="patient_id")
+  @Field(value = "patient_id")
   private Long patientId;
 
   @NotBlank
+  @Max(60)
+  @Min(2)
   @Field(value = "title")
   private String title;
 
   @NotNull
-  @Field(value="date")
+  @Field(value = "date")
   private LocalDate date;
 
   @NotBlank
+  @Min(2)
   @Field(value = "note")
   private String note;
 
   public String getId() {
     return id;
   }
+
   public void setId(String id) {
     this.id = id;
   }
+
   public Long getPatientId() {
     return patientId;
   }
+
   public void setPatientId(Long patientId) {
     this.patientId = patientId;
   }
+
   public LocalDate getDate() {
     return date;
   }
+
   public void setDate(LocalDate date) {
     this.date = date;
   }
+
   public String getNote() {
     return note;
   }
+
   public void setNote(String note) {
     this.note = note;
   }
+
   public String getTitle() {
     return title;
   }
+
   public void setTitle(String title) {
     this.title = title;
   }

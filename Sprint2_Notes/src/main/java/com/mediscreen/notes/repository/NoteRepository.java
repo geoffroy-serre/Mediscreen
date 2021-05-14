@@ -6,12 +6,20 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface NoteRepository extends MongoRepository<Note,Long> {
+public interface NoteRepository extends MongoRepository<Note, Long> {
 
-  boolean deleteNoteById(String id);
+
   List<Note> findNoteByPatientId(Long id);
+
   List<Note> findByPatientIdAndDate(Long id, LocalDate date);
-  boolean deleteById(String id);
+
+  void deleteNoteById(String id);
+
   boolean existsById(String id);
+
+  boolean existsByPatientId(Long id);
+
   Optional<Note> findById(String id);
+
+  Long deleteNoteByPatientId(Long id);
 }

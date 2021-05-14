@@ -1,13 +1,16 @@
 <main>
   <div class="data-content" *ngIf="status==200 !=null  else Errors">
-    <h2 class="content-title">Patient</h2>
+    <h2 class="content-title"></h2>
     <div
       class="button-div">
-      <button class="btn-delete" (click)="deletePatient()"><i class="fa fa-trash"></i></button>
-      <button class="btn-call"
-              routerLink="/note/add/{{patient?.id}}"><i class="fa fa-file"></i></button>
+      <button class="btn-delete" (click)="deletePatient()"
+              title="Delete patient"><i class="fa fa-trash"></i></button>
+      <button class="btn-note"
+              routerLink="/note/add/{{patient?.id}}"
+              title="Add note"><i class="fa fa-file"></i></button>
       <button class="btn-modify"
-              routerLink="/patient/update/{{patient?.id}}"><i class="fa fa-pen"></i></button>
+              routerLink="/patient/update/{{patient?.id}}"
+              title="Modify patient informations"><i class="fa fa-pen"></i></button>
     </div>
     <div class="patient-data-card">
       <div class="infos-persos">
@@ -57,7 +60,7 @@
       </div>
     </div>
     <div class="notes-wrapper">
-      <h1 class="content-title">Notes</h1>
+      <h1 class="content-title"></h1>
       <div class="note-content" *ngFor="let tempNote of notes">
         <button (click)="openModal(tempNote.id)">
           <div class="note-header">
@@ -78,11 +81,14 @@
             </div>
             <div class="button-div-modal">
               <button class="modal-close"
-                      (click)="closeModal(tempNote.id)"><i class="fa fa-times"></i></button>
+                      (click)="closeModal(tempNote.id)"
+                      title="Close windows"><i class="fa fa-times"></i></button>
               <button class="btn-delete"
-                      (click)="deleteNote(tempNote.id)"><i class="fa fa-trash"></i></button>
+                      (click)="deleteNote(tempNote.id)"
+                      title="Delete this note"><i class="fa fa-trash"></i></button>
               <button class="btn-modify"
-                      routerLink="/note/update/{{tempNote?.id}}"><i class="fa fa-pen"></i></button>
+                      routerLink="/note/update/{{tempNote?.id}}"
+                      title="Modify this note"><i class="fa fa-pen"></i></button>
             </div>
           </jw-modal>
         </button>

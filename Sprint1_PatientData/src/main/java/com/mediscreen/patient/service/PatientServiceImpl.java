@@ -93,6 +93,7 @@ public class PatientServiceImpl implements PatientService {
   public List<Patient> findPatients() {
     return patientRepository.findAll();
   }
+
   /**
    * @inheritDoc
    */
@@ -100,6 +101,7 @@ public class PatientServiceImpl implements PatientService {
   public Optional<Patient> findById(long id) {
     return patientRepository.findById(id);
   }
+
   /**
    * @inheritDoc
    */
@@ -107,6 +109,7 @@ public class PatientServiceImpl implements PatientService {
   public boolean existsPatientById(Long id) {
     return patientRepository.existsPatientById(id);
   }
+
   /**
    * @inheritDoc
    */

@@ -61,12 +61,11 @@ public class NoteServiceImpl implements NoteService {
   @Override
   public boolean addNote(Note note) {
     logger.debug("Entering addNote with Note:{}.", note.toString());
-    if(note.getId()==null){
+    if (note.getId() == null) {
       logger.debug("Note doesn't exist, proceeding to save");
       noteRepository.save(note);
       return true;
-    }
-    else return false;
+    } else return false;
   }
 
   /**
@@ -75,7 +74,7 @@ public class NoteServiceImpl implements NoteService {
   @Override
   public boolean updateNote(Note note) {
     logger.debug("Entering updateNote with Note:{}.", note.toString());
-    if (note.getId()!=null && existByID(note.getId())) {
+    if (note.getId() != null && existByID(note.getId())) {
       logger.debug("updateNote: Note with id {}. exist proceeding to save", note.getId());
       noteRepository.save(note);
       return true;
@@ -92,10 +91,28 @@ public class NoteServiceImpl implements NoteService {
     logger.debug("Entering deleteNote with Note:{}.", id);
     if (existByID(id)) {
       logger.debug("deleteNote: Note with id {}. exist proceeding to suppression", id);
-      noteRepository.deleteById(id);
+      noteRepository.deleteNoteById(id);
       return true;
     }
     logger.debug("deleteNote: Note with id {}. doesn't  exist suppression aborted", id);
+    return false;
+  }
+
+
+  /**
+   * @inheritDoc
+   */
+  @Override
+  public boolean deleteNoteByPatientId(Long id) {
+    logger.debug("Entering deleteNote with Note:{}.", id);
+    if (existByPatientID(id)) {
+      logger.debug("deleteNoteByPatientId: patient with id {}. exist proceeding to suppression",
+              id);
+      noteRepository.deleteNoteByPatientId(id);
+      return true;
+    }
+    logger.debug("deleteNoteByPatientId: patient with id {}. doesn't  exist suppression aborted",
+            id);
     return false;
   }
 
@@ -105,7 +122,17 @@ public class NoteServiceImpl implements NoteService {
   @Override
   public boolean existByID(String id) {
     logger.debug("Entering existsById with id:{}.", id);
-      return noteRepository.existsById(id);
+    return noteRepository.existsById(id);
+
+  }
+
+  /**
+   * @inheritDoc
+   */
+  @Override
+  public boolean existByPatientID(Long id) {
+    logger.debug("Entering existsByPatientId with id:{}.", id);
+    return noteRepository.existsByPatientId(id);
 
   }
 

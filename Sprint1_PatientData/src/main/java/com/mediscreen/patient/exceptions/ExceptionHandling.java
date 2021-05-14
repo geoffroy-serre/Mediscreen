@@ -1,6 +1,7 @@
 package com.mediscreen.patient.exceptions;
 
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,67 +21,67 @@ public class ExceptionHandling {
   @ExceptionHandler(ConstraintViolationException.class)
   @ResponseBody
   public ExceptionResponse handleConstraintViolationException(ConstraintViolationException constraintViolationException,
-                                                       HttpServletRequest request,
-                                                       HttpServletResponse responseCode) {
+                                                              HttpServletRequest request,
+                                                              HttpServletResponse responseCode) {
     responseCode.setStatus(400);
     List<String> messages = constraintViolationException.getConstraintViolations().stream()
             .map(ConstraintViolation::getMessage).collect(Collectors.toList());
     String errorMessage = "";
-    for (int i = 0; i<messages.size(); i++){
-      if (i<messages.size()-1){
-        errorMessage += messages.get(i)+" and also ";
-      }
-      else{
+    for (int i = 0; i < messages.size(); i++) {
+      if (i < messages.size() - 1) {
+        errorMessage += messages.get(i) + " and also ";
+      } else {
         errorMessage += messages.get(i);
       }
     }
     ExceptionResponse response = new ExceptionResponse(new Date(), 400,
             errorMessage,
             request.getRequestURI());
-    logger.error("ERROR: "+constraintViolationException+" " + response);
+    logger.error("ERROR: " + constraintViolationException + " " + response);
     return response;
   }
 
   @ExceptionHandler(IllegalArgumentException.class)
   @ResponseBody
   public ExceptionResponse handleIllegalArgumentException(IllegalArgumentException illegalArgumentException,
-                                                              HttpServletRequest request,
-                                                              HttpServletResponse responseCode) {
+                                                          HttpServletRequest request,
+                                                          HttpServletResponse responseCode) {
     responseCode.setStatus(400);
     ExceptionResponse response = new ExceptionResponse(new Date(), 400,
             illegalArgumentException.getLocalizedMessage(),
             request.getRequestURI()
     );
-    logger.error("ERROR: "+illegalArgumentException+" " + response);
+    logger.error("ERROR: " + illegalArgumentException + " " + response);
     return response;
   }
 
   @ExceptionHandler(MissingServletRequestParameterException.class)
   @ResponseBody
   public ExceptionResponse handleMissingServletRequestParameterException(MissingServletRequestParameterException missingServletRequestParameterException,
-                                                          HttpServletRequest request,
-                                                          HttpServletResponse responseCode) {
+                                                                         HttpServletRequest request,
+                                                                         HttpServletResponse responseCode) {
     responseCode.setStatus(400);
     ExceptionResponse response = new ExceptionResponse(new Date(), 400,
-            "'"+missingServletRequestParameterException.getParameterName()+"'"+" parameter is " +
+            "'" + missingServletRequestParameterException.getParameterName() + "'" + " parameter " +
+                    "is " +
                     "missing",
             request.getRequestURI()
     );
-    logger.error("ERROR: "+missingServletRequestParameterException+" " + response);
+    logger.error("ERROR: " + missingServletRequestParameterException + " " + response);
     return response;
   }
 
   @ExceptionHandler(PatientNotFoundException.class)
   @ResponseBody
   public ExceptionResponse handlePatientNotFoundException(PatientNotFoundException patientNotFoundException,
-                                                                         HttpServletRequest request,
-                                                                         HttpServletResponse responseCode) {
+                                                          HttpServletRequest request,
+                                                          HttpServletResponse responseCode) {
     responseCode.setStatus(404);
     ExceptionResponse response = new ExceptionResponse(new Date(), 404,
             "Patient not found for this id",
             request.getRequestURI()
     );
-    logger.debug("ERROR: "+patientNotFoundException+" " + response);
+    logger.debug("ERROR: " + patientNotFoundException + " " + response);
     return response;
   }
 

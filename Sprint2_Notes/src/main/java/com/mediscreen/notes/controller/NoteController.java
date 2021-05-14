@@ -23,48 +23,71 @@ public class NoteController {
   @Autowired
   NoteService noteService;
 
-  @PostMapping("note/add")
-  public void addNote(@RequestBody @Valid Note note, HttpServletResponse response){
-    if(noteService.addNote(note)){
+  @PostMapping("patHistory/add")
+  public void addNote(@RequestBody @Valid Note note, HttpServletResponse response) {
+    if (noteService.addNote(note)) {
       logger.debug("Note valid and not in db. Is added");
       response.setStatus(200);
-    }
-    else {
+    } else {
       logger.debug("Can't be add");
       response.setStatus(400);
     }
   }
 
-  @GetMapping("notes")
-  public List<Note> getNotes(HttpServletResponse response){
-    List<Note> result = noteService.getNotes();
-    if(!result.isEmpty()){
-      logger.debug("Results found for getNotes");
+  @PutMapping("patHistory/update")
+  public void updateNote(@RequestBody @Valid Note note, HttpServletResponse response) {
+    if (note.getId().isEmpty()) {
+      logger.debug("Id can't be null for update request");
+      response.setStatus(400);
+    } else if (noteService.updateNote(note)) {
+      logger.debug("Note updated succesfully");
       response.setStatus(200);
-      return result;
-    }
-    logger.debug("No results found for getNotes");
+    } else {
+      logger.debug("Note can't be updated");
       response.setStatus(404);
-      return result;
-
+    }
   }
 
-  @DeleteMapping("notes/delete")
-  public void deleteNote(@RequestParam String id, HttpServletResponse response){
-    if(noteService.deleteNote(id)){
+  @DeleteMapping("patHistory/delete")
+  public void deleteNote(@RequestParam String id, HttpServletResponse response) {
+    if (noteService.deleteNote(id)) {
       logger.debug("Note deleted");
       response.setStatus(200);
-    }
-    else {
+    } else {
       logger.debug("Note can't be deleted");
       response.setStatus(404);
     }
   }
 
-  @GetMapping("note")
-  public Optional<Note> getNoteById(@RequestParam String id, HttpServletResponse response){
+  @DeleteMapping("patHistory/patient/delete")
+  public void deleteNotesByPatientId(@RequestParam Long id, HttpServletResponse response) {
+    if (noteService.deleteNoteByPatientId(id)) {
+      logger.debug("Notes deleted");
+      response.setStatus(200);
+    } else {
+      logger.debug("Notes can't be deleted");
+      response.setStatus(404);
+    }
+  }
+
+  @GetMapping("patHistory")
+  public List<Note> getNotes(HttpServletResponse response) {
+    List<Note> result = noteService.getNotes();
+    if (!result.isEmpty()) {
+      logger.debug("Results found for getNotes");
+      response.setStatus(200);
+      return result;
+    }
+    logger.debug("No results found for getNotes");
+    response.setStatus(404);
+    return result;
+
+  }
+
+  @GetMapping("patHistory/note")
+  public Optional<Note> getNoteById(@RequestParam String id, HttpServletResponse response) {
     Optional<Note> result = noteService.getNoteById(id);
-    if(result.isEmpty()){
+    if (result.isEmpty()) {
       logger.debug("GetNoteById is empty");
       response.setStatus(404);
       return result;
@@ -74,34 +97,20 @@ public class NoteController {
     return noteService.getNoteById(id);
   }
 
-  @GetMapping("notes/patient")
-  public List<Note> getNotesByPatientId (@RequestParam Long id, HttpServletResponse response){
+  @GetMapping("patHistory/patient")
+  public List<Note> getNotesByPatientId(@RequestParam Long id, HttpServletResponse response) {
     List<Note> result = noteService.getNotesByPatientId(id);
-    if(result.isEmpty()){
+    if (result.isEmpty()) {
       logger.debug("GetNoteByPatientId is empty");
       response.setStatus(404);
       return result;
     }
-    logger.debug("GetNoteByPatientId have {} results",result.size());
+    logger.debug("GetNoteByPatientId have {} results", result.size());
     response.setStatus(200);
     return result;
   }
 
-  @PutMapping("notes/update")
-  public void updateNote (@RequestBody @Valid Note note, HttpServletResponse response){
-    if(note.getId().isEmpty()){
-      logger.debug("Id can't be null for update request");
-      response.setStatus(400);
-    }
-    else if(noteService.updateNote(note)){
-      logger.debug("Note updated succesfully");
-      response.setStatus(200);
-    }
-    else{
-      logger.debug("Note can't be updated");
-      response.setStatus(404);
-    }
-  }
+
 
 
 }

@@ -22,11 +22,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(PatientController.class)
 public class PatientControllerTest {
 
-  @MockBean
-  private PatientService patientService;
   @Autowired
   MockMvc mockMvc;
   Patient patient;
+  @MockBean
+  private PatientService patientService;
 
   @BeforeEach()
   void setupPatient() {
@@ -65,7 +65,7 @@ public class PatientControllerTest {
     mockMvc.perform(put("/patient/update")
             .contentType(MediaType.APPLICATION_JSON)
             .content(jsonRequest))
-            .andExpect(status().isConflict());
+            .andExpect(status().isNotFound());
   }
 
   @Test

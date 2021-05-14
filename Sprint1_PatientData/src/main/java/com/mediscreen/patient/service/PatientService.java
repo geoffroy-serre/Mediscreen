@@ -9,12 +9,13 @@ public interface PatientService {
   /**
    * Save new patient with params.
    * Return true if dont exist and save successfully.
-   * @param family String
-   * @param given String
-   * @param dob LocalDate
-   * @param sex Character
+   *
+   * @param family  String
+   * @param given   String
+   * @param dob     LocalDate
+   * @param sex     Character
    * @param address String
-   * @param phone String
+   * @param phone   String
    * @return boolean
    */
   boolean addPatient(String family, String given, LocalDate dob, Character sex, String address,
@@ -22,14 +23,16 @@ public interface PatientService {
 
   /**
    * Return a Patient if one is found with right family and Given Name.
+   *
    * @param family String
-   * @param given String
+   * @param given  String
    * @return Optional<Patient>
    */
   List<Patient> findPatientByFamilyNameAndGivenName(String family, String given);
 
   /**
    * Return True if patient already exist and have been updated.
+   *
    * @param patient Patient
    * @return boolean
    */
@@ -37,6 +40,7 @@ public interface PatientService {
 
   /**
    * Return True if patient exist.
+   *
    * @param patient Patient
    * @return boolean
    */
@@ -44,21 +48,24 @@ public interface PatientService {
 
   /**
    * Return True if patient exist.
+   *
    * @param family String
-   * @param given String
-   * @param dob LocalDate
+   * @param given  String
+   * @param dob    LocalDate
    * @return boolean
    */
   boolean existsPatientByFamilyAndGivenAndDob(String family, String given, LocalDate dob);
 
   /**
    * Find All patients
+   *
    * @return List of Patients
    */
   List<Patient> findPatients();
 
   /**
    * Use id param to find Patient. Return empty optionnal if no match.
+   *
    * @param id Long
    * @return Optional of Patient
    */
@@ -66,6 +73,7 @@ public interface PatientService {
 
   /**
    * Return true if the patient with this id exist.
+   *
    * @param id Long
    * @return boolean
    */
@@ -73,6 +81,7 @@ public interface PatientService {
 
   /**
    * Delete patient with this id
+   *
    * @param id Long
    */
   void deletePatientById(Long id);

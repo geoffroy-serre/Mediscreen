@@ -11,44 +11,36 @@ import javax.validation.constraints.Size;
 @Entity
 public class Patient {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
-  private Long id;
-
   @NotBlank
   @Column(name = "familly_name")
-  @Size(min = 2, max = 60,message ="Family '${validatedValue}' must be between {min} and {max} " +
+  @Size(min = 2, max = 60, message = "Family '${validatedValue}' must be between {min} and {max} " +
           "characters long")
   String familyName;
-
   @NotBlank
   @Column(name = "given_name")
-  @Size(min = 2, max = 60,message ="Given '${validatedValue}' must be between {min} and {max} " +
+  @Size(min = 2, max = 60, message = "Given '${validatedValue}' must be between {min} and {max} " +
           "characters long")
   String givenName;
-
   @NotNull
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   @Column(name = "date_of_birth")
   LocalDate dateOfBirth;
-
   @NotNull
   @Column(name = "gender")
   Character gender;
-
-
   @Column(name = "address")
-  @Size(max = 100,message ="Address '${validatedValue}' must be between {min} and {max}" +
+  @Size(max = 100, message = "Address '${validatedValue}' must be between {min} and {max}" +
           " " +
           "characters long")
   String address;
-
-
   @Column(name = "phone_number")
-  @Size(max = 20,message ="Phone '${validatedValue}' must be between {min} and {max} " +
+  @Size(max = 20, message = "Phone '${validatedValue}' must be between {min} and {max} " +
           "characters long")
   String phoneNumber;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private Long id;
 
 
   public Patient() {

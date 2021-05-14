@@ -19,16 +19,14 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class NoteServiceImplTest {
 
+  public Note note = new Note();
   @Mock
   NoteRepository noteRepository;
-
   @InjectMocks
   NoteService noteService = new NoteServiceImpl();
 
-  public Note note = new Note();
-
   @BeforeEach
-  public void setup(){
+  public void setup() {
     note.setNote("Note content Test");
     note.setTitle("Note title Test");
     note.setDate(LocalDate.now());
@@ -43,6 +41,7 @@ class NoteServiceImplTest {
     assertNotNull(noteService.getNoteById("id"));
     assertFalse(noteService.getNoteById("id").isEmpty());
   }
+
   @Test
   void getNoteByIdNoResult() {
     when(noteRepository.findById("id")).thenReturn(Optional.empty());
@@ -62,6 +61,7 @@ class NoteServiceImplTest {
     verify(noteRepository, times(1)).findAll();
     assertFalse(noteService.getNotes().isEmpty());
   }
+
   @Test
   void getNotesNoResult() {
     List<Note> notes = new ArrayList<>();
@@ -77,19 +77,20 @@ class NoteServiceImplTest {
     note.setId("idTest");
     notes.add(note);
     LocalDate date = LocalDate.now();
-    when(noteRepository.findByPatientIdAndDate(134L,date)).thenReturn(notes);
-    noteService.getNotesByPatientIdAndByDate(134L,date);
-    verify(noteRepository, times(1)).findByPatientIdAndDate(134L,date);
-    assertFalse(noteService.getNotesByPatientIdAndByDate(134L,date).isEmpty());
+    when(noteRepository.findByPatientIdAndDate(134L, date)).thenReturn(notes);
+    noteService.getNotesByPatientIdAndByDate(134L, date);
+    verify(noteRepository, times(1)).findByPatientIdAndDate(134L, date);
+    assertFalse(noteService.getNotesByPatientIdAndByDate(134L, date).isEmpty());
   }
+
   @Test
   void getNotesByPatientIdAndByDateNoResult() {
     List<Note> notes = new ArrayList<>();
     LocalDate date = LocalDate.now();
-    when(noteRepository.findByPatientIdAndDate(134L,date)).thenReturn(notes);
-    noteService.getNotesByPatientIdAndByDate(134L,date);
-    verify(noteRepository, times(1)).findByPatientIdAndDate(134L,date);
-    assertTrue(noteService.getNotesByPatientIdAndByDate(134L,date).isEmpty());
+    when(noteRepository.findByPatientIdAndDate(134L, date)).thenReturn(notes);
+    noteService.getNotesByPatientIdAndByDate(134L, date);
+    verify(noteRepository, times(1)).findByPatientIdAndDate(134L, date);
+    assertTrue(noteService.getNotesByPatientIdAndByDate(134L, date).isEmpty());
   }
 
   @Test
@@ -102,6 +103,7 @@ class NoteServiceImplTest {
     verify(noteRepository, times(1)).findNoteByPatientId(134L);
     assertFalse(noteService.getNotesByPatientId(134L).isEmpty());
   }
+
   @Test
   void getNotesByPatientIdNoResult() {
     List<Note> notes = new ArrayList<>();
@@ -116,6 +118,7 @@ class NoteServiceImplTest {
     noteService.addNote(note);
     verify(noteRepository, times(1)).save(note);
   }
+
   @Test
   void addNoteWithId() {
     note.setId("idTest");
@@ -131,6 +134,7 @@ class NoteServiceImplTest {
     verify(noteRepository, times(1)).existsById("idTest");
     verify(noteRepository, times(1)).save(note);
   }
+
   @Test
   void updateNoteNoId() {
     noteService.updateNote(note);
@@ -140,6 +144,7 @@ class NoteServiceImplTest {
     verify(noteRepository, times(0)).existsById("idTest");
     verify(noteRepository, times(0)).save(note);
   }
+
   @Test
   void updateNoteUnknownId() {
     note.setId("idTest");
@@ -150,13 +155,48 @@ class NoteServiceImplTest {
   }
 
   @Test
+  void deleteNoteByPatientID() {
+    when(noteRepository.existsByPatientId(134L)).thenReturn(true);
+    noteService.deleteNoteByPatientId(134L);
+    verify(noteRepository, times(1)).existsByPatientId(134L);
+    verify(noteRepository, times(1)).deleteNoteByPatientId(134L);
+    assertAll(() -> noteService.deleteNoteByPatientId(134L));
+    assertTrue(noteService.deleteNoteByPatientId(134L));
+  }
+
+  @Test
+  void deleteNoteByPatientIdUnKnown() {
+    when(noteRepository.existsByPatientId(134L)).thenReturn(false);
+    noteService.deleteNoteByPatientId(134L);
+    verify(noteRepository, times(1)).existsByPatientId(134L);
+    verify(noteRepository, times(0)).deleteNoteByPatientId(134L);
+    assertFalse(noteService.deleteNoteByPatientId(134L));
+  }
+
+  @Test
+  void existByPatientID() {
+    when(noteRepository.existsByPatientId(134L)).thenReturn(true);
+    noteService.existByPatientID(134L);
+    verify(noteRepository, times(1)).existsByPatientId(134L);
+    assertTrue(noteService.existByPatientID(134L));
+  }
+
+  @Test
+  void existByPatientIDFalse() {
+    when(noteRepository.existsByPatientId(134L)).thenReturn(false);
+    noteService.existByPatientID(134L);
+    verify(noteRepository, times(1)).existsByPatientId(134L);
+    assertFalse(noteService.existByPatientID(134L));
+  }
+
+  @Test
   void deleteNote() {
-    when(noteRepository.deleteById("idTest")).thenReturn(true);
     when(noteRepository.existsById("idTest")).thenReturn(true);
     noteService.deleteNote("idTest");
     verify(noteRepository, times(1)).existsById("idTest");
-    verify(noteRepository, times(1)).deleteById("idTest");
-    assertAll(()->noteService.deleteNote("idTest"));
+    verify(noteRepository, times(1)).deleteNoteById("idTest");
+    assertAll(() -> noteService.deleteNote("idTest"));
+    assertTrue(noteService.deleteNote("idTest"));
   }
 
   @Test
@@ -164,7 +204,8 @@ class NoteServiceImplTest {
     when(noteRepository.existsById("idTest")).thenReturn(false);
     noteService.deleteNote("idTest");
     verify(noteRepository, times(1)).existsById("idTest");
-    verify(noteRepository, times(0)).deleteById("idTest");
+    verify(noteRepository, times(0)).deleteNoteById("idTest");
+    assertFalse(noteService.deleteNote("idTest"));
   }
 
   @Test
@@ -172,11 +213,14 @@ class NoteServiceImplTest {
     when(noteRepository.existsById("idTest")).thenReturn(true);
     noteService.existByID("idTest");
     verify(noteRepository, times(1)).existsById("idTest");
+    assertTrue(noteService.existByID("idTest"));
   }
+
   @Test
   void existByIDFalse() {
     when(noteRepository.existsById("idTest")).thenReturn(false);
     noteService.existByID("idTest");
     verify(noteRepository, times(1)).existsById("idTest");
+    assertFalse(noteService.existByID("idTest"));
   }
 }

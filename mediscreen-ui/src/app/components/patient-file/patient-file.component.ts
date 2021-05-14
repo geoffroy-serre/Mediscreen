@@ -48,6 +48,7 @@ export class PatientFileComponent implements OnInit {
   }
 
   deletePatient(){
+    this.deleteNotesByPatientId(+this.idParam);
       this.patientService.deletePatient(this.idParam).subscribe(
         data => {
           this.status = data.status;
@@ -61,6 +62,7 @@ export class PatientFileComponent implements OnInit {
   }
 
   deleteNote(id:string){
+
     this.noteService.deleteNote(id).subscribe(
       data => {
         this.status = data.status;
@@ -72,6 +74,17 @@ export class PatientFileComponent implements OnInit {
     );
     this.closeModal(id);
     window.location.reload();
+  }
+  deleteNotesByPatientId(id:number){
+    this.noteService.deleteNotesByPatientID(id).subscribe(
+      data => {
+        this.status = data.status;
+      },
+      error => {
+        this.status = error.status;
+        this.message = error.error.error;
+      }
+    );
   }
 
   private getNotes(){

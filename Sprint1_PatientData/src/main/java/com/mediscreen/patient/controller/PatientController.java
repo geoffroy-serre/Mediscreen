@@ -5,7 +5,9 @@ import com.mediscreen.patient.entity.Patient;
 import com.mediscreen.patient.exceptions.PatientNotFoundException;
 import com.mediscreen.patient.service.PatientService;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +111,7 @@ public class PatientController {
 
   @GetMapping("patient/file")
   public Optional<Patient> getPatientById(@RequestParam long id) {
-    logger.debug("Return Patient with id:"+id);
+    logger.debug("Return Patient with id:" + id);
     if (patientService.findById(id).isEmpty()) {
       throw new PatientNotFoundException();
     }
@@ -117,12 +119,11 @@ public class PatientController {
   }
 
   @DeleteMapping("patient/delete")
-  public void deletePatientById(@RequestParam @Valid Long id, HttpServletResponse response){
-    if(patientService.existsPatientById(id)){
+  public void deletePatientById(@RequestParam @Valid Long id, HttpServletResponse response) {
+    if (patientService.existsPatientById(id)) {
       patientService.deletePatientById(id);
       response.setStatus(200);
-    }
-    else{
+    } else {
       response.setStatus(404);
     }
   }

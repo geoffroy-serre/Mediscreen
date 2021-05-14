@@ -1,10 +1,8 @@
 import {AfterViewInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Patient} from "../../common/patient";
 import {NoteService} from "../../services/note.service";
 import {Note} from "../../common/note";
-import {formatDate} from "@angular/common";
 
 @Component({
   selector: 'app-note-update',
@@ -14,16 +12,16 @@ import {formatDate} from "@angular/common";
 export class NoteUpdateComponent implements OnInit, AfterViewInit {
 
   idParam!: string;
-  note!:Note;
-  status!:number;
-  message!:string;
+  note!: Note;
+  status!: number;
+  message!: string;
 
   updateNoteForm = this.formBuilder.group({
     title: ['', [Validators.required, Validators.minLength(2)]],
     note: ['', [Validators.required, Validators.minLength(2)]]
   });
 
-  constructor(private router: Router,private noteService: NoteService,private formBuilder: FormBuilder, private route: ActivatedRoute,private cdr: ChangeDetectorRef) {
+  constructor(private router: Router, private noteService: NoteService, private formBuilder: FormBuilder, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
     this.idParam = this.route.snapshot.paramMap.get('id') || '0';
   }
 

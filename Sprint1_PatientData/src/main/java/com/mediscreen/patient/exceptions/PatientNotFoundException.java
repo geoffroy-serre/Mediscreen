@@ -1,8 +1,8 @@
 package com.mediscreen.patient.exceptions;
 
-public class PatientNotFoundException extends RuntimeException{
+public class PatientNotFoundException extends RuntimeException {
 
-  public PatientNotFoundException(){
+  public PatientNotFoundException() {
     super();
   }
 }

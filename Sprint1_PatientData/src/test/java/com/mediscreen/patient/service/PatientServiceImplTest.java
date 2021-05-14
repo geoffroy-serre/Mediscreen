@@ -13,29 +13,22 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.servlet.http.HttpServletResponse;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class PatientServiceImplTest {
 
+  public static Patient patient;
   @Mock
   PatientRepository patientRepository;
-
   @InjectMocks
   PatientService patientService = new PatientServiceImpl();
-
   @Mock
   HttpServletResponse response;
-
-
-  public static Patient patient;
 
   @BeforeAll
   public static void setup() {
@@ -80,6 +73,7 @@ class PatientServiceImplTest {
     Mockito.verify(patientRepository, Mockito.times(1)).existsPatientById(patient.getId());
     Mockito.verify(patientRepository, Mockito.times(1)).save(any(Patient.class));
   }
+
   @Test
   void getPatients() {
     List<Patient> patients = new ArrayList<>();
@@ -107,6 +101,7 @@ class PatientServiceImplTest {
     Mockito.verify(patientRepository, Mockito.times(1)).findPatientByFamilyNameAndGivenName(patient.getFamilyName(),
             patient.getGivenName());
   }
+
   @Test
   void findPatientByFamilyNameAndGivenNameNoResult() {
     when(patientRepository.findPatientByFamilyNameAndGivenName(patient.getFamilyName(),
@@ -123,6 +118,7 @@ class PatientServiceImplTest {
     assertFalse(patientService.existsPatient(patient));
     Mockito.verify(patientRepository, Mockito.times(1)).existsPatientById(patient.getId());
   }
+
   @Test
   void existsPatientNot() {
     when(patientRepository.existsPatientById(patient.getId())).thenReturn(false);
@@ -132,17 +128,18 @@ class PatientServiceImplTest {
 
   @Test
   void existsPatientByFamilyAndGivenAndDob() {
-    when(patientRepository.existsPatientByFamilyNameAndGivenNameAndDateOfBirth(patient.getFamilyName() ,patient.getGivenName(),patient.getDateOfBirth())).thenReturn(true);
+    when(patientRepository.existsPatientByFamilyNameAndGivenNameAndDateOfBirth(patient.getFamilyName(), patient.getGivenName(), patient.getDateOfBirth())).thenReturn(true);
     assertTrue(patientService.existsPatientByFamilyAndGivenAndDob(patient.getFamilyName()
-            ,patient.getGivenName(),patient.getDateOfBirth()));
-    Mockito.verify(patientRepository, Mockito.times(1)).existsPatientByFamilyNameAndGivenNameAndDateOfBirth(patient.getFamilyName() ,patient.getGivenName(),patient.getDateOfBirth());
+            , patient.getGivenName(), patient.getDateOfBirth()));
+    Mockito.verify(patientRepository, Mockito.times(1)).existsPatientByFamilyNameAndGivenNameAndDateOfBirth(patient.getFamilyName(), patient.getGivenName(), patient.getDateOfBirth());
   }
+
   @Test
   void existsPatientByFamilyAndGivenAndDobFalse() {
-    when(patientRepository.existsPatientByFamilyNameAndGivenNameAndDateOfBirth(patient.getFamilyName() ,patient.getGivenName(),patient.getDateOfBirth())).thenReturn(false);
+    when(patientRepository.existsPatientByFamilyNameAndGivenNameAndDateOfBirth(patient.getFamilyName(), patient.getGivenName(), patient.getDateOfBirth())).thenReturn(false);
     assertFalse(patientService.existsPatientByFamilyAndGivenAndDob(patient.getFamilyName()
-            ,patient.getGivenName(),patient.getDateOfBirth()));
-    Mockito.verify(patientRepository, Mockito.times(1)).existsPatientByFamilyNameAndGivenNameAndDateOfBirth(patient.getFamilyName() ,patient.getGivenName(),patient.getDateOfBirth());
+            , patient.getGivenName(), patient.getDateOfBirth()));
+    Mockito.verify(patientRepository, Mockito.times(1)).existsPatientByFamilyNameAndGivenNameAndDateOfBirth(patient.getFamilyName(), patient.getGivenName(), patient.getDateOfBirth());
   }
 
   @Test
@@ -151,28 +148,32 @@ class PatientServiceImplTest {
     assertFalse(patientService.findById(134L).isEmpty());
     Mockito.verify(patientRepository, Mockito.times(1)).findById(134L);
   }
+
   @Test
   void findByIdEmpty() {
     when(patientRepository.findById(134L)).thenReturn(Optional.empty());
     assertTrue(patientService.findById(134L).isEmpty());
     Mockito.verify(patientRepository, Mockito.times(1)).findById(134L);
   }
+
   @Test
   void existsPatientById() {
     when(patientRepository.existsPatientById(134L)).thenReturn(true);
     assertTrue(patientService.existsPatientById(134L));
     Mockito.verify(patientRepository, Mockito.times(1)).existsPatientById(134L);
   }
+
   @Test
   void existsByIdEmpty() {
     when(patientRepository.existsPatientById(134L)).thenReturn(false);
     assertFalse(patientService.existsPatientById(134L));
     Mockito.verify(patientRepository, Mockito.times(1)).existsPatientById(134L);
   }
+
   @Test
   void deleteById() {
     //Check that no errors at all are thrown
-    assertAll(()->patientService.deletePatientById(134L));
+    assertAll(() -> patientService.deletePatientById(134L));
     Mockito.verify(patientRepository, Mockito.times(1)).deleteById(134L);
   }
 }
