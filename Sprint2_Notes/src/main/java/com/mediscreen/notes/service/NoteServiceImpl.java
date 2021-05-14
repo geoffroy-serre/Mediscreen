@@ -106,12 +106,15 @@ public class NoteServiceImpl implements NoteService {
   public boolean deleteNoteByPatientId(Long id) {
     logger.debug("Entering deleteNote with Note:{}.", id);
     if (existByPatientID(id)) {
-      logger.debug("deleteNoteByPatientId: patient with id {}. exist proceeding to suppression",
+      logger.debug("deleteNoteByPatientId: no note for patient with id {}. exist proceeding to " +
+                      "suppression",
               id);
       noteRepository.deleteNoteByPatientId(id);
       return true;
     }
-    logger.debug("deleteNoteByPatientId: patient with id {}. doesn't  exist suppression aborted",
+    logger.debug("deleteNoteByPatientId: no note for patient with id {}. doesn't  exist " +
+                    "suppression " +
+                    "aborted",
             id);
     return false;
   }
