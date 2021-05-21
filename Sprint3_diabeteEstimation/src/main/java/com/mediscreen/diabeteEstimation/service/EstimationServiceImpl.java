@@ -2,6 +2,7 @@ package com.mediscreen.diabeteEstimation.service;
 
 
 import com.mediscreen.diabeteEstimation.enums.RiskTriggers;
+import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.EnumSet;
@@ -40,6 +41,7 @@ public class EstimationServiceImpl implements EstimationService {
     Map<String, Integer> count = new HashMap<>();
     for (RiskTriggers risk : riskTriggers) {
       for (String string : notes) {
+        string = removeDiacriticalMarks(string);
         if (StringUtils.containsIgnoreCase(string, risk.toString())) {
           if (count.containsKey(risk.toString())) {
             int truc = count.get(risk.toString());
@@ -50,6 +52,7 @@ public class EstimationServiceImpl implements EstimationService {
         }
       }
     }
+    System.out.println(count);
     return count.size();
   }
 
@@ -58,7 +61,7 @@ public class EstimationServiceImpl implements EstimationService {
    */
   @Override
   public String estimationResult(int risks, int age, char gender) {
-    String result = "None";
+    String result = "";
     switch (risks) {
       case 0:
       case 1:
@@ -76,6 +79,9 @@ public class EstimationServiceImpl implements EstimationService {
         if (age < 30 && gender == 'm' || age < 30 && gender == 'M') {
           result = "In Danger";
         }
+        if (age < 30 && gender == 'f' || age < 30 && gender == 'F') {
+          result = "None";
+        }
         break;
       case 4:
         if (age < 30 && gender == 'f' || age < 30 && gender == 'F') {
@@ -86,10 +92,16 @@ public class EstimationServiceImpl implements EstimationService {
         if (age < 30 && gender == 'm' || age < 30 && gender == 'M') {
           result = "Early Onset";
         }
+        if (age >30) {
+          result = "BorderLine";
+        }
         break;
       case 6:
         if (age > 30) {
           result = "In Danger";
+        }
+        if (age < 30 && gender == 'm' || age < 30 && gender == 'M') {
+          result = "Early Onset";
         }
         break;
       case 7:
@@ -122,6 +134,11 @@ public class EstimationServiceImpl implements EstimationService {
    */
   private int ageCalculation(LocalDate birthdate) {
     return Period.between(birthdate, LocalDate.now()).getYears();
+  }
+
+  public static String removeDiacriticalMarks(String string) {
+    return Normalizer.normalize(string, Normalizer.Form.NFD)
+            .replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
   }
 
 }
