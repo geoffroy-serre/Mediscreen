@@ -17,4 +17,5 @@ export class Patient {
     this.address = address;
     this.phoneNumber = phoneNumber;
   }
+
 }

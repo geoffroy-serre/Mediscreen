@@ -4,6 +4,9 @@ package com.mediscreen.diabeteEstimation.service;
 import com.mediscreen.diabeteEstimation.enums.EstimationNames;
 import com.mediscreen.diabeteEstimation.enums.Gender;
 import com.mediscreen.diabeteEstimation.enums.RiskTriggers;
+import com.mediscreen.diabeteEstimation.model.EstimationResult;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.Period;
@@ -23,12 +26,23 @@ public class EstimationServiceImpl implements EstimationService {
    * @inheritDoc
    */
   @Override
-  public String riskEstimation(Character gender, LocalDate birthdate, List<String> notes) {
+  public EstimationResult riskEstimation(Character gender, LocalDate birthdate, List<String> notes) {
     logger.debug("Entering riskEstimation");
     gender = Character.toUpperCase(gender);
+    List<String> processedSpace = new ArrayList<>();
+    for (String note:notes) {
+      String result = null;
+      try {
+        result = URLDecoder.decode(note, "UTF-8");
+      } catch (UnsupportedEncodingException e) {
+        logger.debug("Error while replacing %20 with white spaces");
+      }
+      processedSpace.add(result);
+
+    }
     int age = ageCalculation(birthdate);
     int riskOccurrences = riskCountFromNotes(notes);
-    return estimationResult(riskOccurrences, age, gender);
+    return new EstimationResult(estimationResult(riskOccurrences, age, gender));
   }
 
   /**
@@ -55,7 +69,7 @@ public class EstimationServiceImpl implements EstimationService {
    * @inheritDoc
    */
   @Override
-  public String estimationResult(int risks, int age, char gender) {
+  public String estimationResult(int risks, int age, Character gender) {
     logger.debug("Entering estimationResult with {},{},{}",risks,age,gender);
     gender = Character.toUpperCase(gender);
     if ((gender == Gender.F.getGender() && age < 30 && risks >= 7)

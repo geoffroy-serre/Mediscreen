@@ -1,5 +1,6 @@
 package com.mediscreen.diabeteEstimation.service;
 
+import com.mediscreen.diabeteEstimation.model.EstimationResult;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface EstimationService {
    * @param notes List<String>
    * @return String
    */
-  String riskEstimation(Character gender, LocalDate birthdate, List<String> notes);
+  EstimationResult riskEstimation(Character gender, LocalDate birthdate, List<String> notes);
 
   /**
    * Return the number of different risk triggers found form given List.
@@ -32,5 +33,5 @@ public interface EstimationService {
    * @param gender char
    * @return String
    */
-  String estimationResult(int risks, int age, char gender);
+  String estimationResult(int risks, int age, Character gender);
 }

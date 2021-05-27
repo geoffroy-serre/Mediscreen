@@ -1,5 +1,6 @@
 package com.mediscreen.diabeteEstimation.controller;
 
+import com.mediscreen.diabeteEstimation.model.EstimationResult;
 import com.mediscreen.diabeteEstimation.service.EstimationService;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -35,7 +36,8 @@ class EstimationControllerTest {
     notes.add("not exists");
     Character gender = 'm';
     LocalDate birthDate = LocalDate.of(1982, 4, 14);
-when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn("Borderline");
+    EstimationResult result= new EstimationResult("Borderline");
+when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result);
     mockMvc.perform(get("/estimation")
             .contentType(MediaType.APPLICATION_JSON)
             .param("gender", String.valueOf(gender))
@@ -50,7 +52,8 @@ when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn("Borde
   public void riskEstimationTestBadNoNotes() throws Exception {
     Character gender = 'm';
     LocalDate birthDate = LocalDate.of(1982, 4, 14);
-    when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn("Borderline");
+    EstimationResult result= new EstimationResult("Borderline");
+    when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result);
     mockMvc.perform(get("/estimation")
             .contentType(MediaType.APPLICATION_JSON)
             .param("gender", String.valueOf(gender))
@@ -68,7 +71,8 @@ when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn("Borde
     notes.add("not exists");
     Character gender = 'm';
     LocalDate birthDate = LocalDate.of(1982, 4, 14);
-    when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn("Borderline");
+    EstimationResult result= new EstimationResult("Borderline");
+    when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result);
     mockMvc.perform(get("/estimation")
             .contentType(MediaType.APPLICATION_JSON)
             .param("birthdate", String.valueOf(birthDate))
@@ -86,7 +90,8 @@ when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn("Borde
     notes.add("not exists");
     Character gender = 'Q';
     LocalDate birthDate = LocalDate.of(1982, 4, 14);
-    when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn("Borderline");
+    EstimationResult result= new EstimationResult("Borderline");
+    when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result);
     mockMvc.perform(get("/estimation")
             .contentType(MediaType.APPLICATION_JSON)
             .param("gender", String.valueOf(gender))
@@ -105,7 +110,8 @@ when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn("Borde
     notes.add("not exists");
     Character gender = 'm';
     LocalDate birthDate = LocalDate.of(1982, 4, 14);
-    when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn("Borderline");
+    EstimationResult result= new EstimationResult("Borderline");
+    when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result);
     mockMvc.perform(get("/estimation")
             .contentType(MediaType.APPLICATION_JSON)
             .param("birthdate", String.valueOf(birthDate))
