@@ -1,12 +1,12 @@
 package com.mediscreen.diabeteEstimation.enums;
 
 public enum RiskTriggers {
-  HEMO("Hémoglobine A1C"),MICROALBUMINE("MicroAlbumine"),TAILLE("Taille"),
-  POIDS("Poids"),FUMEUR("Fumeur"),ANORMAL("Anormal"),
-  CHOLESTEROL("Cholesterol"),  VERTIGE("Vertige"),
-  RECHUTE("Rechute"),REACTION("Réaction"),ANTICORPS("Anticorps");
+  HEMO("Hemoglobin A1C"),MICROALBUMINE("MicroAlbumin"),TAILLE("Height"),
+  POIDS("Weight"),FUMEUR("Smoker"),ANORMAL("Abnormal"),
+  CHOLESTEROL("Cholesterol"),  VERTIGE("Dizziness"),
+  RECHUTE("Relapse"),REACTION("reaction"),ANTICORPS("Antibodies");
 
-  private String name;
+  private final String name;
 
   RiskTriggers(String name) {
     this.name=name;

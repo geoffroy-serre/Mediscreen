@@ -4,10 +4,7 @@ import java.time.LocalDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @Document(collection = "Notes")
 public class Note {
@@ -20,8 +17,7 @@ public class Note {
   private Long patientId;
 
   @NotBlank
-  @Max(60)
-  @Min(2)
+  @Size(min=2,max=60)
   @Field(value = "title")
   private String title;
 
@@ -30,7 +26,7 @@ public class Note {
   private LocalDate date;
 
   @NotBlank
-  @Min(2)
+  @Size(min=2)
   @Field(value = "note")
   private String note;
 

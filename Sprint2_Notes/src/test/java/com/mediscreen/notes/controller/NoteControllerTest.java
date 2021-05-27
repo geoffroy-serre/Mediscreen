@@ -43,7 +43,7 @@ class NoteControllerTest {
   void addNote() throws Exception {
     String jsonRequest = "{ \"id\":\"\",\"patientId\":\"134\"," +
             "\"title\":\"titleTest\"," +
-            "\"date\":\"1982-04-14\"," +
+            "\"date\":\"2021-04-14\"," +
             "\"note\":\"NoteContent\"}";
     when(noteService.addNote(any(Note.class))).thenReturn(true);
     mockMvc.perform(post("/patHistory/add")

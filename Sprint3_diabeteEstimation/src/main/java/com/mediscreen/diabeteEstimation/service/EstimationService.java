@@ -7,6 +7,7 @@ public interface EstimationService {
 
   /**
    * Return the result of diabetes estimation based on risks factors.
+   * gender is auto converted to upperCase to avoir false result.
    * See Api documentation to learn more about the calculation.
    * @param gender Character
    * @param birthdate LocalDate
@@ -24,7 +25,7 @@ public interface EstimationService {
   int riskCountFromNotes(List<String> notes);
 
   /**
-   * Return the estimation of diabetes risks for given parameters.
+   * Return the estimation of diabetes risks for given parameters
    * See Api documentation to learn more about the calculation.
    * @param risks int
    * @param age int

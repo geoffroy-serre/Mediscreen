@@ -18,13 +18,13 @@ public class DiabetesEstimationApplication {
 
     SpringApplication.run(DiabetesEstimationApplication.class, args);
     List<String> notes = new ArrayList<>();
-    notes.add("Hémoglobine A1C");
-    notes.add("Hémoglobine A1C");
-    notes.add("Hémoglobine A1C");
-    notes.add("Poids");
-    notes.add("Poids");
-    notes.add("taille");
-    notes.add("vertige");
+    notes.add("Hemoglobin A1C");
+    notes.add("Hemoglobin A1C");
+    notes.add("Hemoglobin A1C");
+    notes.add("weight");
+    notes.add("weight");
+    notes.add("height");
+    notes.add("dizziness");
     notes.add("réaction");
     notes.add("Rien");
     notes.add("Rien");
