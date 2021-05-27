@@ -1,4 +1,4 @@
-package com.mediscreen.diabeteEstimation.model;
+package com.mediscreen.diabetesEstimation.model;
 
 public class EstimationResult {
 

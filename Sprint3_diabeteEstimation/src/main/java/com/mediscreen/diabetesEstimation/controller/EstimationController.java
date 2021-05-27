@@ -1,10 +1,9 @@
-package com.mediscreen.diabeteEstimation.controller;
+package com.mediscreen.diabetesEstimation.controller;
 
 
-import com.mediscreen.diabeteEstimation.customValidator.Gender;
-import com.mediscreen.diabeteEstimation.model.EstimationResult;
-import com.mediscreen.diabeteEstimation.service.EstimationService;
-import com.mediscreen.diabeteEstimation.service.EstimationServiceImpl;
+import com.mediscreen.diabetesEstimation.customValidator.Gender;
+import com.mediscreen.diabetesEstimation.model.EstimationResult;
+import com.mediscreen.diabetesEstimation.service.EstimationService;
 import java.time.LocalDate;
 import java.util.List;
 import org.slf4j.Logger;
@@ -29,8 +28,8 @@ public class EstimationController {
   @GetMapping("estimation")
   public EstimationResult riskEstimation(@RequestParam @Gender Character gender,
                                          @RequestParam @Valid LocalDate birthdate,
-                                         @RequestParam @Valid List<String> notes){
+                                         @RequestParam @Valid List<String> notes) {
     logger.debug("Entering riskEstimation");
-    return estimationService.riskEstimation(gender,birthdate,notes);
+    return estimationService.riskEstimation(gender, birthdate, notes);
   }
 }

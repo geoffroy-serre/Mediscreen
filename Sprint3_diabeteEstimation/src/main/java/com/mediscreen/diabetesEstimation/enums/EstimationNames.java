@@ -1,8 +1,7 @@
-package com.mediscreen.diabeteEstimation.enums;
+package com.mediscreen.diabetesEstimation.enums;
 
 public enum EstimationNames {
-  NONE("None"), BORDERLINE("Borderline"),IN_DANGER("In danger"), EARLY_ONSET("Early onset")
-  ;
+  NONE("None"), BORDERLINE("Borderline"), IN_DANGER("In danger"), EARLY_ONSET("Early onset");
 
   private final String estimationName;
 

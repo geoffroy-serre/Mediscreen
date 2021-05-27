@@ -1,6 +1,6 @@
-package com.mediscreen.diabeteEstimation.service;
+package com.mediscreen.diabetesEstimation.service;
 
-import com.mediscreen.diabeteEstimation.model.EstimationResult;
+import com.mediscreen.diabetesEstimation.model.EstimationResult;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,9 +10,10 @@ public interface EstimationService {
    * Return the result of diabetes estimation based on risks factors.
    * gender is auto converted to upperCase to avoir false result.
    * See Api documentation to learn more about the calculation.
-   * @param gender Character
+   *
+   * @param gender    Character
    * @param birthdate LocalDate
-   * @param notes List<String>
+   * @param notes     List<String>
    * @return String
    */
   EstimationResult riskEstimation(Character gender, LocalDate birthdate, List<String> notes);
@@ -20,6 +21,7 @@ public interface EstimationService {
   /**
    * Return the number of different risk triggers found form given List.
    * See Api documentation to learn more risks triggers.
+   *
    * @param notes List<String>
    * @return int
    */
@@ -28,8 +30,9 @@ public interface EstimationService {
   /**
    * Return the estimation of diabetes risks for given parameters
    * See Api documentation to learn more about the calculation.
-   * @param risks int
-   * @param age int
+   *
+   * @param risks  int
+   * @param age    int
    * @param gender char
    * @return String
    */

@@ -1,4 +1,4 @@
-package com.mediscreen.diabeteEstimation.customValidator;
+package com.mediscreen.diabetesEstimation.customValidator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -1,12 +1,10 @@
-package com.mediscreen.diabeteEstimation.service;
+package com.mediscreen.diabetesEstimation.service;
 
 
-import com.mediscreen.diabeteEstimation.enums.EstimationNames;
-import com.mediscreen.diabeteEstimation.enums.Gender;
-import com.mediscreen.diabeteEstimation.enums.RiskTriggers;
-import com.mediscreen.diabeteEstimation.model.EstimationResult;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
+import com.mediscreen.diabetesEstimation.enums.EstimationNames;
+import com.mediscreen.diabetesEstimation.enums.Gender;
+import com.mediscreen.diabetesEstimation.enums.RiskTriggers;
+import com.mediscreen.diabetesEstimation.model.EstimationResult;
 import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.Period;
@@ -20,26 +18,27 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class EstimationServiceImpl implements EstimationService {
-   Logger logger = LoggerFactory.getLogger(EstimationServiceImpl.class);
+  Logger logger = LoggerFactory.getLogger(EstimationServiceImpl.class);
 
   /**
    * @inheritDoc
    */
   @Override
-  public EstimationResult riskEstimation(Character gender, LocalDate birthdate, List<String> notes) {
+  public EstimationResult riskEstimation(Character gender, LocalDate birthdate,
+                                         List<String> notes) {
     logger.debug("Entering riskEstimation");
     gender = Character.toUpperCase(gender);
-    List<String> processedSpace = new ArrayList<>();
+    /*List<String> processedSpace = new ArrayList<>();
     for (String note:notes) {
       String result = null;
       try {
         result = URLDecoder.decode(note, "UTF-8");
       } catch (UnsupportedEncodingException e) {
-        logger.debug("Error while replacing %20 with white spaces");
+        logger.debug("Error while replacing %20 with white spaces -> UnsupportedEncodingException");
       }
       processedSpace.add(result);
 
-    }
+    }*/
     int age = ageCalculation(birthdate);
     int riskOccurrences = riskCountFromNotes(notes);
     return new EstimationResult(estimationResult(riskOccurrences, age, gender));
@@ -70,23 +69,23 @@ public class EstimationServiceImpl implements EstimationService {
    */
   @Override
   public String estimationResult(int risks, int age, Character gender) {
-    logger.debug("Entering estimationResult with {},{},{}",risks,age,gender);
+    logger.debug("Entering estimationResult with {},{},{}", risks, age, gender);
     gender = Character.toUpperCase(gender);
     if ((gender == Gender.F.getGender() && age < 30 && risks >= 7)
             || (gender == Gender.M.getGender() && age < 30 && risks >= 5)
             || (age >= 30 && risks >= 8)) {
-      logger.debug("Returning result: "+ EstimationNames.EARLY_ONSET.getEstimationName());
+      logger.debug("Returning result: " + EstimationNames.EARLY_ONSET.getEstimationName());
       return EstimationNames.EARLY_ONSET.getEstimationName();
     } else if ((gender == Gender.M.getGender() && age < 30 && risks >= 3)
             || (gender == Gender.F.getGender() && age < 30 && risks >= 4)
             || (age >= 30 && risks >= 6)) {
-      logger.debug("Returning result: "+ EstimationNames.IN_DANGER.getEstimationName());
+      logger.debug("Returning result: " + EstimationNames.IN_DANGER.getEstimationName());
       return EstimationNames.IN_DANGER.getEstimationName();
     } else if ((age >= 30 && risks >= 2)) {
-      logger.debug("Returning result: "+ EstimationNames.BORDERLINE.getEstimationName());
+      logger.debug("Returning result: " + EstimationNames.BORDERLINE.getEstimationName());
       return EstimationNames.BORDERLINE.getEstimationName();
     }
-    logger.debug("Returning result: "+ EstimationNames.NONE.getEstimationName());
+    logger.debug("Returning result: " + EstimationNames.NONE.getEstimationName());
     return EstimationNames.NONE.getEstimationName();
   }
 
@@ -103,7 +102,8 @@ public class EstimationServiceImpl implements EstimationService {
   }
 
   /**
-   * Remove all accented letter(s), and remplace them with non accented letter(s).
+   * Remove all accented letter(s), and replace them with non accented letter(s).
+   *
    * @param stringToClean String
    * @return String
    */

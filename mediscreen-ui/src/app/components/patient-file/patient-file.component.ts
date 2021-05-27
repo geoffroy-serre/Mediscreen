@@ -41,11 +41,9 @@ export class PatientFileComponent implements OnInit {
 
   private waitForData(){
     if(this.patient !=null && this.notes!=null){
-      console.log("WAIT "+this.patient);
-      console.log("WAIT "+this.notes)
       this.getEstimation();
     }else{
-      setTimeout(() =>this.waitForData(),1);
+      setTimeout(() =>this.waitForData(),0);
     }
   }
 
@@ -131,21 +129,16 @@ export class PatientFileComponent implements OnInit {
   }
 
   public getEstimation() {
-    console.log(this.patient);
-    console.log(this.notes);
-
     this.notes.forEach(note => this.notesContentOnly.push(note.note));
     this.estimationService.getEstimation(this.patient?.gender, this.patient?.dateOfBirth, this.notesContentOnly).subscribe(
       (estimation: EstimationResult) => {
         this.diabetesEstimation = estimation;
-        console.log("ESTIMATION: "+estimation.result);
       },
       (err: any) => {
         this.status = err.status;
         console.error(err)
       },
     )
-    console.log("TRUC:"+this.diabetesEstimation);
   }
 
   private notesContent(notesToProcess: Note[]) {

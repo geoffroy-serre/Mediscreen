@@ -1,7 +1,7 @@
-package com.mediscreen.diabeteEstimation.controller;
+package com.mediscreen.diabetesEstimation.controller;
 
-import com.mediscreen.diabeteEstimation.model.EstimationResult;
-import com.mediscreen.diabeteEstimation.service.EstimationService;
+import com.mediscreen.diabetesEstimation.model.EstimationResult;
+import com.mediscreen.diabetesEstimation.service.EstimationService;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.mediscreen.diabeteEstimation.exceptions;
+package com.mediscreen.diabetesEstimation.exceptions;
 
 import java.util.Date;
 import java.util.List;

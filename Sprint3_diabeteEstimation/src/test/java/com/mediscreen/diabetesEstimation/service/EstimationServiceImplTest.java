@@ -1,4 +1,4 @@
-package com.mediscreen.diabeteEstimation.service;
+package com.mediscreen.diabetesEstimation.service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

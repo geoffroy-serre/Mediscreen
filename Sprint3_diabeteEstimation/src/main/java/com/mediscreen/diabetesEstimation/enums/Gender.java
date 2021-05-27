@@ -1,9 +1,10 @@
-package com.mediscreen.diabeteEstimation.enums;
+package com.mediscreen.diabetesEstimation.enums;
 
 public enum Gender {
-  F('F'),M('M');
+  F('F'), M('M');
 
-private final Character gender;
+  private final Character gender;
+
   Gender(char gender) {
     this.gender = gender;
   }
