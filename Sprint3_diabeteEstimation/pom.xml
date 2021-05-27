@@ -99,8 +99,9 @@
 				<configuration>
 					<excludes>
 						<exclude>**/model/*</exclude>
-						<exclude>**/NotesApplication.class</exclude>
-						<exclude>**/config/*</exclude>
+						<exclude>**/DiabetesEstimationApplication.class</exclude>
+						<exclude>**/exceptions/*</exclude>
+						<exclude>**/customValidator/*</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
