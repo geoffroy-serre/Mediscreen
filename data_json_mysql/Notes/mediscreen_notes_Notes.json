@@ -1,0 +1,74 @@
+[
+  {
+    "_id": {"$oid": "609ea7fcf3b05b6543f2f064"},
+    "_class": "com.mediscreen.notes.model.Note",
+    "date": {"$date": "2021-04-13T22:00:00.000Z"},
+    "note": "Patient states that they are 'feeling terrific' Weight at or below recommended level",
+    "patient_id": 1,
+    "title": "First consultation"
+  },
+  {
+    "_id": {"$oid": "609ea8b0f3b05b6543f2f065"},
+    "_class": "com.mediscreen.notes.model.Note",
+    "date": {"$date": "2021-08-11T22:00:00.000Z"},
+    "note": "Patient states that they are feeling a great deal of stress at work Patient also complains that their hearing seems Abnormal as of late",
+    "patient_id": 2,
+    "title": "First consultation"
+  },
+  {
+    "_id": {"$oid": "609ea8f2f3b05b6543f2f066"},
+    "_class": "com.mediscreen.notes.model.Note",
+    "date": {"$date": "2021-08-20T22:00:00.000Z"},
+    "note": "Patient states that they have had a Reaction to medication within last 3 months Patient also complains that their hearing continues to be problematic",
+    "patient_id": 2,
+    "title": "Second consultation"
+  },
+  {
+    "_id": {"$oid": "609ea930f3b05b6543f2f067"},
+    "_class": "com.mediscreen.notes.model.Note",
+    "date": {"$date": "2020-07-20T22:00:00.000Z"},
+    "note": "Patient states that they are short term Smoker",
+    "patient_id": 3,
+    "title": "First consultation"
+  },
+  {
+    "_id": {"$oid": "609ea95bf3b05b6543f2f068"},
+    "_class": "com.mediscreen.notes.model.Note",
+    "date": {"$date": "2020-08-20T22:00:00.000Z"},
+    "note": "Patient states that they quit within last year Patient also complains that of Abnormal breathing spells Lab reports Cholesterol LDL high",
+    "patient_id": 3,
+    "title": "Second consultation"
+  },
+  {
+    "_id": {"$oid": "609ea9c1f3b05b6543f2f06a"},
+    "_class": "com.mediscreen.notes.model.Note",
+    "date": {"$date": "2021-01-20T23:00:00.000Z"},
+    "note": "Patient states that walking up stairs has become difficult Patient also complains that they are having shortness of breath Lab results indicate Antibodies present elevated Reaction to medication",
+    "patient_id": 4,
+    "title": "First consultation"
+  },
+  {
+    "_id": {"$oid": "609eaa23f3b05b6543f2f06b"},
+    "_class": "com.mediscreen.notes.model.Note",
+    "date": {"$date": "2021-02-20T23:00:00.000Z"},
+    "note": "Patient states that they are experiencing back pain when seated for a long time",
+    "patient_id": 4,
+    "title": "Second consultation"
+  },
+  {
+    "_id": {"$oid": "609eaa4bf3b05b6543f2f06c"},
+    "_class": "com.mediscreen.notes.model.Note",
+    "date": {"$date": "2021-03-20T23:00:00.000Z"},
+    "note": "Patient states that they are a short term Smoker Hemoglobin A1C above recommended level",
+    "patient_id": 4,
+    "title": "Third consultation"
+  },
+  {
+    "_id": {"$oid": "609eaa77f3b05b6543f2f06d"},
+    "_class": "com.mediscreen.notes.model.Note",
+    "date": {"$date": "2021-04-20T22:00:00.000Z"},
+    "note": "Patient states that Body Height, Body Weight, Cholesterol, Dizziness and Reaction",
+    "patient_id": 4,
+    "title": "Fourth consultation"
+  }
+]
