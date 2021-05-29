@@ -38,12 +38,10 @@ export class NoteAddComponent implements OnInit {
       return;
     }
     const note = new Note(+this.idParam,new Date(),this.addNoteForm.value.title,this.addNoteForm.value.note)
-    console.log(this.note);
 
     this.noteService.addNote(note).subscribe(
       () => this.router.navigate(['/patient/file',this.idParam]),
       (err: any) => {
-        console.log(err)
         this.status = err.status;
         this.message = err.message;
       }
@@ -63,7 +61,6 @@ export class NoteAddComponent implements OnInit {
       (err: any) => {
         this.status = err.status;
         this.message = err.message;
-        console.error(err)
       }
     );
   }

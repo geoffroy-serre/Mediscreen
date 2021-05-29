@@ -22,6 +22,56 @@ services:
     volumes:
       - mongodb_data_container:/data/db
       
+  patient:
+    depends_on:
+      - mysql
+    image: mediscreen-patient
+    container_name: mediscreen-microservice-patient
+    ports:
+      - "8081:8081"
+    networks:
+      - default
+    environment:
+      - "JASYPT_ENCRYPTOR_PASSWORD=efsmg+A@u?F2F*%y"
+      - "MEDISCREEN_UI_CROSS_ORIGIN=http://localhost"
+      - "SPRING_DATASOURCE_URL=jdbc:mysql://mediscreen_mysql:3306/mediscreen?serverTimezone=Europe/Paris"
+      
+  note:
+    depends_on:
+      - mongodb
+    image: mediscreen-note
+    container_name: mediscreen-microservice-note
+    ports:
+      - "8082:8082"
+    networks:
+      - default
+    environment:
+      - "JASYPT_ENCRYPTOR_PASSWORD=efsmg+A@u?F2F*%y"
+      - "MEDISCREEN_UI_CROSS_ORIGIN=http://localhost"
+      - "SPRING_DATA_MONGODB_HOST=mediscreen_mongodb"
+      
+  estimation:
+    image: mediscreen-estimation
+    container_name: mediscreen-microservice-estimation
+    ports:
+      - "8083:8083"
+    networks:
+      - default
+    environment:
+      - "MEDISCREEN_UI_CROSS_ORIGIN=http://localhost"
+      
+  ui:
+    depends_on:
+      - patient
+      - note
+      - estimation
+    image: mediscreen-ui
+    container_name: mediscreen-microservice-ui
+    ports:
+      - "80:80"
+    networks:
+      - default
+      
 volumes:
   mysql_db_data_container:
   mongodb_data_container:

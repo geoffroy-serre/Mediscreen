@@ -67,12 +67,10 @@ export class NoteUpdateComponent implements OnInit, AfterViewInit {
       (note: Note) => {
         this.note = note;
         this.editNote(note);
-        console.error(note);
       },
       (err: any) => {
         this.status = err.status;
         this.message = err.message;
-        console.error(err)
       }
     );
   }

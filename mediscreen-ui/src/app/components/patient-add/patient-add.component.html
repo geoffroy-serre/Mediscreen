@@ -34,7 +34,7 @@
             <input formControlName="given" id="givenName" placeholder="Given Name" type="text"
                    class="patient-data-field-data" name="givenName" [ngClass]="{ 'is-invalid':
              validator.given.errors }">
-            <div *ngIf="validator?.family?.errors" class="invalid-feedback">
+            <div *ngIf="validator?.given?.errors" class="invalid-feedback">
               <div *ngIf="addUserForm?.controls?.given?.errors?.minlength">Given Name must
                 have at least 2 characters
               </div>

@@ -48,6 +48,7 @@ public class PatientController {
                                          "{min} and {max} characters long") String phone,
                          HttpServletResponse response) {
     logger.info("Enter addPatient in patient microservice");
+    System.out.println(address);
     if (patientService.addPatient(family, given, dob, sex, address, phone)) {
       logger.debug("Patient added: status 200");
       response.setStatus(200);

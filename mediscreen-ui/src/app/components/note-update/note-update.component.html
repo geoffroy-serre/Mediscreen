@@ -27,7 +27,8 @@
           <label for="note" class="patient-data-field-name">Note<span
             class="mandatory-star"> *</span> : </label>
           <div class="flex-for-errors-form">
-            <textarea formControlName="note" id="note" placeholder="Note" type="text"
+            <textarea formControlName="note" rows="20" cols="50" id="note" placeholder="Note"
+                      type="text"
                    class="patient-data-field-data" name="note" value="" [ngClass]="{
             'is-invalid':
              validator.note.errors }" ></textarea>

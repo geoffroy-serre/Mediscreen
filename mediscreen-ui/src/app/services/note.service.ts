@@ -3,13 +3,14 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from "@angular/c
 import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {Note} from "../common/note";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NoteService {
 
-  private baseUrl = 'http://localhost:8082'
+  private baseUrl = environment.apiUrlNotes;
 
   constructor(private httpClient: HttpClient) {
   }

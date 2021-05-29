@@ -3,19 +3,19 @@ import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/c
 import {Observable, throwError} from 'rxjs';
 import {Patient} from '../common/patient';
 import {catchError} from 'rxjs/operators';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientService {
 
-  private baseUrl = 'http://localhost:8081';
+  private baseUrl = environment.apiUrlPatient;
 
   constructor(private httpClient: HttpClient) {
   }
 
   getPatients(): Observable<Patient[]> {
-    console.log(this.httpClient.get<Patient[]>(this.baseUrl + '/patients'));
     return this.httpClient.get<Patient[]>(this.baseUrl + '/patients')
       .pipe(catchError(this.handleError));
   }
@@ -27,19 +27,20 @@ export class PatientService {
   }
 
   addPatient(patient: Patient): Observable<Patient> {
-    console.log(patient);
+    if (patient.address == null) {
+      patient.address ="";
+    }
+    if (patient.phoneNumber == null) {
+      patient.phoneNumber="";
+    }
     const params = new HttpParams()
       .set('family', patient.familyName)
       .set('given', patient.givenName)
       .set('dob', patient.dateOfBirth.toString())
-      .set('sex', patient.gender);
+      .set('sex', patient.gender)
+  .set('address', patient.address)
+      .set('phone', patient.phoneNumber)
 
-    if (patient.address != null) {
-      params.set('address', patient.address);
-    }
-    if (patient.phoneNumber != null) {
-      params.set('phone', patient.phoneNumber);
-    }
     const addUrl = this.baseUrl + '/patient/add?' + params;
     return this.httpClient.post<Patient>(addUrl, {
       headers: new HttpHeaders({
@@ -64,7 +65,6 @@ export class PatientService {
   }
 
   updatePatient(patient: Patient): Observable<void> {
-    console.error(patient.toString());
     return this.httpClient.put<void>(this.baseUrl + '/patient/update', patient,
       {
         headers: new HttpHeaders({

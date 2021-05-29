@@ -6,8 +6,6 @@ import {NoteService} from "../../services/note.service";
 import {Note} from "../../common/note";
 import {ModalService} from "../../_modal";
 import {DiabetesEstimationService} from "../../services/diabetes-estimation.service";
-import {Subscription} from "rxjs";
-import {timeout} from "rxjs/operators";
 import {EstimationResult} from "../../common/EstimationResult";
 
 @Component({
@@ -34,16 +32,14 @@ export class PatientFileComponent implements OnInit {
       this.patientFile();
       this.getNotes();
     });
-  this.waitForData();
-
-
+    this.waitForData();
   }
 
-  private waitForData(){
-    if(this.patient !=null && this.notes!=null){
+  private waitForData() {
+    if (this.patient != null && this.notes != null) {
       this.getEstimation();
-    }else{
-      setTimeout(() =>this.waitForData(),0);
+    } else {
+      setTimeout(() => this.waitForData(), 0);
     }
   }
 
@@ -55,7 +51,6 @@ export class PatientFileComponent implements OnInit {
       (err: any) => {
         this.status = err.status;
         this.message = err.message;
-        console.error(err)
       }
     );
   }
@@ -109,7 +104,6 @@ export class PatientFileComponent implements OnInit {
       },
       (err: any) => {
         this.status = err.status;
-        console.error(err)
       },
     )
   }
@@ -132,17 +126,11 @@ export class PatientFileComponent implements OnInit {
     this.notes.forEach(note => this.notesContentOnly.push(note.note));
     this.estimationService.getEstimation(this.patient?.gender, this.patient?.dateOfBirth, this.notesContentOnly).subscribe(
       (estimation: EstimationResult) => {
-        this.diabetesEstimation = estimation;
+        this.diabetesEstimation =estimation;
       },
       (err: any) => {
         this.status = err.status;
-        console.error(err)
       },
     )
   }
-
-  private notesContent(notesToProcess: Note[]) {
-
-  }
-
 }

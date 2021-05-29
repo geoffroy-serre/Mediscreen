@@ -4,6 +4,7 @@ import {Note} from "../common/note";
 import {Observable, throwError} from "rxjs";
 import {catchError} from "rxjs/operators";
 import {EstimationResult} from "../common/EstimationResult";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class DiabetesEstimationService {
   constructor(private httpClient: HttpClient) {
   }
 
-  baseUrl: String = "http://localhost:8083"
+  baseUrl: String = environment.apiUrlEstimation;
 
   public getEstimation(gender: string, birthdate: Date, notes: String[]): Observable<EstimationResult> {
     const params = new HttpParams()

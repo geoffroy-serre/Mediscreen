@@ -16,9 +16,13 @@
       <div class="infos-persos">
         <div class="civility-card">{{patient?.givenName}}</div>
         <div class="civility-card">{{patient?.familyName}}</div>
-        <div class="civility-card"> <div class="risk-result">
-          Risk: {{diabetesEstimation?.result}}
-        </div> </div>
+        <div class="civility-card">
+          <div *ngIf="notesContentOnly.length>0 && diabetesEstimation !=null">
+            <div class="risk-result" [colors]="diabetesEstimation.result.toString()">
+              {{diabetesEstimation.result}}
+            </div>
+          </div>
+        </div>
       </div>
       <div class="patient-data">
         <div class="patient-file-set">
@@ -54,12 +58,7 @@
           <div
             class="patient-data-file-data">{{patient?.phoneNumber}}</div>
         </div>
-        <div class="patient-file-set">
-          <div class="patient-data-file-name">Notes:</div>
-          <div class="patient-data-file-data">Vulcan man who try to kolinar with a frog like
-            a Klingon
-          </div>
-        </div>
+
       </div>
     </div>
     <div class="notes-wrapper">

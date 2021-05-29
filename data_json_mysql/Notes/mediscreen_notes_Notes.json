@@ -1,74 +1,379 @@
-[
-  {
-    "_id": {"$oid": "609ea7fcf3b05b6543f2f064"},
-    "_class": "com.mediscreen.notes.model.Note",
-    "date": {"$date": "2021-04-13T22:00:00.000Z"},
-    "note": "Patient states that they are 'feeling terrific' Weight at or below recommended level",
-    "patient_id": 1,
-    "title": "First consultation"
-  },
-  {
-    "_id": {"$oid": "609ea8b0f3b05b6543f2f065"},
-    "_class": "com.mediscreen.notes.model.Note",
-    "date": {"$date": "2021-08-11T22:00:00.000Z"},
-    "note": "Patient states that they are feeling a great deal of stress at work Patient also complains that their hearing seems Abnormal as of late",
-    "patient_id": 2,
-    "title": "First consultation"
-  },
-  {
-    "_id": {"$oid": "609ea8f2f3b05b6543f2f066"},
-    "_class": "com.mediscreen.notes.model.Note",
-    "date": {"$date": "2021-08-20T22:00:00.000Z"},
-    "note": "Patient states that they have had a Reaction to medication within last 3 months Patient also complains that their hearing continues to be problematic",
-    "patient_id": 2,
-    "title": "Second consultation"
-  },
-  {
-    "_id": {"$oid": "609ea930f3b05b6543f2f067"},
-    "_class": "com.mediscreen.notes.model.Note",
-    "date": {"$date": "2020-07-20T22:00:00.000Z"},
-    "note": "Patient states that they are short term Smoker",
-    "patient_id": 3,
-    "title": "First consultation"
-  },
-  {
-    "_id": {"$oid": "609ea95bf3b05b6543f2f068"},
-    "_class": "com.mediscreen.notes.model.Note",
-    "date": {"$date": "2020-08-20T22:00:00.000Z"},
-    "note": "Patient states that they quit within last year Patient also complains that of Abnormal breathing spells Lab reports Cholesterol LDL high",
-    "patient_id": 3,
-    "title": "Second consultation"
-  },
-  {
-    "_id": {"$oid": "609ea9c1f3b05b6543f2f06a"},
-    "_class": "com.mediscreen.notes.model.Note",
-    "date": {"$date": "2021-01-20T23:00:00.000Z"},
-    "note": "Patient states that walking up stairs has become difficult Patient also complains that they are having shortness of breath Lab results indicate Antibodies present elevated Reaction to medication",
-    "patient_id": 4,
-    "title": "First consultation"
-  },
-  {
-    "_id": {"$oid": "609eaa23f3b05b6543f2f06b"},
-    "_class": "com.mediscreen.notes.model.Note",
-    "date": {"$date": "2021-02-20T23:00:00.000Z"},
-    "note": "Patient states that they are experiencing back pain when seated for a long time",
-    "patient_id": 4,
-    "title": "Second consultation"
-  },
-  {
-    "_id": {"$oid": "609eaa4bf3b05b6543f2f06c"},
-    "_class": "com.mediscreen.notes.model.Note",
-    "date": {"$date": "2021-03-20T23:00:00.000Z"},
-    "note": "Patient states that they are a short term Smoker Hemoglobin A1C above recommended level",
-    "patient_id": 4,
-    "title": "Third consultation"
-  },
-  {
-    "_id": {"$oid": "609eaa77f3b05b6543f2f06d"},
-    "_class": "com.mediscreen.notes.model.Note",
-    "date": {"$date": "2021-04-20T22:00:00.000Z"},
-    "note": "Patient states that Body Height, Body Weight, Cholesterol, Dizziness and Reaction",
-    "patient_id": 4,
-    "title": "Fourth consultation"
-  }
-]
+/* 1 */
+{
+    "_id" : ObjectId("609ea7fcf3b05b6543f2f064"),
+    "patient_id" : NumberLong(1),
+    "title" : "First consultation",
+    "date" : ISODate("2021-04-13T22:00:00.000Z"),
+    "note" : "Patient states that they are 'feeling terrific' Weight at or below recommended level",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 2 */
+{
+    "_id" : ObjectId("609ea8b0f3b05b6543f2f065"),
+    "patient_id" : NumberLong(2),
+    "title" : "First consultation",
+    "date" : ISODate("2021-08-11T22:00:00.000Z"),
+    "note" : "Patient states that they are feeling a great deal of stress at work Patient also complains that their hearing seems Abnormal as of late",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 3 */
+{
+    "_id" : ObjectId("609ea8f2f3b05b6543f2f066"),
+    "patient_id" : NumberLong(2),
+    "title" : "Second consultation",
+    "date" : ISODate("2021-08-20T22:00:00.000Z"),
+    "note" : "Patient states that they have had a Reaction to medication within last 3 months Patient also complains that their hearing continues to be problematic",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 4 */
+{
+    "_id" : ObjectId("609ea930f3b05b6543f2f067"),
+    "patient_id" : NumberLong(3),
+    "title" : "First consultation",
+    "date" : ISODate("2020-07-20T22:00:00.000Z"),
+    "note" : "Patient states that they are short term Smoker",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 5 */
+{
+    "_id" : ObjectId("609ea95bf3b05b6543f2f068"),
+    "patient_id" : NumberLong(3),
+    "title" : "Second consultation",
+    "date" : ISODate("2020-08-20T22:00:00.000Z"),
+    "note" : "Patient states that they quit within last year Patient also complains that of Abnormal breathing spells Lab reports Cholesterol LDL high",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 6 */
+{
+    "_id" : ObjectId("609ea9c1f3b05b6543f2f06a"),
+    "patient_id" : NumberLong(4),
+    "title" : "First consultation",
+    "date" : ISODate("2021-01-20T23:00:00.000Z"),
+    "note" : "Patient states that walking up stairs has become difficult Patient also complains that they are having shortness of breath Lab results indicate Antibodies present elevated Reaction to medication",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 7 */
+{
+    "_id" : ObjectId("609eaa23f3b05b6543f2f06b"),
+    "patient_id" : NumberLong(4),
+    "title" : "Second consultation",
+    "date" : ISODate("2021-02-20T23:00:00.000Z"),
+    "note" : "Patient states that they are experiencing back pain when seated for a long time",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 8 */
+{
+    "_id" : ObjectId("609eaa4bf3b05b6543f2f06c"),
+    "patient_id" : NumberLong(4),
+    "title" : "Third consultation",
+    "date" : ISODate("2021-03-20T23:00:00.000Z"),
+    "note" : "Patient states that they are a short term Smoker Hemoglobin A1C above recommended level",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 9 */
+{
+    "_id" : ObjectId("609eaa77f3b05b6543f2f06d"),
+    "patient_id" : NumberLong(4),
+    "title" : "Fourth consultation",
+    "date" : ISODate("2021-04-20T22:00:00.000Z"),
+    "note" : "Patient states that Body Height, Body Weight, Cholesterol, Dizziness and Reaction",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 10 */
+{
+    "_id" : ObjectId("60b24a5b0009922f20633553"),
+    "patient_id" : NumberLong(5),
+    "title" : "First consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient declares that he\" feels very good \"\nWeight equal to or less than recommended weight",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 11 */
+{
+    "_id" : ObjectId("60b24abb0009922f20633554"),
+    "patient_id" : NumberLong(5),
+    "title" : "Second consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient states that he feels tired during the day\nHe also complains of muscle pain\nLaboratory tests indicating elevated microalbumin",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 12 */
+{
+    "_id" : ObjectId("60b24b260009922f20633555"),
+    "patient_id" : NumberLong(5),
+    "title" : "Third consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient says he doesn't feel that tired.\nSmoker, he quit in the previous 12 months\nLaboratory tests indicating that the antibodies are high",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 13 */
+{
+    "_id" : ObjectId("60b24c0e0009922f20633556"),
+    "patient_id" : NumberLong(6),
+    "title" : "First consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient says he feels a lot of stress at work\nHe also complains that his hearing has been abnormal lately",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 14 */
+{
+    "_id" : ObjectId("60b24c270009922f20633557"),
+    "patient_id" : NumberLong(6),
+    "title" : "Second consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient reports having had a reaction to the drugs within the last 3 months\nHe also notices that his hearing continues to be abnormal",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 15 */
+{
+    "_id" : ObjectId("60b24c400009922f20633558"),
+    "patient_id" : NumberLong(6),
+    "title" : "Third consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "Laboratory tests indicating elevated microalbumin\n",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 16 */
+{
+    "_id" : ObjectId("60b24c610009922f20633559"),
+    "patient_id" : NumberLong(6),
+    "title" : "Fourth consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient says everything seems to be fine\nLaboratory reports hemoglobin A1C exceeds recommended level\nThe patient says he has smoked for a long time ",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 17 */
+{
+    "_id" : ObjectId("60b24cbb0009922f2063355a"),
+    "patient_id" : NumberLong(7),
+    "title" : "First consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient declares that he has recently smoked",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 18 */
+{
+    "_id" : ObjectId("60b24d060009922f2063355b"),
+    "patient_id" : NumberLong(7),
+    "title" : "Second consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "Laboratory tests indicating elevated microalbumin",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 19 */
+{
+    "_id" : ObjectId("60b24d1e0009922f2063355c"),
+    "patient_id" : NumberLong(7),
+    "title" : "Third consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient states that he is a smoker and that he quit smoking last year\nHe also complains of abnormal respiratory apnea attacks\nLaboratory tests indicating high LDL cholesterol",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 20 */
+{
+    "_id" : ObjectId("60b24d430009922f2063355d"),
+    "patient_id" : NumberLong(7),
+    "title" : "Fourth consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "Laboratory tests indicating high LDL cholesterol",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 21 */
+{
+    "_id" : ObjectId("60b24d810009922f2063355e"),
+    "patient_id" : NumberLong(8),
+    "title" : "First consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient says it has become difficult for him to climb the stairs\nHe also complains of being short of breath\nLaboratory tests indicating that the antibodies are high\nDrug reaction",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 22 */
+{
+    "_id" : ObjectId("60b24d950009922f2063355f"),
+    "patient_id" : NumberLong(8),
+    "title" : "Second consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "Patient reports back pain when sitting for a long time",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 23 */
+{
+    "_id" : ObjectId("60b24da80009922f20633560"),
+    "patient_id" : NumberLong(8),
+    "title" : "Third consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient claims to have recently started smoking\nHemoglobin A1C above recommended level ",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 24 */
+{
+    "_id" : ObjectId("60b24dcb0009922f20633561"),
+    "patient_id" : NumberLong(9),
+    "title" : "First consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient reports having occasional neck pain\nThe patient also notices that some foods taste different\nApparent reaction to drugs\nBody weight greater than recommended weight ",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 25 */
+{
+    "_id" : ObjectId("60b24e790009922f20633562"),
+    "patient_id" : NumberLong(9),
+    "title" : "Second consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient reports having had several episodes of dizziness since the last visit.\nBody height included in the relevant range",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 26 */
+{
+    "_id" : ObjectId("60b24e920009922f20633563"),
+    "patient_id" : NumberLong(9),
+    "title" : "Third consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "Patient says he still suffers from occasional neck pain\nLaboratory tests indicating elevated microalbumin\nSmoker, he quit in the previous 12 months ",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 27 */
+{
+    "_id" : ObjectId("60b24eb50009922f20633564"),
+    "patient_id" : NumberLong(9),
+    "title" : "Fourth consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient reports having had several episodes of dizziness since the last visit.\nLaboratory tests indicating that the antibodies are high",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 28 */
+{
+    "_id" : ObjectId("60b2500c0009922f20633565"),
+    "patient_id" : NumberLong(10),
+    "title" : "First consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient declares that he is feeling well\nBody weight greater than recommended weight",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 29 */
+{
+    "_id" : ObjectId("60b250200009922f20633566"),
+    "patient_id" : NumberLong(10),
+    "title" : "Second consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient declares that he is feeling well",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 30 */
+{
+    "_id" : ObjectId("60b2504b0009922f20633567"),
+    "patient_id" : NumberLong(11),
+    "title" : "First consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "Patient says he often wakes up with stiff joints\nHe also complains of difficulty falling asleep\nBody weight greater than recommended weight\nLaboratory tests indicating high LDL cholesterol",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 31 */
+{
+    "_id" : ObjectId("60b250650009922f20633568"),
+    "patient_id" : NumberLong(12),
+    "title" : "First consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "Lab tests indicate antibodies are high\nHemoglobin A1C above recommended level",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 32 */
+{
+    "_id" : ObjectId("60b2508a0009922f20633569"),
+    "patient_id" : NumberLong(13),
+    "title" : "First consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient reports having difficulty concentrating on his school homework\nHemoglobin A1C above recommended level",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 33 */
+{
+    "_id" : ObjectId("60b250b40009922f2063356a"),
+    "patient_id" : NumberLong(13),
+    "title" : "Second consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient says he gets impatient easily if he waits for a long time.\nIt also reports that the vending machine products are not good\nLaboratory tests showing abnormal levels of blood cells",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 34 */
+{
+    "_id" : ObjectId("60b250da0009922f2063356b"),
+    "patient_id" : NumberLong(13),
+    "title" : "Third consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient reports that he is easily irritated by trifles\nHe also states that the neighbors' vacuum cleaner makes too much noise.\nLaboratory tests indicating that the antibodies are high",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 35 */
+{
+    "_id" : ObjectId("60b250f30009922f2063356c"),
+    "patient_id" : NumberLong(14),
+    "title" : "First consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient declares that he has no problem",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 36 */
+{
+    "_id" : ObjectId("60b251130009922f2063356d"),
+    "patient_id" : NumberLong(14),
+    "title" : "Second consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient declares that he has no problem\nBody height included in the relevant range\nHemoglobin A1C above recommended level",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 37 */
+{
+    "_id" : ObjectId("60b2512d0009922f2063356e"),
+    "patient_id" : NumberLong(14),
+    "title" : "Third consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient declares that he has no problem\nBody weight greater than recommended weight\nThe patient has reported several episodes of dizziness since his last visit",
+    "_class" : "com.mediscreen.notes.model.Note"
+}
+
+/* 38 */
+{
+    "_id" : ObjectId("60b251460009922f2063356f"),
+    "patient_id" : NumberLong(14),
+    "title" : "Fourth consultation",
+    "date" : ISODate("2021-05-28T22:00:00.000Z"),
+    "note" : "The patient declares that he has no problem\nLaboratory tests indicating elevated microalbumin ",
+    "_class" : "com.mediscreen.notes.model.Note"
+}

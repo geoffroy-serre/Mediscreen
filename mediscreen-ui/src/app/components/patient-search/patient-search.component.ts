@@ -31,10 +31,8 @@ export class PatientSearchComponent implements OnInit {
   onSubmit() {
 
     if (this.searchForm.invalid) {
-      console.log(this.searchForm.invalid);
       return;
     }
-    console.log(this.searchForm.value.family);
     this.router.navigateByUrl(`patient/search/${this.searchForm.value.family}/${this.searchForm.value.given}`);
   }
 

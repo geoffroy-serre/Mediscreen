@@ -26,7 +26,7 @@ class EstimationServiceImplTest {
     notes.add("dizziness");
     notes.add("not exists");
     LocalDate birthdate = LocalDate.of(1982,4,14 );
-  assertEquals(estimationService.riskEstimation('m',birthdate,notes),"Borderline");
+  assertEquals(estimationService.riskEstimation('m',birthdate,notes).getResult(),"Borderline");
   }
 
   @Test

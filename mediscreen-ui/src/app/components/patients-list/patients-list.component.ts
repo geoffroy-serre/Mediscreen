@@ -9,7 +9,6 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./patients-list.component.css']
 })
 export class PatientsListComponent implements OnInit {
-
   patients!: Patient[];
   status: number = 200;
   message!: string;
@@ -49,14 +48,11 @@ export class PatientsListComponent implements OnInit {
     this.patientService.getPatients().subscribe(
       (patients: Patient[]) => {
         this.patients = patients;
-        console.log(patients);
       },
       (err: any) => {
         this.status = err.status;
-        console.error(err)
       },
     )
-    console.log(this.status);
   }
 
 }

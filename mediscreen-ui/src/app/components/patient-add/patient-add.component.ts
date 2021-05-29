@@ -20,7 +20,6 @@ export class PatientAddComponent implements OnInit {
   constructor(private patientService: PatientService, private router: Router, private formBuilder: FormBuilder) {
   }
 
-
   ngOnInit(): void {
     this.addUserForm = this.formBuilder.group({
       family: ['', [Validators.required, Validators.minLength(2)]],
@@ -30,9 +29,7 @@ export class PatientAddComponent implements OnInit {
       address: [],
       phone: []
     });
-
   }
-
 
   onSubmit() {
     if (this.addUserForm.invalid) {
@@ -49,7 +46,6 @@ export class PatientAddComponent implements OnInit {
     this.patientService.addPatient(patient).subscribe(
       () => this.router.navigate(['/patients']),
       (err: any) => {
-        console.log(err)
         this.status = err.status;
         this.message = err.message;
       }
