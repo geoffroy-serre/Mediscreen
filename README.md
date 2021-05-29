@@ -14,7 +14,7 @@
 ## 1. Technical informations:
 
 ---
-
+![App Diagram](diag.png)
 ### 1.1 Requirements
 
 ![Java Version](https://img.shields.io/badge/Java-11.x-red)
@@ -72,7 +72,7 @@ or
 ### 1.5 Database
 1. Once you have launched your mysql and mongoDb containers (with the compose file or separately), 
    execute the .sql file provided (two versions with and without data). You can also import the 
-   mongoDB json file with notes related to saved patient.
+   mongoDB json file with notes related to saved patients.
 
 ## 2 EndPoints
 
