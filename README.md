@@ -74,8 +74,8 @@ or
    execute the .sql file provided (two versions with and without data). You can also import the 
    mongoDB json file with notes related to saved patients.
    
-2. To easily manage import you can user MySQL Workbench which is free. For mongoDB, docker 
-   compose file also launch mongo express, to make easy export and import data.
+2. To easily manage imports you can use MySQL Workbench which is free. For mongoDB, docker 
+   compose file also launch mongo-express, to make easy to export and import data.
    
    Use this url: http://localhost:8084/
 
@@ -88,8 +88,11 @@ or
 
    https://github.com/mongo-express
    
-3. Once you have imported mongo's data, it's recommended to delete mongo express from docker 
+3. Once you have imported mongo's data, it's recommended to remove mongo express from docker 
    compose file. 
+   
+4. Notes are linked to patients by the patient_id. Be sure to import notes after importing the 
+   given .sql with data.
 
 ## 2 EndPoints
 
