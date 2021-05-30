@@ -25,7 +25,7 @@
 ![J-Unit Version](https://img.shields.io/badge/JUnit-5.7.0-orange)
 ![TomCat](https://img.shields.io/badge/TomCat-9.0.41-brightgreen)
 ![Docker Version](https://img.shields.io/badge/Docker-20.10.2-cyan)
-![Coverage](https://img.shields.io/badge/Coverage-100%25-green)
+![Coverage](https://img.shields.io/badge/Coverage%20Java-100%25-green)
 
 ### 1.2 Setup with Intellij IDE
 
@@ -73,6 +73,23 @@ or
 1. Once you have launched your mysql and mongoDb containers (with the compose file or separately), 
    execute the .sql file provided (two versions with and without data). You can also import the 
    mongoDB json file with notes related to saved patients.
+   
+2. To easily manage import you can user MySQL Workbench which is free. For mongoDB, docker 
+   compose file also launch mongo express, to make easy export and import data.
+   
+   Use this url: http://localhost:8084/
+
+   It's one rare free tool to allow export and import !!!
+
+3. If you prefer to manually use mongorestore, the metadata and *.bson files are also available.
+
+    !!!! Be careful! Work only on mediscreen_notes. Avoid messing with mongo's system dbs.
+   
+
+   https://github.com/mongo-express
+   
+3. Once you have imported mongo's data, it's recommended to delete mongo express from docker 
+   compose file. 
 
 ## 2 EndPoints
 
