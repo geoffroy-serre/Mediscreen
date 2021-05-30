@@ -77,11 +77,14 @@ or
 2. To easily manage imports you can use MySQL Workbench which is free. For mongoDB, docker 
    compose file also launch mongo-express, to make easy to export and import data.
    
-   Use this url: http://localhost:8084/
-
+   Use this url: 
+```bash
+http://localhost:8084
+```
    It's one rare free tool to allow export and import !!!
 
 3. If you prefer to manually use mongorestore, the metadata and *.bson files are also available.
+   
 
     !!!! Be careful! Work only on mediscreen_notes. Avoid messing with mongo's system dbs.
    
