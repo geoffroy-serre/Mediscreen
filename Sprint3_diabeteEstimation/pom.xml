@@ -107,6 +107,7 @@
 						<exclude>**/DiabetesEstimationApplication.class</exclude>
 						<exclude>**/exceptions/*</exclude>
 						<exclude>**/customValidator/*</exclude>
+						<exclude>**/config/*</exclude>
 					</excludes>
 				</configuration>
 			</plugin>

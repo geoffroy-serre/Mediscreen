@@ -74,27 +74,9 @@ or
    execute the .sql file provided (two versions with and without data). You can also import the 
    mongoDB json file with notes related to saved patients.
    
-2. To easily manage imports you can use MySQL Workbench which is free. For mongoDB, docker 
-   compose file also launch mongo-express, to make easy to export and import data.
+2. For easy imports, you can use free tools like MySQL Workbench and MongoDB Compass.
    
-   Use this url: 
-```bash
-http://localhost:8084
-```
-   It's one rare free tool to allow export and import !!!
-
-3. If you prefer to manually use mongorestore, the metadata and *.bson files are also available.
-   
-
-    !!!! Be careful! Work only on mediscreen_notes. Avoid messing with mongo's system dbs.
-   
-
-   https://github.com/mongo-express
-   
-3. Once you have imported mongo's data, it's recommended to remove mongo express from docker 
-   compose file. 
-   
-4. Notes are linked to patients by the patient_id. Be sure to import notes after importing the 
+3. Notes are linked to patients by the patient_id. Be sure to import notes after importing the 
    given .sql with data.
 
 ## 2 EndPoints
