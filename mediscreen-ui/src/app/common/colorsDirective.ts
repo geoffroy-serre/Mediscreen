@@ -17,7 +17,6 @@ export class ColorsDirective implements OnInit {
     );
   }
   _getStyles(key: string) {
-    console.log("COLOOOOR: "+key);
     let color = '';
     if (key.toLowerCase()=="none") {
       color = 'green';

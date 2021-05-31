@@ -74,9 +74,11 @@ or
    execute the .sql file provided (two versions with and without data). You can also import the 
    mongoDB json file with notes related to saved patients.
    
-2. For easy imports, you can use free tools like MySQL Workbench and MongoDB Compass.
+2. Before importing MongoDB data, create a db named mediscreen-notes and a collection named Notes.
    
-3. Notes are linked to patients by the patient_id. Be sure to import notes after importing the 
+3. For easy imports, you can use free tools like MySQL Workbench and MongoDB Compass.
+   
+4. Notes are linked to patients by the patient_id. Be sure to import notes after importing the 
    given .sql with data.
 
 ## 2 EndPoints

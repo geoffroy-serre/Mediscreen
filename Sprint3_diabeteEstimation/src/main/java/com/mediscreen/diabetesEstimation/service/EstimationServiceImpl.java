@@ -28,17 +28,6 @@ public class EstimationServiceImpl implements EstimationService {
                                          List<String> notes) {
     logger.debug("Entering riskEstimation");
     gender = Character.toUpperCase(gender);
-    /*List<String> processedSpace = new ArrayList<>();
-    for (String note:notes) {
-      String result = null;
-      try {
-        result = URLDecoder.decode(note, "UTF-8");
-      } catch (UnsupportedEncodingException e) {
-        logger.debug("Error while replacing %20 with white spaces -> UnsupportedEncodingException");
-      }
-      processedSpace.add(result);
-
-    }*/
     int age = ageCalculation(birthdate);
     int riskOccurrences = riskCountFromNotes(notes);
     return new EstimationResult(estimationResult(riskOccurrences, age, gender));
