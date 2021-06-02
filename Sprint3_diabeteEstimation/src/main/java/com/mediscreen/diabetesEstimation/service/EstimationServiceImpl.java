@@ -34,10 +34,13 @@ public class EstimationServiceImpl implements EstimationService {
   }
 
   /**
-   * @inheritDoc
+   * Return the number of different risk triggers found form given List.
+   * See Api documentation to learn more risks triggers.
+   *
+   * @param notes List<String>
+   * @return int
    */
-  @Override
-  public int riskCountFromNotes(List<String> notes) {
+  private int riskCountFromNotes(List<String> notes) {
     logger.debug("Entering riskCountFromNotes");
     EnumSet<RiskTriggers> riskTriggers = EnumSet.allOf(RiskTriggers.class);
     List<RiskTriggers> risksPresent = new ArrayList<>();
@@ -53,29 +56,36 @@ public class EstimationServiceImpl implements EstimationService {
     return risksPresent.size();
   }
 
+
   /**
-   * @inheritDoc
+   * Return the estimation of diabetes risks for given parameters
+   * See Api documentation to learn more about the calculation.
+   *
+   * @param risks  int
+   * @param age    int
+   * @param gender char
+   * @return String
    */
-  @Override
-  public String estimationResult(int risks, int age, Character gender) {
+  private String estimationResult(int risks, int age, Character gender) {
     logger.debug("Entering estimationResult with {},{},{}", risks, age, gender);
     gender = Character.toUpperCase(gender);
+    String result = EstimationNames.NONE.getEstimationName();
     if ((gender == Gender.F.getGender() && age < 30 && risks >= 7)
             || (gender == Gender.M.getGender() && age < 30 && risks >= 5)
             || (age >= 30 && risks >= 8)) {
       logger.debug("Returning result: " + EstimationNames.EARLY_ONSET.getEstimationName());
-      return EstimationNames.EARLY_ONSET.getEstimationName();
+      result = EstimationNames.EARLY_ONSET.getEstimationName();
     } else if ((gender == Gender.M.getGender() && age < 30 && risks >= 3)
             || (gender == Gender.F.getGender() && age < 30 && risks >= 4)
             || (age >= 30 && risks >= 6)) {
       logger.debug("Returning result: " + EstimationNames.IN_DANGER.getEstimationName());
-      return EstimationNames.IN_DANGER.getEstimationName();
+      result = EstimationNames.IN_DANGER.getEstimationName();
     } else if ((age >= 30 && risks >= 2)) {
       logger.debug("Returning result: " + EstimationNames.BORDERLINE.getEstimationName());
-      return EstimationNames.BORDERLINE.getEstimationName();
+      result = EstimationNames.BORDERLINE.getEstimationName();
     }
     logger.debug("Returning result: " + EstimationNames.NONE.getEstimationName());
-    return EstimationNames.NONE.getEstimationName();
+    return result;
   }
 
 

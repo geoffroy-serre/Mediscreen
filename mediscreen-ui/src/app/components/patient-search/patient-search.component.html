@@ -1,10 +1,10 @@
   <form [formGroup]="searchForm" class="search-form" (ngSubmit)="onSubmit()" name="searchForm"
         id="searchForm">
     <div class="search-inputs">
-      <input formControlName="family" id="family" type="text" placeholder="Family Name"
+      <input formControlName="family" id="family" type="text" placeholder="Last name"
              class="search-field" [ngClass]="{ 'is-invalid':
              validator.family.errors }">
-      <input formControlName="given" id="given" type="text" placeholder="Given Name"
+      <input formControlName="given" id="given" type="text" placeholder="First name"
              class="search-field"
              style="margin-left: 5px" [ngClass]="{ 'is-invalid':
              validator.given.errors }">

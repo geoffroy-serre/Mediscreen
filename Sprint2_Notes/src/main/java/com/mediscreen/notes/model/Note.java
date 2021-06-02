@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.*;
 
 @Document(collection = "Notes")
@@ -23,6 +24,7 @@ public class Note {
 
   @NotNull
   @Field(value = "date")
+  @DateTimeFormat(pattern = "yyyy-MM-dd")
   private LocalDate date;
 
   @NotBlank
