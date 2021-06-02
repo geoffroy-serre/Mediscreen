@@ -25,19 +25,23 @@ class EstimationServiceImplTest {
     notes.add("Smoker");
     notes.add("dizziness");
     notes.add("not exists");
-    LocalDate birthdate = LocalDate.of(1982,4,14 );
-  assertEquals(estimationService.riskEstimation('m',birthdate,notes).getResult(),"Borderline");
+    LocalDate birthdate = LocalDate.of(1982, 4, 14);
+    assertEquals(estimationService.riskEstimation('m', birthdate, notes).getResult(), "Borderline");
   }
 
   @Test
-  void riskCountFromNotes() {
+  void riskCountFromNotes() throws NoSuchMethodException, InvocationTargetException,
+          IllegalAccessException {
+    Method method = EstimationServiceImpl.class.getDeclaredMethod("riskCountFromNotes",
+            List.class);
+    method.setAccessible(true);
     notes.add("Smoker");
     notes.add("Smoker");
     notes.add("dizziness");
     notes.add("not exists");
-    assertEquals(estimationService.riskCountFromNotes(notes), 2);
-    assertNotEquals(estimationService.riskCountFromNotes(notes), 4);
-    assertNotEquals(estimationService.riskCountFromNotes(notes), 3);
+    assertEquals(method.invoke(estimationService, notes), 2);
+    assertNotEquals(method.invoke(estimationService, notes), 4);
+    assertNotEquals(method.invoke(estimationService, notes), 3);
     notes.clear();
   }
 
@@ -49,81 +53,98 @@ class EstimationServiceImplTest {
    */
 
   @Test
-  void estimationResultNoneOver30() {
-    assertEquals(estimationService.estimationResult(0, 32, 'm'), "None");
-    assertEquals(estimationService.estimationResult(0, 32, 'f'), "None");
-    assertEquals(estimationService.estimationResult(1, 32, 'm'), "None");
-    assertEquals(estimationService.estimationResult(1, 32, 'f'), "None");
+  void estimationResultNoneOver30() throws NoSuchMethodException, InvocationTargetException,
+          IllegalAccessException {
+    Method method = EstimationServiceImpl.class.getDeclaredMethod("estimationResult",
+            int.class, int.class, Character.class);
+    method.setAccessible(true);
+    assertEquals(method.invoke(estimationService, 0, 32, 'm'), "None");
+    assertEquals(method.invoke(estimationService, 0, 32, 'f'), "None");
+    assertEquals(method.invoke(estimationService, 1, 32, 'm'), "None");
+    assertEquals(method.invoke(estimationService, 1, 32, 'f'), "None");
     /*
     When age is 30, it is considered as over 30
     */
-    assertEquals(estimationService.estimationResult(0, 30, 'm'), "None");
-    assertEquals(estimationService.estimationResult(0, 30, 'f'), "None");
-    assertEquals(estimationService.estimationResult(1, 30, 'm'), "None");
-    assertEquals(estimationService.estimationResult(1, 30, 'f'), "None");
+    assertEquals(method.invoke(estimationService, 0, 30, 'm'), "None");
+    assertEquals(method.invoke(estimationService, 0, 30, 'f'), "None");
+    assertEquals(method.invoke(estimationService, 1, 30, 'm'), "None");
+    assertEquals(method.invoke(estimationService, 1, 30, 'f'), "None");
+  }
+
+
+  @Test
+  void estimationResultBorderLineOver30() throws NoSuchMethodException, InvocationTargetException
+          , IllegalAccessException {
+    Method method = EstimationServiceImpl.class.getDeclaredMethod("estimationResult",
+            int.class, int.class, Character.class);
+    method.setAccessible(true);
+    assertEquals(method.invoke(estimationService, 2, 32, 'm'), "Borderline");
+    assertEquals(method.invoke(estimationService, 2, 32, 'f'), "Borderline");
+    assertEquals(method.invoke(estimationService, 3, 32, 'm'), "Borderline");
+    assertEquals(method.invoke(estimationService, 3, 32, 'f'), "Borderline");
+    assertEquals(method.invoke(estimationService, 4, 32, 'm'), "Borderline");
+    assertEquals(method.invoke(estimationService, 4, 32, 'f'), "Borderline");
+    assertEquals(method.invoke(estimationService, 5, 32, 'm'), "Borderline");
+    assertEquals(method.invoke(estimationService, 5, 32, 'f'), "Borderline");
+    /*
+    When age is 30, it is considered as over 30
+    */
+    assertEquals(method.invoke(estimationService, 2, 30, 'm'), "Borderline");
+    assertEquals(method.invoke(estimationService, 2, 30, 'f'), "Borderline");
+    assertEquals(method.invoke(estimationService, 3, 30, 'm'), "Borderline");
+    assertEquals(method.invoke(estimationService, 3, 30, 'f'), "Borderline");
+    assertEquals(method.invoke(estimationService, 4, 30, 'm'), "Borderline");
+    assertEquals(method.invoke(estimationService, 4, 30, 'f'), "Borderline");
+    assertEquals(method.invoke(estimationService, 5, 30, 'm'), "Borderline");
+    assertEquals(method.invoke(estimationService, 5, 30, 'f'), "Borderline");
   }
 
   @Test
-  void estimationResultBorderLineOver30() {
-    assertEquals(estimationService.estimationResult(2, 32, 'm'), "Borderline");
-    assertEquals(estimationService.estimationResult(2, 32, 'f'), "Borderline");
-    assertEquals(estimationService.estimationResult(3, 32, 'm'), "Borderline");
-    assertEquals(estimationService.estimationResult(3, 32, 'f'), "Borderline");
-    assertEquals(estimationService.estimationResult(4, 32, 'm'), "Borderline");
-    assertEquals(estimationService.estimationResult(4, 32, 'f'), "Borderline");
-    assertEquals(estimationService.estimationResult(5, 32, 'm'), "Borderline");
-    assertEquals(estimationService.estimationResult(5, 32, 'f'), "Borderline");
+  void estimationResultInDangerOver30() throws InvocationTargetException, IllegalAccessException,
+          NoSuchMethodException {
+    Method method = EstimationServiceImpl.class.getDeclaredMethod("estimationResult",
+            int.class, int.class, Character.class);
+    method.setAccessible(true);
+    assertEquals(method.invoke(estimationService, 6, 32, 'm'), "In danger");
+    assertEquals(method.invoke(estimationService, 6, 32, 'f'), "In danger");
+    assertEquals(method.invoke(estimationService, 7, 32, 'm'), "In danger");
+    assertEquals(method.invoke(estimationService, 7, 32, 'f'), "In danger");
+
     /*
     When age is 30, it is considered as over 30
     */
-    assertEquals(estimationService.estimationResult(2, 30, 'm'), "Borderline");
-    assertEquals(estimationService.estimationResult(2, 30, 'f'), "Borderline");
-    assertEquals(estimationService.estimationResult(3, 30, 'm'), "Borderline");
-    assertEquals(estimationService.estimationResult(3, 30, 'f'), "Borderline");
-    assertEquals(estimationService.estimationResult(4, 30, 'm'), "Borderline");
-    assertEquals(estimationService.estimationResult(4, 30, 'f'), "Borderline");
-    assertEquals(estimationService.estimationResult(5, 30, 'm'), "Borderline");
-    assertEquals(estimationService.estimationResult(5, 30, 'f'), "Borderline");
+    assertEquals(method.invoke(estimationService, 6, 30, 'm'), "In danger");
+    assertEquals(method.invoke(estimationService, 6, 30, 'f'), "In danger");
+    assertEquals(method.invoke(estimationService, 7, 30, 'm'), "In danger");
+    assertEquals(method.invoke(estimationService, 7, 30, 'f'), "In danger");
   }
 
   @Test
-  void estimationResultInDangerOver30() {
-    assertEquals(estimationService.estimationResult(6, 32, 'm'), "In danger");
-    assertEquals(estimationService.estimationResult(6, 32, 'f'), "In danger");
-    assertEquals(estimationService.estimationResult(7, 32, 'm'), "In danger");
-    assertEquals(estimationService.estimationResult(7, 32, 'f'), "In danger");
+  void estimationResultEarlyOnSetOver30() throws NoSuchMethodException, InvocationTargetException
+          , IllegalAccessException {
+    Method method = EstimationServiceImpl.class.getDeclaredMethod("estimationResult",
+            int.class, int.class, Character.class);
+    method.setAccessible(true);
+    assertEquals(method.invoke(estimationService, 8, 32, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 8, 32, 'f'), "Early onset");
+    assertEquals(method.invoke(estimationService, 9, 32, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 9, 32, 'f'), "Early onset");
+    assertEquals(method.invoke(estimationService, 10, 32, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 10, 32, 'f'), "Early onset");
+    assertEquals(method.invoke(estimationService, 11, 32, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 11, 32, 'f'), "Early onset");
 
     /*
     When age is 30, it is considered as over 30
     */
-    assertEquals(estimationService.estimationResult(6, 30, 'm'), "In danger");
-    assertEquals(estimationService.estimationResult(6, 30, 'f'), "In danger");
-    assertEquals(estimationService.estimationResult(7, 30, 'm'), "In danger");
-    assertEquals(estimationService.estimationResult(7, 30, 'f'), "In danger");
-  }
-
-  @Test
-  void estimationResultEarlyOnSetOver30() {
-    assertEquals(estimationService.estimationResult(8, 32, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(8, 32, 'f'), "Early onset");
-    assertEquals(estimationService.estimationResult(9, 32, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(9, 32, 'f'), "Early onset");
-    assertEquals(estimationService.estimationResult(10, 32, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(10, 32, 'f'), "Early onset");
-    assertEquals(estimationService.estimationResult(11, 32, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(11, 32, 'f'), "Early onset");
-
-    /*
-    When age is 30, it is considered as over 30
-    */
-    assertEquals(estimationService.estimationResult(8, 30, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(8, 30, 'f'), "Early onset");
-    assertEquals(estimationService.estimationResult(9, 30, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(9, 30, 'f'), "Early onset");
-    assertEquals(estimationService.estimationResult(10, 30, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(10, 30, 'f'), "Early onset");
-    assertEquals(estimationService.estimationResult(11, 30, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(11, 30, 'f'), "Early onset");
+    assertEquals(method.invoke(estimationService, 8, 30, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 8, 30, 'f'), "Early onset");
+    assertEquals(method.invoke(estimationService, 9, 30, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 9, 30, 'f'), "Early onset");
+    assertEquals(method.invoke(estimationService, 10, 30, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 10, 30, 'f'), "Early onset");
+    assertEquals(method.invoke(estimationService, 11, 30, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 11, 30, 'f'), "Early onset");
   }
 
 
@@ -134,45 +155,56 @@ class EstimationServiceImplTest {
    */
 
   @Test
-  void estimationResultNoneUnder30() {
-    notes.add("Dizziness");
-    assertEquals(estimationService.estimationResult(0, 29, 'm'), "None");
-    assertEquals(estimationService.estimationResult(0, 29, 'f'), "None");
-    assertEquals(estimationService.estimationResult(1, 29, 'm'), "None");
-    assertEquals(estimationService.estimationResult(1, 29, 'f'), "None");
-    assertEquals(estimationService.estimationResult(2, 29, 'f'), "None");
-    assertEquals(estimationService.estimationResult(2, 29, '2'), "None");
-    assertEquals(estimationService.estimationResult(3, 29, 'f'), "None");
+  void estimationResultNoneUnder30() throws NoSuchMethodException, InvocationTargetException,
+          IllegalAccessException {
+    Method method = EstimationServiceImpl.class.getDeclaredMethod("estimationResult",
+            int.class, int.class, Character.class);
+    method.setAccessible(true);
+    assertEquals(method.invoke(estimationService, 0, 29, 'm'), "None");
+    assertEquals(method.invoke(estimationService, 0, 29, 'f'), "None");
+    assertEquals(method.invoke(estimationService, 1, 29, 'm'), "None");
+    assertEquals(method.invoke(estimationService, 1, 29, 'f'), "None");
+    assertEquals(method.invoke(estimationService, 2, 29, 'f'), "None");
+    assertEquals(method.invoke(estimationService, 2, 29, '2'), "None");
+    assertEquals(method.invoke(estimationService, 3, 29, 'f'), "None");
   }
 
 
   @Test
-  void estimationResultInDangerUnder30() {
-    assertEquals(estimationService.estimationResult(3, 29, 'm'), "In danger");
-    assertEquals(estimationService.estimationResult(4, 29, 'f'), "In danger");
-    assertEquals(estimationService.estimationResult(4, 29, 'm'), "In danger");
-    assertEquals(estimationService.estimationResult(4, 29, 'f'), "In danger");
-    assertEquals(estimationService.estimationResult(5, 29, 'f'), "In danger");
-    assertEquals(estimationService.estimationResult(6, 29, 'f'), "In danger");
+  void estimationResultInDangerUnder30() throws NoSuchMethodException, InvocationTargetException,
+          IllegalAccessException {
+    Method method = EstimationServiceImpl.class.getDeclaredMethod("estimationResult",
+            int.class, int.class, Character.class);
+    method.setAccessible(true);
+    assertEquals(method.invoke(estimationService, 3, 29, 'm'), "In danger");
+    assertEquals(method.invoke(estimationService, 4, 29, 'f'), "In danger");
+    assertEquals(method.invoke(estimationService, 4, 29, 'm'), "In danger");
+    assertEquals(method.invoke(estimationService, 4, 29, 'f'), "In danger");
+    assertEquals(method.invoke(estimationService, 5, 29, 'f'), "In danger");
+    assertEquals(method.invoke(estimationService, 6, 29, 'f'), "In danger");
 
   }
 
   @Test
-  void estimationResultEarlyOnSetUnder30() {
-    assertEquals(estimationService.estimationResult(5, 29, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(6, 29, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(7, 29, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(8, 29, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(9, 29, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(10, 29, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(11, 29, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(12, 29, 'm'), "Early onset");
-    assertEquals(estimationService.estimationResult(7, 29, 'f'), "Early onset");
-    assertEquals(estimationService.estimationResult(8, 29, 'f'), "Early onset");
-    assertEquals(estimationService.estimationResult(8, 29, 'f'), "Early onset");
-    assertEquals(estimationService.estimationResult(10, 29, 'f'), "Early onset");
-    assertEquals(estimationService.estimationResult(11, 29, 'f'), "Early onset");
-    assertEquals(estimationService.estimationResult(12, 29, 'f'), "Early onset");
+  void estimationResultEarlyOnSetUnder30() throws NoSuchMethodException,
+          InvocationTargetException, IllegalAccessException {
+    Method method = EstimationServiceImpl.class.getDeclaredMethod("estimationResult",
+            int.class, int.class, Character.class);
+    method.setAccessible(true);
+    assertEquals(method.invoke(estimationService, 5, 29, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 6, 29, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 7, 29, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 8, 29, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 9, 29, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 10, 29, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 11, 29, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 12, 29, 'm'), "Early onset");
+    assertEquals(method.invoke(estimationService, 7, 29, 'f'), "Early onset");
+    assertEquals(method.invoke(estimationService, 8, 29, 'f'), "Early onset");
+    assertEquals(method.invoke(estimationService, 8, 29, 'f'), "Early onset");
+    assertEquals(method.invoke(estimationService, 10, 29, 'f'), "Early onset");
+    assertEquals(method.invoke(estimationService, 11, 29, 'f'), "Early onset");
+    assertEquals(method.invoke(estimationService, 12, 29, 'f'), "Early onset");
 
   }
 

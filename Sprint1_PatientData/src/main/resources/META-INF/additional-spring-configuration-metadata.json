@@ -10,4 +10,5 @@
       "type": "java.lang.String",
       "description": "Define allowed app to access micro service"
     }
-  ] }
+  ]
+}

@@ -2,7 +2,7 @@ package com.mediscreen.diabetesEstimation.controller;
 
 
 import com.mediscreen.diabetesEstimation.customValidator.Gender;
-import com.mediscreen.diabetesEstimation.model.EstimationResult;
+import com.mediscreen.diabetesEstimation.model.DiabetesResult;
 import com.mediscreen.diabetesEstimation.service.EstimationService;
 import java.time.LocalDate;
 import java.util.List;
@@ -26,9 +26,9 @@ public class EstimationController {
   EstimationService estimationService;
 
   @GetMapping("estimation")
-  public EstimationResult riskEstimation(@RequestParam @Gender Character gender,
-                                         @RequestParam @Valid LocalDate birthdate,
-                                         @RequestParam @Valid List<String> notes) {
+  public DiabetesResult riskEstimation(@RequestParam @Gender Character gender,
+                                       @RequestParam @Valid LocalDate birthdate,
+                                       @RequestParam @Valid List<String> notes) {
     logger.debug("Entering riskEstimation");
     return estimationService.riskEstimation(gender, birthdate, notes);
   }

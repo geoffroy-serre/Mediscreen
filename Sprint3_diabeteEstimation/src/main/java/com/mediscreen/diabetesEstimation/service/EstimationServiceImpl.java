@@ -4,7 +4,7 @@ package com.mediscreen.diabetesEstimation.service;
 import com.mediscreen.diabetesEstimation.enums.EstimationNames;
 import com.mediscreen.diabetesEstimation.enums.Gender;
 import com.mediscreen.diabetesEstimation.enums.RiskTriggers;
-import com.mediscreen.diabetesEstimation.model.EstimationResult;
+import com.mediscreen.diabetesEstimation.model.DiabetesResult;
 import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.Period;
@@ -24,13 +24,13 @@ public class EstimationServiceImpl implements EstimationService {
    * @inheritDoc
    */
   @Override
-  public EstimationResult riskEstimation(Character gender, LocalDate birthdate,
-                                         List<String> notes) {
+  public DiabetesResult riskEstimation(Character gender, LocalDate birthdate,
+                                       List<String> notes) {
     logger.debug("Entering riskEstimation");
     gender = Character.toUpperCase(gender);
     int age = ageCalculation(birthdate);
     int riskOccurrences = riskCountFromNotes(notes);
-    return new EstimationResult(estimationResult(riskOccurrences, age, gender));
+    return new DiabetesResult(estimationResult(riskOccurrences, age, gender));
   }
 
   /**

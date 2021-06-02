@@ -1,6 +1,6 @@
 package com.mediscreen.diabetesEstimation.controller;
 
-import com.mediscreen.diabetesEstimation.model.EstimationResult;
+import com.mediscreen.diabetesEstimation.model.DiabetesResult;
 import com.mediscreen.diabetesEstimation.service.EstimationService;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(EstimationController.class)
@@ -22,11 +21,9 @@ class EstimationControllerTest {
 
   @Autowired
   MockMvc mockMvc;
-
+  List<String> notes = new ArrayList<>();
   @MockBean
   private EstimationService estimationService;
-
-  List<String> notes = new ArrayList<>();
 
   @Test
   public void riskEstimationTest() throws Exception {
@@ -36,8 +33,8 @@ class EstimationControllerTest {
     notes.add("not exists");
     Character gender = 'm';
     LocalDate birthDate = LocalDate.of(1982, 4, 14);
-    EstimationResult result= new EstimationResult("Borderline");
-when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result);
+    DiabetesResult result = new DiabetesResult("Borderline");
+    when(estimationService.riskEstimation(gender, birthDate, notes)).thenReturn(result);
     mockMvc.perform(get("/estimation")
             .contentType(MediaType.APPLICATION_JSON)
             .param("gender", String.valueOf(gender))
@@ -52,8 +49,8 @@ when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result
   public void riskEstimationTestBadNoNotes() throws Exception {
     Character gender = 'm';
     LocalDate birthDate = LocalDate.of(1982, 4, 14);
-    EstimationResult result= new EstimationResult("Borderline");
-    when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result);
+    DiabetesResult result = new DiabetesResult("Borderline");
+    when(estimationService.riskEstimation(gender, birthDate, notes)).thenReturn(result);
     mockMvc.perform(get("/estimation")
             .contentType(MediaType.APPLICATION_JSON)
             .param("gender", String.valueOf(gender))
@@ -71,8 +68,8 @@ when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result
     notes.add("not exists");
     Character gender = 'm';
     LocalDate birthDate = LocalDate.of(1982, 4, 14);
-    EstimationResult result= new EstimationResult("Borderline");
-    when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result);
+    DiabetesResult result = new DiabetesResult("Borderline");
+    when(estimationService.riskEstimation(gender, birthDate, notes)).thenReturn(result);
     mockMvc.perform(get("/estimation")
             .contentType(MediaType.APPLICATION_JSON)
             .param("birthdate", String.valueOf(birthDate))
@@ -90,8 +87,8 @@ when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result
     notes.add("not exists");
     Character gender = 'Q';
     LocalDate birthDate = LocalDate.of(1982, 4, 14);
-    EstimationResult result= new EstimationResult("Borderline");
-    when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result);
+    DiabetesResult result = new DiabetesResult("Borderline");
+    when(estimationService.riskEstimation(gender, birthDate, notes)).thenReturn(result);
     mockMvc.perform(get("/estimation")
             .contentType(MediaType.APPLICATION_JSON)
             .param("gender", String.valueOf(gender))
@@ -110,8 +107,8 @@ when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result
     notes.add("not exists");
     Character gender = 'm';
     LocalDate birthDate = LocalDate.of(1982, 4, 14);
-    EstimationResult result= new EstimationResult("Borderline");
-    when(estimationService.riskEstimation(gender,birthDate,notes)).thenReturn(result);
+    DiabetesResult result = new DiabetesResult("Borderline");
+    when(estimationService.riskEstimation(gender, birthDate, notes)).thenReturn(result);
     mockMvc.perform(get("/estimation")
             .contentType(MediaType.APPLICATION_JSON)
             .param("birthdate", String.valueOf(birthDate))

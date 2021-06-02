@@ -5,7 +5,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.format.annotation.DateTimeFormat;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Document(collection = "Notes")
 public class Note {
@@ -18,7 +20,7 @@ public class Note {
   private Long patientId;
 
   @NotBlank
-  @Size(min=2,max=60)
+  @Size(min = 2, max = 60)
   @Field(value = "title")
   private String title;
 
@@ -28,7 +30,7 @@ public class Note {
   private LocalDate date;
 
   @NotBlank
-  @Size(min=2)
+  @Size(min = 2)
   @Field(value = "note")
   private String note;
 

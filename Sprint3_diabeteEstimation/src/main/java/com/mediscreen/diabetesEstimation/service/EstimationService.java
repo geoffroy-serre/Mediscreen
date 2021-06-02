@@ -1,6 +1,6 @@
 package com.mediscreen.diabetesEstimation.service;
 
-import com.mediscreen.diabetesEstimation.model.EstimationResult;
+import com.mediscreen.diabetesEstimation.model.DiabetesResult;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface EstimationService {
    * @param notes     List<String>
    * @return String
    */
-  EstimationResult riskEstimation(Character gender, LocalDate birthdate, List<String> notes);
+  DiabetesResult riskEstimation(Character gender, LocalDate birthdate, List<String> notes);
 
 
 }

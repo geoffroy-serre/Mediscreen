@@ -1,10 +1,10 @@
 package com.mediscreen.diabetesEstimation.model;
 
-public class EstimationResult {
+public class DiabetesResult {
 
   private String result;
 
-  public EstimationResult(String result) {
+  public DiabetesResult(String result) {
     this.result = result;
   }
 

@@ -79,6 +79,7 @@ public interface NoteService {
   /**
    * Cant delete multiple notes.
    * it delete all note with given patientId.
+   *
    * @param id Long
    * @return boolean true if note(s) is delete
    */
@@ -86,6 +87,7 @@ public interface NoteService {
 
   /**
    * Return boolean true if at least one note with this patientId exist.
+   *
    * @param id Long
    * @return boolean
    */
